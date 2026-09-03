@@ -82,7 +82,8 @@ struct ContractEditorView: View {
                 ContractPreviewView(
                     language: language,
                     document: formData.document,
-                    printAction: printDocument
+                    printAction: printDocument,
+                    savePDFAction: saveDocumentAsPDF
                 )
             }
         }
@@ -107,12 +108,19 @@ struct ContractEditorView: View {
         PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "Contract")
         #endif
     }
+
+    private func saveDocumentAsPDF() {
+        #if canImport(UIKit)
+        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "Contract")
+        #endif
+    }
 }
 
 private struct ContractPreviewView: View {
     let language: AppLanguage
     let document: ContractDocument
     let printAction: () -> Void
+    let savePDFAction: () -> Void
 
     @Environment(\.dismiss) private var dismiss
 
@@ -125,6 +133,7 @@ private struct ContractPreviewView: View {
             secondSignature: document.partyTwo.name,
             language: language,
             printAction: printAction,
+            savePDFAction: savePDFAction,
             dismissAction: { dismiss() }
         )
     }

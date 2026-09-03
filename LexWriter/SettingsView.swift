@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct SettingsView: View {
-    let language: AppLanguage
-
+    @AppStorage("selectedLanguage") private var selectedLanguageRawValue = AppLanguage.norwegian.rawValue
     @AppStorage("preferredAppearance") private var preferredAppearance = AppAppearance.system.rawValue
 
     var body: some View {
         Form {
+            Section(currentLanguage.text(.language)) {
+                Picker(currentLanguage.text(.language), selection: selectedLanguageBinding) {
+                    ForEach(AppLanguage.allCases) { language in
+                        Text(language.displayName).tag(language)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+
             Section(language.text(.appearance)) {
                 Picker(language.text(.appearance), selection: $preferredAppearance) {
                     ForEach(AppAppearance.allCases) { appearance in
                         Text(language.text(appearance.localizedKey)).tag(appearance.rawValue)
                     }
                 }
-                .pickerStyle(.inline)
+                .pickerStyle(.segmented)
             }
 
             Section(language.text(.help)) {
@@ -38,9 +46,27 @@ struct SettingsView: View {
                 LabeledContent(language.text(.build)) {
                     Text(AppMetadata.buildString)
                 }
+                LabeledContent(language.text(.versionAndBuild)) {
+                    Text(AppMetadata.combinedVersionString)
+                }
             }
         }
         .navigationTitle(language.text(.settings))
+    }
+
+    private var language: AppLanguage {
+        AppLanguage(rawValue: selectedLanguageRawValue) ?? .norwegian
+    }
+
+    private var currentLanguage: AppLanguage {
+        language
+    }
+
+    private var selectedLanguageBinding: Binding<AppLanguage> {
+        Binding(
+            get: { language },
+            set: { selectedLanguageRawValue = $0.rawValue }
+        )
     }
 }
 
@@ -77,4 +103,5 @@ enum AppAppearance: String, CaseIterable, Identifiable {
 private enum AppMetadata {
     static let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
     static let buildString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
+    static let combinedVersionString: String = "\(versionString) (\(buildString))"
 }

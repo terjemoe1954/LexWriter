@@ -43,6 +43,18 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Lag et juridisk strukturert testamentutkast med vitnefelt og utskrift."
         case (.norwegian, .contractTitle):
             return "Kontrakt"
+        case (.norwegian, .purchaseAgreementTitle):
+            return "Kjøpskontrakt"
+        case (.norwegian, .rentalTerminationTitle):
+            return "Oppsigelse av leieforhold"
+        case (.norwegian, .receiptTitle):
+            return "Kvittering"
+        case (.norwegian, .loanAgreementTitle):
+            return "Låneavtale"
+        case (.norwegian, .employmentAgreementTitle):
+            return "Arbeidsavtale"
+        case (.norwegian, .ndaTitle):
+            return "NDA"
         case (.norwegian, .powerOfAttorneyTitle):
             return "Fullmakt"
         case (.norwegian, .settings):
@@ -59,6 +71,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Versjon"
         case (.norwegian, .build):
             return "Build"
+        case (.norwegian, .versionAndBuild):
+            return "Versjon og build"
         case (.norwegian, .systemMode):
             return "System"
         case (.norwegian, .lightMode):
@@ -99,6 +113,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Lukk"
         case (.norwegian, .printButton):
             return "Skriv ut"
+        case (.norwegian, .savePDFButton):
+            return "Lagre PDF"
         case (.norwegian, .legalWarningsTitle):
             return "Juridiske advarsler"
         case (.norwegian, .showAnyway):
@@ -175,6 +191,18 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Prepare a structured will draft with witness fields and printing."
         case (.english, .contractTitle):
             return "Contract"
+        case (.english, .purchaseAgreementTitle):
+            return "Purchase Agreement"
+        case (.english, .rentalTerminationTitle):
+            return "Termination of Tenancy"
+        case (.english, .receiptTitle):
+            return "Receipt"
+        case (.english, .loanAgreementTitle):
+            return "Loan Agreement"
+        case (.english, .employmentAgreementTitle):
+            return "Employment Agreement"
+        case (.english, .ndaTitle):
+            return "NDA"
         case (.english, .powerOfAttorneyTitle):
             return "Power of Attorney"
         case (.english, .settings):
@@ -191,6 +219,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Version"
         case (.english, .build):
             return "Build"
+        case (.english, .versionAndBuild):
+            return "Version and build"
         case (.english, .systemMode):
             return "System"
         case (.english, .lightMode):
@@ -231,6 +261,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Close"
         case (.english, .printButton):
             return "Print"
+        case (.english, .savePDFButton):
+            return "Save PDF"
         case (.english, .legalWarningsTitle):
             return "Legal warnings"
         case (.english, .showAnyway):
@@ -307,6 +339,18 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "จัดทำร่างพินัยกรรมพร้อมช่องพยานและการพิมพ์"
         case (.thai, .contractTitle):
             return "สัญญา"
+        case (.thai, .purchaseAgreementTitle):
+            return "สัญญาซื้อขาย"
+        case (.thai, .rentalTerminationTitle):
+            return "หนังสือบอกเลิกสัญญาเช่า"
+        case (.thai, .receiptTitle):
+            return "ใบเสร็จรับเงิน"
+        case (.thai, .loanAgreementTitle):
+            return "สัญญาเงินกู้"
+        case (.thai, .employmentAgreementTitle):
+            return "สัญญาจ้างงาน"
+        case (.thai, .ndaTitle):
+            return "ข้อตกลงไม่เปิดเผยข้อมูล"
         case (.thai, .powerOfAttorneyTitle):
             return "หนังสือมอบอำนาจ"
         case (.thai, .settings):
@@ -323,6 +367,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "เวอร์ชัน"
         case (.thai, .build):
             return "บิลด์"
+        case (.thai, .versionAndBuild):
+            return "เวอร์ชันและบิลด์"
         case (.thai, .systemMode):
             return "ระบบ"
         case (.thai, .lightMode):
@@ -363,6 +409,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "ปิด"
         case (.thai, .printButton):
             return "พิมพ์"
+        case (.thai, .savePDFButton):
+            return "บันทึก PDF"
         case (.thai, .legalWarningsTitle):
             return "คำเตือนทางกฎหมาย"
         case (.thai, .showAnyway):
@@ -436,6 +484,12 @@ enum LocalizedKey {
     case testamentTitle
     case testamentSubtitle
     case contractTitle
+    case purchaseAgreementTitle
+    case rentalTerminationTitle
+    case receiptTitle
+    case loanAgreementTitle
+    case employmentAgreementTitle
+    case ndaTitle
     case powerOfAttorneyTitle
     case settings
     case help
@@ -444,6 +498,7 @@ enum LocalizedKey {
     case appInfo
     case version
     case build
+    case versionAndBuild
     case systemMode
     case lightMode
     case darkMode
@@ -464,6 +519,7 @@ enum LocalizedKey {
     case previewTitle
     case close
     case printButton
+    case savePDFButton
     case legalWarningsTitle
     case showAnyway
     case cancel

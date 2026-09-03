@@ -120,7 +120,8 @@ struct TestamentEditorView: View {
                 TestamentPreviewView(
                     language: language,
                     document: formData.generatedDocument,
-                    printAction: printDocument
+                    printAction: printDocument,
+                    savePDFAction: saveDocumentAsPDF
                 )
             }
         }
@@ -155,14 +156,26 @@ struct TestamentEditorView: View {
         PrintCoordinator.present(markupText: formData.generatedDocument.htmlDocument, jobName: "Testament")
         #endif
     }
+
+    private func saveDocumentAsPDF() {
+        #if canImport(UIKit)
+        PrintCoordinator.exportPDF(markupText: formData.generatedDocument.htmlDocument, jobName: "Testament")
+        #endif
+    }
 }
 
 struct TestamentPreviewView: View {
     let language: AppLanguage
     let document: TestamentDocument
     let printAction: () -> Void
+    let savePDFAction: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+
+    private let paperColor = Color(red: 0.96, green: 0.92, blue: 0.84)
+    private let paperBorderColor = Color(red: 0.55, green: 0.43, blue: 0.28)
+    private let inkColor = Color(red: 0.16, green: 0.13, blue: 0.10)
+    private let deskColor = Color(red: 0.82, green: 0.76, blue: 0.68)
 
     var body: some View {
         ScrollView {
@@ -192,24 +205,31 @@ struct TestamentPreviewView: View {
                     WitnessSignatureBlock(title: language.text(.witnessTwo), witness: document.witnessTwo)
                 }
             }
+            .foregroundStyle(inkColor)
             .padding(28)
             .frame(maxWidth: 760, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: 18)
-                    .fill(Color(red: 0.96, green: 0.92, blue: 0.84))
+                    .fill(paperColor)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 18)
-                    .stroke(Color(red: 0.55, green: 0.43, blue: 0.28), lineWidth: 1)
+                    .stroke(paperBorderColor, lineWidth: 1)
             )
             .padding()
         }
-        .background(Color(red: 0.82, green: 0.76, blue: 0.68).ignoresSafeArea())
+        .background(deskColor.ignoresSafeArea())
         .navigationTitle(language.text(.previewTitle))
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button(language.text(.close)) {
                     dismiss()
+                }
+            }
+
+            ToolbarItem(placement: .automatic) {
+                Button(language.text(.savePDFButton)) {
+                    savePDFAction()
                 }
             }
 
@@ -307,13 +327,15 @@ struct ValidationRow: View {
 private struct SignatureLine: View {
     let label: String
 
+    private let secondaryInkColor = Color(red: 0.38, green: 0.31, blue: 0.24)
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(label)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(secondaryInkColor)
             Rectangle()
-                .fill(Color.primary.opacity(0.4))
+                .fill(secondaryInkColor.opacity(0.45))
                 .frame(height: 1)
         }
     }

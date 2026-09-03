@@ -15,7 +15,14 @@ struct LegalPaperView: View {
     let secondSignature: String
     let language: AppLanguage
     let printAction: () -> Void
+    let savePDFAction: () -> Void
     let dismissAction: () -> Void
+
+    private let paperColor = Color(red: 0.96, green: 0.92, blue: 0.84)
+    private let paperBorderColor = Color(red: 0.55, green: 0.43, blue: 0.28)
+    private let inkColor = Color(red: 0.16, green: 0.13, blue: 0.10)
+    private let secondaryInkColor = Color(red: 0.38, green: 0.31, blue: 0.24)
+    private let deskColor = Color(red: 0.82, green: 0.76, blue: 0.68)
 
     var body: some View {
         ScrollView {
@@ -36,24 +43,31 @@ struct LegalPaperView: View {
                     LegalSignatureLine(label: secondSignature)
                 }
             }
+            .foregroundStyle(inkColor)
             .padding(28)
             .frame(maxWidth: 760, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: 18)
-                    .fill(Color(red: 0.96, green: 0.92, blue: 0.84))
+                    .fill(paperColor)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 18)
-                    .stroke(Color(red: 0.55, green: 0.43, blue: 0.28), lineWidth: 1)
+                    .stroke(paperBorderColor, lineWidth: 1)
             )
             .padding()
         }
-        .background(Color(red: 0.82, green: 0.76, blue: 0.68).ignoresSafeArea())
+        .background(deskColor.ignoresSafeArea())
         .navigationTitle(language.text(.previewTitle))
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button(language.text(.close)) {
                     dismissAction()
+                }
+            }
+
+            ToolbarItem(placement: .automatic) {
+                Button(language.text(.savePDFButton)) {
+                    savePDFAction()
                 }
             }
 
@@ -73,10 +87,12 @@ private struct LegalSignatureLine: View {
         VStack(alignment: .leading, spacing: 6) {
             Text(label)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(secondaryInkColor)
             Rectangle()
-                .fill(Color.primary.opacity(0.4))
+                .fill(secondaryInkColor.opacity(0.45))
                 .frame(height: 1)
         }
     }
+
+    private let secondaryInkColor = Color(red: 0.38, green: 0.31, blue: 0.24)
 }

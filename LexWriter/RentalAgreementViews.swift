@@ -79,7 +79,8 @@ struct RentalAgreementEditorView: View {
                 RentalAgreementPreviewView(
                     language: language,
                     document: formData.document,
-                    printAction: printDocument
+                    printAction: printDocument,
+                    savePDFAction: saveDocumentAsPDF
                 )
             }
         }
@@ -104,12 +105,19 @@ struct RentalAgreementEditorView: View {
         PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "RentalAgreement")
         #endif
     }
+
+    private func saveDocumentAsPDF() {
+        #if canImport(UIKit)
+        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "RentalAgreement")
+        #endif
+    }
 }
 
 private struct RentalAgreementPreviewView: View {
     let language: AppLanguage
     let document: RentalAgreementDocument
     let printAction: () -> Void
+    let savePDFAction: () -> Void
 
     @Environment(\.dismiss) private var dismiss
 
@@ -122,6 +130,7 @@ private struct RentalAgreementPreviewView: View {
             secondSignature: document.tenant.name,
             language: language,
             printAction: printAction,
+            savePDFAction: savePDFAction,
             dismissAction: { dismiss() }
         )
     }

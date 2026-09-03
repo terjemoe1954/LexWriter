@@ -66,15 +66,15 @@ extension AppLanguage {
         case (.norwegian, .gettingStartedTitle):
             return "Kom i gang"
         case (.norwegian, .gettingStartedBody):
-            return "Velg språk øverst på forsiden. Trykk deretter på dokumenttypen du vil opprette. Fyll inn feltene så konkret som mulig. Appen viser advarsler hvis viktig informasjon mangler før utskrift."
+            return "Velg språk i innstillingene og åpne deretter dokumenttypen du vil opprette. Fyll inn feltene så konkret som mulig. Appen viser advarsler hvis viktig informasjon mangler før forhåndsvisning og utskrift."
         case (.norwegian, .documentsTitle):
             return "Dokumenttyper"
         case (.norwegian, .documentsBody):
-            return "LexWriter støtter nå testament, kontrakt, fullmakt, husleiekontrakt, samboeravtale og gjeldsbrev. Hver dokumenttype har egne felter som er tilpasset innholdet i akkurat den avtalen."
+            return "LexWriter støtter nå testament, kontrakt, fullmakt, husleiekontrakt, samboeravtale, gjeldsbrev, kjøpskontrakt, oppsigelse av leieforhold, kvittering, låneavtale, arbeidsavtale og NDA. Hver dokumenttype har egne felter som er tilpasset innholdet i akkurat den avtalen."
         case (.norwegian, .printingTitle):
             return "Forhåndsvisning og utskrift"
         case (.norwegian, .printingBody):
-            return "Når alle nødvendige felt er fylt inn, kan du åpne forhåndsvisning. Derfra kan dokumentet skrives ut. Utskriftsvisningen bruker et formelt oppsett som egner seg for signering på papir."
+            return "Når alle nødvendige felt er fylt inn, kan du åpne forhåndsvisning. Derfra kan dokumentet skrives ut eller lagres som PDF. Utskriftsvisningen bruker et formelt oppsett som egner seg for signering på papir."
         case (.norwegian, .privacyTitle):
             return "Personvern"
         case (.norwegian, .privacyBody):
@@ -86,15 +86,15 @@ extension AppLanguage {
         case (.english, .gettingStartedTitle):
             return "Getting Started"
         case (.english, .gettingStartedBody):
-            return "Choose the language at the top of the home screen. Then open the document type you want to prepare. Fill in the fields as specifically as possible. The app shows warnings if important information is missing before printing."
+            return "Choose the language in Settings, then open the document type you want to prepare. Fill in the fields as specifically as possible. The app shows warnings if important information is missing before preview and printing."
         case (.english, .documentsTitle):
             return "Document Types"
         case (.english, .documentsBody):
-            return "LexWriter currently supports wills, contracts, powers of attorney, rental agreements, cohabitation agreements, and promissory notes. Each document type has fields tailored to that specific legal document."
+            return "LexWriter currently supports wills, contracts, powers of attorney, rental agreements, cohabitation agreements, promissory notes, purchase agreements, termination of tenancy notices, receipts, loan agreements, employment agreements, and NDAs. Each document type has fields tailored to that specific legal document."
         case (.english, .printingTitle):
             return "Preview and Printing"
         case (.english, .printingBody):
-            return "When all required fields are completed, you can open the preview. From there, the document can be printed. The print layout is formal and intended for paper signing."
+            return "When all required fields are completed, you can open the preview. From there, the document can be printed or saved as a PDF. The print layout is formal and intended for paper signing."
         case (.english, .privacyTitle):
             return "Privacy"
         case (.english, .privacyBody):
@@ -106,15 +106,15 @@ extension AppLanguage {
         case (.thai, .gettingStartedTitle):
             return "เริ่มต้นใช้งาน"
         case (.thai, .gettingStartedBody):
-            return "เลือกภาษาที่ด้านบนของหน้าแรก จากนั้นเปิดประเภทเอกสารที่ต้องการจัดทำ กรอกข้อมูลให้เฉพาะเจาะจงมากที่สุด แอปจะแสดงคำเตือนหากข้อมูลสำคัญยังไม่ครบก่อนพิมพ์"
+            return "เลือกภาษาในหน้าตั้งค่า จากนั้นเปิดประเภทเอกสารที่ต้องการจัดทำ กรอกข้อมูลให้เฉพาะเจาะจงมากที่สุด แอปจะแสดงคำเตือนหากข้อมูลสำคัญยังไม่ครบก่อนดูตัวอย่างและพิมพ์"
         case (.thai, .documentsTitle):
             return "ประเภทเอกสาร"
         case (.thai, .documentsBody):
-            return "ขณะนี้ LexWriter รองรับพินัยกรรม สัญญา หนังสือมอบอำนาจ สัญญาเช่า สัญญาอยู่กินร่วมกัน และหนังสือรับสภาพหนี้ โดยแต่ละประเภทมีช่องข้อมูลที่เหมาะกับเอกสารนั้นโดยเฉพาะ"
+            return "ขณะนี้ LexWriter รองรับพินัยกรรม สัญญา หนังสือมอบอำนาจ สัญญาเช่า สัญญาอยู่กินร่วมกัน หนังสือรับสภาพหนี้ สัญญาซื้อขาย หนังสือบอกเลิกสัญญาเช่า ใบเสร็จรับเงิน สัญญาเงินกู้ สัญญาจ้างงาน และ NDA โดยแต่ละประเภทมีช่องข้อมูลที่เหมาะกับเอกสารนั้นโดยเฉพาะ"
         case (.thai, .printingTitle):
             return "ตัวอย่างและการพิมพ์"
         case (.thai, .printingBody):
-            return "เมื่อกรอกข้อมูลที่จำเป็นครบแล้ว คุณสามารถเปิดตัวอย่างก่อนพิมพ์ได้ จากหน้านั้นสามารถสั่งพิมพ์เอกสารได้ รูปแบบการพิมพ์ถูกออกแบบให้เป็นทางการและเหมาะสำหรับลงนามบนกระดาษ"
+            return "เมื่อกรอกข้อมูลที่จำเป็นครบแล้ว คุณสามารถเปิดตัวอย่างก่อนพิมพ์ได้ จากหน้านั้นสามารถสั่งพิมพ์เอกสารหรือบันทึกเป็น PDF ได้ รูปแบบการพิมพ์ถูกออกแบบให้เป็นทางการและเหมาะสำหรับลงนามบนกระดาษ"
         case (.thai, .privacyTitle):
             return "ความเป็นส่วนตัว"
         case (.thai, .privacyBody):

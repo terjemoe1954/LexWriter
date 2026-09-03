@@ -1,23 +1,23 @@
 //
-//  CohabitationAgreementViews.swift
+//  PurchaseAgreementViews.swift
 //  LexWriter
 //
-//  Created by Codex on 29/08/2026.
+//  Created by Codex on 03/09/2026.
 //
 
 import SwiftUI
 
-struct CohabitationAgreementEditorView: View {
+struct PurchaseAgreementEditorView: View {
     let language: AppLanguage
 
-    @State private var formData = CohabitationAgreementFormData()
+    @State private var formData = PurchaseAgreementFormData()
     @State private var showingPreview = false
     @State private var showingWarningsAlert = false
 
     var body: some View {
         Form {
-            Section(language.cohabitationText(.legalChecklistTitle)) {
-                ForEach(language.cohabitationChecklist, id: \.self) { item in
+            Section(language.purchaseText(.legalChecklistTitle)) {
+                ForEach(language.purchaseChecklist, id: \.self) { item in
                     RequirementRow(title: item, isSatisfied: true)
                 }
             }
@@ -30,27 +30,24 @@ struct CohabitationAgreementEditorView: View {
                 }
             }
 
-            Section(language.cohabitationText(.partnerOneTitle)) {
-                CohabitationPartyEditor(language: language, party: $formData.partnerOne)
+            Section(language.purchaseText(.sellerTitle)) {
+                PurchasePartyEditor(language: language, party: $formData.seller)
             }
 
-            Section(language.cohabitationText(.partnerTwoTitle)) {
-                CohabitationPartyEditor(language: language, party: $formData.partnerTwo)
+            Section(language.purchaseText(.buyerTitle)) {
+                PurchasePartyEditor(language: language, party: $formData.buyer)
             }
 
-            Section(language.cohabitationText(.agreementTermsTitle)) {
-                TextField(language.cohabitationText(.sharedHomeField), text: $formData.sharedHomeAddress)
-                TextField(language.cohabitationText(.ownershipField), text: $formData.ownershipDistribution, axis: .vertical)
+            Section(language.purchaseText(.agreementTermsTitle)) {
+                TextField(language.purchaseText(.itemField), text: $formData.itemDescription, axis: .vertical)
                     .lineLimit(2...4)
-                TextField(language.cohabitationText(.separateAssetsField), text: $formData.separateAssets, axis: .vertical)
+                TextField(language.purchaseText(.purchasePriceField), text: $formData.purchasePrice)
+                TextField(language.purchaseText(.handoverDateField), text: $formData.handoverDate)
+                TextField(language.purchaseText(.conditionField), text: $formData.conditionDescription, axis: .vertical)
+                    .lineLimit(2...5)
+                TextField(language.purchaseText(.paymentTermsField), text: $formData.paymentTerms, axis: .vertical)
                     .lineLimit(2...4)
-                TextField(language.cohabitationText(.sharedExpensesField), text: $formData.sharedExpenses, axis: .vertical)
-                    .lineLimit(2...4)
-                TextField(language.cohabitationText(.debtResponsibilityField), text: $formData.debtResponsibility, axis: .vertical)
-                    .lineLimit(2...4)
-                TextField(language.cohabitationText(.breakupField), text: $formData.breakupHandling, axis: .vertical)
-                    .lineLimit(3...5)
-                TextField(language.cohabitationText(.specialTermsField), text: $formData.specialTerms, axis: .vertical)
+                TextField(language.purchaseText(.defectsField), text: $formData.defectsAndClaims, axis: .vertical)
                     .lineLimit(2...5)
             }
 
@@ -60,7 +57,7 @@ struct CohabitationAgreementEditorView: View {
             }
 
             Section(language.text(.print)) {
-                Button(language.cohabitationText(.previewButton)) {
+                Button(language.purchaseText(.previewButton)) {
                     presentPreview()
                 }
                 .disabled(formData.blockingIssues(in: language).isEmpty == false)
@@ -72,10 +69,10 @@ struct CohabitationAgreementEditorView: View {
                 }
             }
         }
-        .navigationTitle(language.cohabitationText(.title))
+        .navigationTitle(language.purchaseText(.title))
         .sheet(isPresented: $showingPreview) {
             NavigationStack {
-                CohabitationAgreementPreviewView(
+                PurchaseAgreementPreviewView(
                     language: language,
                     document: formData.document,
                     printAction: printDocument,
@@ -101,20 +98,20 @@ struct CohabitationAgreementEditorView: View {
 
     private func printDocument() {
         #if canImport(UIKit)
-        PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "CohabitationAgreement")
+        PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "PurchaseAgreement")
         #endif
     }
 
     private func saveDocumentAsPDF() {
         #if canImport(UIKit)
-        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "CohabitationAgreement")
+        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "PurchaseAgreement")
         #endif
     }
 }
 
-private struct CohabitationAgreementPreviewView: View {
+private struct PurchaseAgreementPreviewView: View {
     let language: AppLanguage
-    let document: CohabitationAgreementDocument
+    let document: PurchaseAgreementDocument
     let printAction: () -> Void
     let savePDFAction: () -> Void
 
@@ -122,11 +119,11 @@ private struct CohabitationAgreementPreviewView: View {
 
     var body: some View {
         LegalPaperView(
-            title: language.cohabitationText(.title),
+            title: language.purchaseText(.title),
             bodyText: document.bodyText(in: language),
             signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate)",
-            firstSignature: document.partnerOne.name,
-            secondSignature: document.partnerTwo.name,
+            firstSignature: document.seller.name,
+            secondSignature: document.buyer.name,
             language: language,
             printAction: printAction,
             savePDFAction: savePDFAction,
@@ -135,9 +132,9 @@ private struct CohabitationAgreementPreviewView: View {
     }
 }
 
-private struct CohabitationPartyEditor: View {
+private struct PurchasePartyEditor: View {
     let language: AppLanguage
-    @Binding var party: CohabitationParty
+    @Binding var party: ContractParty
 
     var body: some View {
         TextField(language.text(.name), text: $party.name)

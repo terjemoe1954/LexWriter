@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var selectedLanguage: AppLanguage = .norwegian
+    @AppStorage("selectedLanguage") private var selectedLanguageRawValue = AppLanguage.norwegian.rawValue
     @AppStorage("preferredAppearance") private var preferredAppearance = AppAppearance.system.rawValue
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    languagePicker
                     heroSection
                     documentSection
                 }
@@ -26,7 +25,7 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        SettingsView(language: selectedLanguage)
+                        SettingsView()
                     } label: {
                         Image(systemName: "gearshape.fill")
                             .foregroundStyle(Color.white.opacity(0.88))
@@ -36,46 +35,6 @@ struct HomeView: View {
             }
         }
         .preferredColorScheme(AppAppearance(rawValue: preferredAppearance)?.colorScheme)
-    }
-
-    private var languagePicker: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(selectedLanguage.text(.language))
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(Color.white.opacity(0.88))
-
-            HStack(spacing: 10) {
-                ForEach(AppLanguage.allCases) { language in
-                    Button {
-                        selectedLanguage = language
-                    } label: {
-                        Text(language.displayName)
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(buttonTextColor(for: language))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .fill(buttonBackground(for: language))
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(buttonBorder(for: language), lineWidth: 1)
-                            )
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-            .padding(8)
-            .background(
-                RoundedRectangle(cornerRadius: 18)
-                    .fill(Color.white.opacity(0.08))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 18)
-                    .stroke(Color.white.opacity(0.12), lineWidth: 1)
-            )
-        }
     }
 
     private var heroSection: some View {
@@ -202,6 +161,78 @@ struct HomeView: View {
                 )
             }
             .buttonStyle(.plain)
+
+            NavigationLink {
+                PurchaseAgreementEditorView(language: selectedLanguage)
+            } label: {
+                DocumentCard(
+                    title: selectedLanguage.purchaseText(.title),
+                    subtitle: selectedLanguage.purchaseText(.cardSubtitle),
+                    iconName: "car.fill",
+                    accent: Color(red: 0.58, green: 0.47, blue: 0.29)
+                )
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                RentalTerminationEditorView(language: selectedLanguage)
+            } label: {
+                DocumentCard(
+                    title: selectedLanguage.rentalTerminationText(.title),
+                    subtitle: selectedLanguage.rentalTerminationText(.cardSubtitle),
+                    iconName: "key.slash.fill",
+                    accent: Color(red: 0.50, green: 0.42, blue: 0.32)
+                )
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                ReceiptEditorView(language: selectedLanguage)
+            } label: {
+                DocumentCard(
+                    title: selectedLanguage.receiptText(.title),
+                    subtitle: selectedLanguage.receiptText(.cardSubtitle),
+                    iconName: "receipt.fill",
+                    accent: Color(red: 0.54, green: 0.46, blue: 0.24)
+                )
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                LoanAgreementEditorView(language: selectedLanguage)
+            } label: {
+                DocumentCard(
+                    title: selectedLanguage.loanAgreementText(.title),
+                    subtitle: selectedLanguage.loanAgreementText(.cardSubtitle),
+                    iconName: "creditcard.fill",
+                    accent: Color(red: 0.32, green: 0.49, blue: 0.40)
+                )
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                EmploymentAgreementEditorView(language: selectedLanguage)
+            } label: {
+                DocumentCard(
+                    title: selectedLanguage.employmentAgreementText(.title),
+                    subtitle: selectedLanguage.employmentAgreementText(.cardSubtitle),
+                    iconName: "briefcase.fill",
+                    accent: Color(red: 0.36, green: 0.44, blue: 0.55)
+                )
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                NDAEditorView(language: selectedLanguage)
+            } label: {
+                DocumentCard(
+                    title: selectedLanguage.ndaText(.title),
+                    subtitle: selectedLanguage.ndaText(.cardSubtitle),
+                    iconName: "lock.doc.fill",
+                    accent: Color(red: 0.43, green: 0.39, blue: 0.56)
+                )
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -218,28 +249,8 @@ struct HomeView: View {
         .ignoresSafeArea()
     }
 
-    private func buttonBackground(for language: AppLanguage) -> Color {
-        if selectedLanguage == language {
-            return Color(red: 0.92, green: 0.84, blue: 0.63)
-        }
-
-        return Color.white.opacity(0.08)
-    }
-
-    private func buttonTextColor(for language: AppLanguage) -> Color {
-        if selectedLanguage == language {
-            return Color(red: 0.17, green: 0.13, blue: 0.10)
-        }
-
-        return .white
-    }
-
-    private func buttonBorder(for language: AppLanguage) -> Color {
-        if selectedLanguage == language {
-            return Color(red: 0.64, green: 0.50, blue: 0.28)
-        }
-
-        return Color.white.opacity(0.12)
+    private var selectedLanguage: AppLanguage {
+        AppLanguage(rawValue: selectedLanguageRawValue) ?? .norwegian
     }
 }
 

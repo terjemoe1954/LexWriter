@@ -82,7 +82,8 @@ struct PowerOfAttorneyEditorView: View {
                 PowerOfAttorneyPreviewView(
                     language: language,
                     document: formData.document,
-                    printAction: printDocument
+                    printAction: printDocument,
+                    savePDFAction: saveDocumentAsPDF
                 )
             }
         }
@@ -107,12 +108,19 @@ struct PowerOfAttorneyEditorView: View {
         PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "PowerOfAttorney")
         #endif
     }
+
+    private func saveDocumentAsPDF() {
+        #if canImport(UIKit)
+        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "PowerOfAttorney")
+        #endif
+    }
 }
 
 private struct PowerOfAttorneyPreviewView: View {
     let language: AppLanguage
     let document: PowerOfAttorneyDocument
     let printAction: () -> Void
+    let savePDFAction: () -> Void
 
     @Environment(\.dismiss) private var dismiss
 
@@ -125,6 +133,7 @@ private struct PowerOfAttorneyPreviewView: View {
             secondSignature: document.agentName,
             language: language,
             printAction: printAction,
+            savePDFAction: savePDFAction,
             dismissAction: { dismiss() }
         )
     }

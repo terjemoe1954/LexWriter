@@ -76,7 +76,8 @@ struct DebtInstrumentEditorView: View {
                 DebtInstrumentPreviewView(
                     language: language,
                     document: formData.document,
-                    printAction: printDocument
+                    printAction: printDocument,
+                    savePDFAction: saveDocumentAsPDF
                 )
             }
         }
@@ -101,12 +102,19 @@ struct DebtInstrumentEditorView: View {
         PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "DebtInstrument")
         #endif
     }
+
+    private func saveDocumentAsPDF() {
+        #if canImport(UIKit)
+        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "DebtInstrument")
+        #endif
+    }
 }
 
 private struct DebtInstrumentPreviewView: View {
     let language: AppLanguage
     let document: DebtInstrumentDocument
     let printAction: () -> Void
+    let savePDFAction: () -> Void
 
     @Environment(\.dismiss) private var dismiss
 
@@ -119,6 +127,7 @@ private struct DebtInstrumentPreviewView: View {
             secondSignature: document.debtor.name,
             language: language,
             printAction: printAction,
+            savePDFAction: savePDFAction,
             dismissAction: { dismiss() }
         )
     }
