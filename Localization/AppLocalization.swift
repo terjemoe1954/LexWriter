@@ -79,6 +79,58 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Lys"
         case (.norwegian, .darkMode):
             return "Mørk"
+        case (.norwegian, .accessPlan):
+            return "Tilgang"
+        case (.norwegian, .currentEdition):
+            return "Nåværende utgave"
+        case (.norwegian, .fullEdition):
+            return "Full tilgang"
+        case (.norwegian, .futurePricingNote):
+            return "Alle dokumenter er tilgjengelige nå. Gratis- og premium-inndeling er forberedt i kodebasen for senere bruk."
+        case (.norwegian, .freeTier):
+            return "Gratis"
+        case (.norwegian, .premiumTier):
+            return "Premium"
+        case (.norwegian, .premiumTitle):
+            return "LexWriter Premium"
+        case (.norwegian, .premiumHeadline):
+            return "Lås opp alle dokumentmaler"
+        case (.norwegian, .premiumDescription):
+            return "Premium gir tilgang til hele dokumentsamlingen og passer for brukere som trenger flere juridiske maler i samme app."
+        case (.norwegian, .premiumIncludes):
+            return "Premium inkluderer"
+        case (.norwegian, .unlockPremiumLifetime):
+            return "Lås opp livstidstilgang"
+        case (.norwegian, .restorePurchases):
+            return "Gjenopprett kjøp"
+        case (.norwegian, .premiumUnlocked):
+            return "Premium er aktivert."
+        case (.norwegian, .premiumNotAvailableYet):
+            return "Kjøpsproduktet er ikke koblet til ennå."
+        case (.norwegian, .premiumDisclaimer):
+            return "Betalt funksjonalitet kan aktiveres senere. Frem til da kan denne løsningen brukes for intern testing og videre klargjøring."
+        case (.norwegian, .selectedPremiumDocument):
+            return "Valgt dokument"
+        case (.norwegian, .premiumRequiredShort):
+            return "Krever premium"
+        case (.norwegian, .premiumBenefitsTitle):
+            return "Hvorfor premium"
+        case (.norwegian, .premiumBenefitOne):
+            return "Tilgang til alle avanserte dokumentmaler i én samlet app."
+        case (.norwegian, .premiumBenefitTwo):
+            return "Bedre verdi for brukere som trenger flere juridiske dokumenter over tid."
+        case (.norwegian, .premiumBenefitThree):
+            return "Enklere fremtidig oppgradering med livstidstilgang i stedet for abonnement."
+        case (.norwegian, .premiumTestingNote):
+            return "Dette er en testklar premiumvisning for simulator og intern validering."
+        case (.norwegian, .premiumTesting):
+            return "Premium testing"
+        case (.norwegian, .lockPremiumDocuments):
+            return "Lås premium-dokumenter"
+        case (.norwegian, .openPremiumPreview):
+            return "Åpne premiumvisning"
+        case (.norwegian, .premiumProductIdentifier):
+            return "Produkt-ID"
         case (.norwegian, .comingSoon):
             return "Kommer senere"
         case (.norwegian, .signingRequirements):
@@ -227,6 +279,58 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Light"
         case (.english, .darkMode):
             return "Dark"
+        case (.english, .accessPlan):
+            return "Access"
+        case (.english, .currentEdition):
+            return "Current edition"
+        case (.english, .fullEdition):
+            return "Full access"
+        case (.english, .futurePricingNote):
+            return "All documents are currently available. The free and premium split has been prepared in the codebase for later use."
+        case (.english, .freeTier):
+            return "Free"
+        case (.english, .premiumTier):
+            return "Premium"
+        case (.english, .premiumTitle):
+            return "LexWriter Premium"
+        case (.english, .premiumHeadline):
+            return "Unlock the full document library"
+        case (.english, .premiumDescription):
+            return "Premium gives access to the full document collection for users who need more legal templates in one app."
+        case (.english, .premiumIncludes):
+            return "Premium includes"
+        case (.english, .unlockPremiumLifetime):
+            return "Unlock lifetime access"
+        case (.english, .restorePurchases):
+            return "Restore purchases"
+        case (.english, .premiumUnlocked):
+            return "Premium is active."
+        case (.english, .premiumNotAvailableYet):
+            return "The purchase product is not connected yet."
+        case (.english, .premiumDisclaimer):
+            return "Paid functionality can be enabled later. Until then, this setup is suitable for internal testing and release preparation."
+        case (.english, .selectedPremiumDocument):
+            return "Selected"
+        case (.english, .premiumRequiredShort):
+            return "Premium required"
+        case (.english, .premiumBenefitsTitle):
+            return "Why premium"
+        case (.english, .premiumBenefitOne):
+            return "Access every advanced document template in one app."
+        case (.english, .premiumBenefitTwo):
+            return "Better value for users who need multiple legal documents over time."
+        case (.english, .premiumBenefitThree):
+            return "Cleaner future upgrade path with lifetime access instead of a subscription."
+        case (.english, .premiumTestingNote):
+            return "This premium screen is prepared for simulator testing and internal validation."
+        case (.english, .premiumTesting):
+            return "Premium testing"
+        case (.english, .lockPremiumDocuments):
+            return "Lock premium documents"
+        case (.english, .openPremiumPreview):
+            return "Open premium preview"
+        case (.english, .premiumProductIdentifier):
+            return "Product ID"
         case (.english, .comingSoon):
             return "Coming later"
         case (.english, .signingRequirements):
@@ -375,6 +479,58 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "สว่าง"
         case (.thai, .darkMode):
             return "มืด"
+        case (.thai, .accessPlan):
+            return "การเข้าถึง"
+        case (.thai, .currentEdition):
+            return "รุ่นปัจจุบัน"
+        case (.thai, .fullEdition):
+            return "เข้าถึงเต็มรูปแบบ"
+        case (.thai, .futurePricingNote):
+            return "ขณะนี้เอกสารทั้งหมดใช้งานได้ และมีการเตรียมโครงสร้างฟรีและพรีเมียมไว้ในโค้ดแล้วสำหรับใช้งานภายหลัง"
+        case (.thai, .freeTier):
+            return "ฟรี"
+        case (.thai, .premiumTier):
+            return "พรีเมียม"
+        case (.thai, .premiumTitle):
+            return "LexWriter Premium"
+        case (.thai, .premiumHeadline):
+            return "ปลดล็อกคลังเอกสารทั้งหมด"
+        case (.thai, .premiumDescription):
+            return "พรีเมียมให้สิทธิ์เข้าถึงชุดเอกสารทั้งหมดสำหรับผู้ใช้ที่ต้องการเทมเพลตกฎหมายมากขึ้นในแอปเดียว"
+        case (.thai, .premiumIncludes):
+            return "พรีเมียมประกอบด้วย"
+        case (.thai, .unlockPremiumLifetime):
+            return "ปลดล็อกการเข้าถึงตลอดชีพ"
+        case (.thai, .restorePurchases):
+            return "กู้คืนการซื้อ"
+        case (.thai, .premiumUnlocked):
+            return "เปิดใช้พรีเมียมแล้ว"
+        case (.thai, .premiumNotAvailableYet):
+            return "ยังไม่ได้เชื่อมต่อสินค้าสำหรับการซื้อ"
+        case (.thai, .premiumDisclaimer):
+            return "สามารถเปิดใช้ฟังก์ชันแบบชำระเงินได้ภายหลัง ระหว่างนี้โครงสร้างนี้เหมาะสำหรับการทดสอบภายในและการเตรียมปล่อยแอป"
+        case (.thai, .selectedPremiumDocument):
+            return "เอกสารที่เลือก"
+        case (.thai, .premiumRequiredShort):
+            return "ต้องใช้พรีเมียม"
+        case (.thai, .premiumBenefitsTitle):
+            return "เหตุผลที่ควรใช้พรีเมียม"
+        case (.thai, .premiumBenefitOne):
+            return "เข้าถึงเทมเพลตเอกสารขั้นสูงทั้งหมดได้ในแอปเดียว"
+        case (.thai, .premiumBenefitTwo):
+            return "คุ้มค่าสำหรับผู้ใช้ที่ต้องการเอกสารกฎหมายหลายประเภทในระยะยาว"
+        case (.thai, .premiumBenefitThree):
+            return "รองรับการอัปเกรดแบบตลอดชีพในอนาคตได้ง่ายกว่าแบบสมัครสมาชิก"
+        case (.thai, .premiumTestingNote):
+            return "หน้าพรีเมียมนี้พร้อมสำหรับการทดสอบบนซิมูเลเตอร์และการตรวจสอบภายใน"
+        case (.thai, .premiumTesting):
+            return "การทดสอบพรีเมียม"
+        case (.thai, .lockPremiumDocuments):
+            return "ล็อกเอกสารพรีเมียม"
+        case (.thai, .openPremiumPreview):
+            return "เปิดหน้าพรีเมียม"
+        case (.thai, .premiumProductIdentifier):
+            return "รหัสสินค้า"
         case (.thai, .comingSoon):
             return "จะเพิ่มภายหลัง"
         case (.thai, .signingRequirements):
@@ -502,6 +658,32 @@ enum LocalizedKey {
     case systemMode
     case lightMode
     case darkMode
+    case accessPlan
+    case currentEdition
+    case fullEdition
+    case futurePricingNote
+    case freeTier
+    case premiumTier
+    case premiumTitle
+    case premiumHeadline
+    case premiumDescription
+    case premiumIncludes
+    case unlockPremiumLifetime
+    case restorePurchases
+    case premiumUnlocked
+    case premiumNotAvailableYet
+    case premiumDisclaimer
+    case selectedPremiumDocument
+    case premiumRequiredShort
+    case premiumBenefitsTitle
+    case premiumBenefitOne
+    case premiumBenefitTwo
+    case premiumBenefitThree
+    case premiumTestingNote
+    case premiumTesting
+    case lockPremiumDocuments
+    case openPremiumPreview
+    case premiumProductIdentifier
     case comingSoon
     case signingRequirements
     case mustFillIn
@@ -581,6 +763,17 @@ enum TestamentLocalizedKey {
 }
 
 extension AppLanguage {
+    func premiumMessage(for document: AppDocument) -> String {
+        switch self {
+        case .norwegian:
+            return "\(document.title(for: self)) er del av premiumsamlingen. Lås opp livstidstilgang for å åpne dette dokumentet når premium aktiveres."
+        case .english:
+            return "\(document.title(for: self)) is part of the premium collection. Unlock lifetime access to open this document when premium is enabled."
+        case .thai:
+            return "\(document.title(for: self)) เป็นส่วนหนึ่งของชุดพรีเมียม ปลดล็อกการเข้าถึงตลอดชีพเพื่อเปิดเอกสารนี้เมื่อเปิดใช้พรีเมียม"
+        }
+    }
+
     func testamentText(_ key: TestamentLocalizedKey) -> String {
         switch (self, key) {
         case (.norwegian, .signingRequirementOne):

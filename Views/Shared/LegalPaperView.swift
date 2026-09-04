@@ -63,18 +63,21 @@ struct LegalPaperView: View {
                 Button(language.text(.close)) {
                     dismissAction()
                 }
+                .accessibilityIdentifier("closePreviewButton")
             }
 
             ToolbarItem(placement: .automatic) {
                 Button(language.text(.savePDFButton)) {
                     savePDFAction()
                 }
+                .accessibilityIdentifier("savePDFButton")
             }
 
             ToolbarItem(placement: .primaryAction) {
                 Button(language.text(.printButton)) {
                     printAction()
                 }
+                .accessibilityIdentifier("printButton")
             }
         }
     }

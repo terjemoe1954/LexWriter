@@ -10,34 +10,49 @@ import XCTest
 final class LexWriterUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testSettingsShowsLanguageAppearanceHelpAndAppInfo() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
+        app.buttons["settingsButton"].tap()
+
+        XCTAssertTrue(app.staticTexts["Språk"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.staticTexts["Utseende"].exists)
+        XCTAssertTrue(app.staticTexts["Hjelp"].exists)
+        XCTAssertTrue(app.staticTexts["Appinformasjon"].exists)
+        XCTAssertTrue(app.staticTexts["Versjon"].exists)
+        XCTAssertTrue(app.staticTexts["Build"].exists)
     }
 
     @MainActor
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-        }
+    func testLanguageChangeUpdatesSettingsLabels() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        app.buttons["settingsButton"].tap()
+        app.buttons["English"].tap()
+
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.staticTexts["Language"].exists)
+        XCTAssertTrue(app.staticTexts["Appearance"].exists)
+        XCTAssertTrue(app.staticTexts["Help"].exists)
+        XCTAssertTrue(app.staticTexts["App information"].exists)
+    }
+
+    @MainActor
+    func testPreviewShowsPrintAndSavePDFButtons() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        app.staticTexts["Testament"].tap()
+        app.buttons["Vis testament"].tap()
+
+        XCTAssertTrue(app.buttons["savePDFButton"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.buttons["printButton"].exists)
+        XCTAssertTrue(app.buttons["closePreviewButton"].exists)
     }
 }

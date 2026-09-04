@@ -225,18 +225,21 @@ struct TestamentPreviewView: View {
                 Button(language.text(.close)) {
                     dismiss()
                 }
+                .accessibilityIdentifier("closePreviewButton")
             }
 
             ToolbarItem(placement: .automatic) {
                 Button(language.text(.savePDFButton)) {
                     savePDFAction()
                 }
+                .accessibilityIdentifier("savePDFButton")
             }
 
             ToolbarItem(placement: .primaryAction) {
                 Button(language.text(.printButton)) {
                     printAction()
                 }
+                .accessibilityIdentifier("printButton")
             }
         }
     }
