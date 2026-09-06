@@ -16,7 +16,9 @@ struct LexWriterApp: App {
             HomeView()
                 .environment(purchaseManager)
                 .task {
-                    purchaseManager.start()
+                    if MonetizationPlan.isPremiumStoreEnabled {
+                        purchaseManager.start()
+                    }
                 }
         }
     }

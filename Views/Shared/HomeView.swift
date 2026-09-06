@@ -11,7 +11,6 @@ struct HomeView: View {
     @Environment(PurchaseManager.self) private var purchaseManager
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = AppLanguage.norwegian.rawValue
     @AppStorage("preferredAppearance") private var preferredAppearance = AppAppearance.system.rawValue
-    @AppStorage(MonetizationPlan.premiumLockingDefaultsKey) private var premiumLockingEnabled = false
     @State private var premiumDocument: AppDocument?
 
     var body: some View {
@@ -149,7 +148,7 @@ struct HomeView: View {
     }
 
     private func isDocumentUnlocked(_ document: AppDocument) -> Bool {
-        guard premiumLockingEnabled else { return true }
+        guard MonetizationPlan.isPremiumEnforced else { return true }
         return purchaseManager.isDocumentUnlocked(document)
     }
 

@@ -196,6 +196,7 @@ enum MonetizationPlan {
     static let premiumLockingDefaultsKey = "premiumLockingEnabled"
     static let showsPremiumBadges = false
     static let showsTestingControls = false
+    static let isPremiumStoreEnabled = false
     static let freeDocuments: [AppDocument] = AppDocument.allCases.filter { $0.accessTier == .free }
     static let premiumDocuments: [AppDocument] = AppDocument.allCases.filter { $0.accessTier == .premium }
 

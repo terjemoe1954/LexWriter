@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = AppLanguage.norwegian.rawValue
     @AppStorage("preferredAppearance") private var preferredAppearance = AppAppearance.system.rawValue
-    @AppStorage(MonetizationPlan.premiumLockingDefaultsKey) private var premiumLockingEnabled = false
 
     var body: some View {
         Form {
@@ -51,34 +50,6 @@ struct SettingsView: View {
                 }
                 LabeledContent(language.text(.versionAndBuild)) {
                     Text(AppMetadata.combinedVersionString)
-                }
-            }
-
-            Section(language.text(.accessPlan)) {
-                LabeledContent(language.text(.currentEdition)) {
-                    Text(language.text(.fullEdition))
-                }
-                Text(language.text(.futurePricingNote))
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-
-            if MonetizationPlan.showsTestingControls {
-                Section(language.text(.premiumTesting)) {
-                    Toggle(language.text(.lockPremiumDocuments), isOn: $premiumLockingEnabled)
-                        .accessibilityIdentifier("premiumLockingToggle")
-
-                    NavigationLink {
-                        PremiumView(language: language, highlightedDocument: nil)
-                    } label: {
-                        Label(language.text(.openPremiumPreview), systemImage: "crown.fill")
-                    }
-                    .accessibilityIdentifier("openPremiumPreviewButton")
-
-                    LabeledContent(language.text(.premiumProductIdentifier)) {
-                        Text(PurchaseManager.premiumLifetimeProductID)
-                            .font(.footnote.monospaced())
-                    }
                 }
             }
         }
