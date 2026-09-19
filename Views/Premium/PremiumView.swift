@@ -54,10 +54,6 @@ struct PremiumView: View {
                 .font(.body)
                 .foregroundStyle(Color.white.opacity(0.82))
 
-            Text(language.text(.premiumTestingNote))
-                .font(.footnote.weight(.medium))
-                .foregroundStyle(Color.white.opacity(0.66))
-
             if let premiumProduct = purchaseManager.premiumProduct {
                 Text(premiumProduct.displayPrice)
                     .font(.title3.weight(.semibold))

@@ -91,42 +91,61 @@ struct HomeView: View {
     }
 
     private var documentSection: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            documentGroup(
+                title: selectedLanguage.text(.freeDocumentsTitle),
+                documents: AppDocument.allCases.filter { $0.accessTier == .free }
+            )
+
+            documentGroup(
+                title: selectedLanguage.text(.moreDocumentTemplatesTitle),
+                documents: AppDocument.allCases.filter { $0.accessTier == .premium }
+            )
+        }
+    }
+
+    private func documentGroup(title: String, documents: [AppDocument]) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(selectedLanguage.text(.documents))
+            Text(title)
                 .font(.system(size: 24, weight: .semibold, design: .serif))
                 .foregroundStyle(.white)
 
-            ForEach(AppDocument.allCases) { document in
-                if isDocumentUnlocked(document) {
-                    NavigationLink {
-                        document.destinationView(language: selectedLanguage)
-                    } label: {
-                        DocumentCard(
-                            title: document.title(for: selectedLanguage),
-                            subtitle: document.subtitle(for: selectedLanguage),
-                            iconName: document.iconName,
-                            accent: document.accent,
-                            badgeText: badgeText(for: document)
-                        )
-                    }
-                    .buttonStyle(.plain)
-                } else {
-                    Button {
-                        premiumDocument = document
-                    } label: {
-                        DocumentCard(
-                            title: document.title(for: selectedLanguage),
-                            subtitle: document.subtitle(for: selectedLanguage),
-                            iconName: document.iconName,
-                            accent: document.accent,
-                            badgeText: badgeText(for: document),
-                            lockedMessage: selectedLanguage.text(.premiumRequiredShort),
-                            isEnabled: false
-                        )
-                    }
-                    .buttonStyle(.plain)
-                }
+            ForEach(documents) { document in
+                documentRow(for: document)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func documentRow(for document: AppDocument) -> some View {
+        if isDocumentUnlocked(document) {
+            NavigationLink {
+                document.destinationView(language: selectedLanguage)
+            } label: {
+                DocumentCard(
+                    title: document.title(for: selectedLanguage),
+                    subtitle: document.subtitle(for: selectedLanguage),
+                    iconName: document.iconName,
+                    accent: document.accent,
+                    badgeText: badgeText(for: document)
+                )
+            }
+            .buttonStyle(.plain)
+        } else {
+            Button {
+                premiumDocument = document
+            } label: {
+                DocumentCard(
+                    title: document.title(for: selectedLanguage),
+                    subtitle: document.subtitle(for: selectedLanguage),
+                    iconName: document.iconName,
+                    accent: document.accent,
+                    badgeText: badgeText(for: document),
+                    lockedMessage: selectedLanguage.text(.premiumRequiredShort),
+                    isEnabled: false
+                )
+            }
+            .buttonStyle(.plain)
         }
     }
 

@@ -37,6 +37,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Velg dokumenttype og fyll inn nødvendige opplysninger i en rolig, formell og utskriftsvennlig arbeidsflate."
         case (.norwegian, .documents):
             return "Dokumenter"
+        case (.norwegian, .freeDocumentsTitle):
+            return "Gratis dokumenter"
+        case (.norwegian, .moreDocumentTemplatesTitle):
+            return "Flere dokumentmaler"
         case (.norwegian, .testamentTitle):
             return "Testament"
         case (.norwegian, .testamentSubtitle):
@@ -106,9 +110,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.norwegian, .premiumUnlocked):
             return "Premium er aktivert."
         case (.norwegian, .premiumNotAvailableYet):
-            return "Kjøpsproduktet er ikke koblet til ennå."
+            return "Kjøp er ikke tilgjengelig akkurat nå. Prøv igjen senere."
         case (.norwegian, .premiumDisclaimer):
-            return "Betalt funksjonalitet kan aktiveres senere. Frem til da kan denne løsningen brukes for intern testing og videre klargjøring."
+            return "Kjøp håndteres trygt av App Store. Dokumentene er utkast og bør vurderes av kvalifisert rådgiver ved kompliserte forhold."
         case (.norwegian, .selectedPremiumDocument):
             return "Valgt dokument"
         case (.norwegian, .premiumRequiredShort):
@@ -237,6 +241,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Choose a document type and enter the required details in a calm, formal, print-ready workspace."
         case (.english, .documents):
             return "Documents"
+        case (.english, .freeDocumentsTitle):
+            return "Free documents"
+        case (.english, .moreDocumentTemplatesTitle):
+            return "More document templates"
         case (.english, .testamentTitle):
             return "Will"
         case (.english, .testamentSubtitle):
@@ -306,9 +314,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.english, .premiumUnlocked):
             return "Premium is active."
         case (.english, .premiumNotAvailableYet):
-            return "The purchase product is not connected yet."
+            return "Purchases are not available right now. Please try again later."
         case (.english, .premiumDisclaimer):
-            return "Paid functionality can be enabled later. Until then, this setup is suitable for internal testing and release preparation."
+            return "Purchases are handled securely by the App Store. Documents are drafts and should be reviewed by a qualified adviser in complex situations."
         case (.english, .selectedPremiumDocument):
             return "Selected"
         case (.english, .premiumRequiredShort):
@@ -437,6 +445,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "เลือกประเภทเอกสารและกรอกข้อมูลที่จำเป็นในหน้าทำงานที่เป็นทางการ สงบ และพร้อมพิมพ์"
         case (.thai, .documents):
             return "เอกสาร"
+        case (.thai, .freeDocumentsTitle):
+            return "เอกสารฟรี"
+        case (.thai, .moreDocumentTemplatesTitle):
+            return "เทมเพลตเอกสารเพิ่มเติม"
         case (.thai, .testamentTitle):
             return "พินัยกรรม"
         case (.thai, .testamentSubtitle):
@@ -506,9 +518,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.thai, .premiumUnlocked):
             return "เปิดใช้พรีเมียมแล้ว"
         case (.thai, .premiumNotAvailableYet):
-            return "ยังไม่ได้เชื่อมต่อสินค้าสำหรับการซื้อ"
+            return "ยังไม่สามารถซื้อได้ในขณะนี้ โปรดลองอีกครั้งภายหลัง"
         case (.thai, .premiumDisclaimer):
-            return "สามารถเปิดใช้ฟังก์ชันแบบชำระเงินได้ภายหลัง ระหว่างนี้โครงสร้างนี้เหมาะสำหรับการทดสอบภายในและการเตรียมปล่อยแอป"
+            return "การซื้อดำเนินการอย่างปลอดภัยผ่าน App Store เอกสารเป็นร่างและควรให้ผู้เชี่ยวชาญตรวจทานเมื่อมีประเด็นซับซ้อน"
         case (.thai, .selectedPremiumDocument):
             return "เอกสารที่เลือก"
         case (.thai, .premiumRequiredShort):
@@ -637,6 +649,8 @@ enum LocalizedKey {
     case heroTitle
     case heroSubtitle
     case documents
+    case freeDocumentsTitle
+    case moreDocumentTemplatesTitle
     case testamentTitle
     case testamentSubtitle
     case contractTitle
@@ -766,11 +780,11 @@ extension AppLanguage {
     func premiumMessage(for document: AppDocument) -> String {
         switch self {
         case .norwegian:
-            return "\(document.title(for: self)) er del av premiumsamlingen. Lås opp livstidstilgang for å åpne dette dokumentet når premium aktiveres."
+            return "\(document.title(for: self)) er del av premiumsamlingen. Lås opp livstidstilgang for å åpne dette dokumentet."
         case .english:
-            return "\(document.title(for: self)) is part of the premium collection. Unlock lifetime access to open this document when premium is enabled."
+            return "\(document.title(for: self)) is part of the premium collection. Unlock lifetime access to open this document."
         case .thai:
-            return "\(document.title(for: self)) เป็นส่วนหนึ่งของชุดพรีเมียม ปลดล็อกการเข้าถึงตลอดชีพเพื่อเปิดเอกสารนี้เมื่อเปิดใช้พรีเมียม"
+            return "\(document.title(for: self)) เป็นส่วนหนึ่งของชุดพรีเมียม ปลดล็อกการเข้าถึงตลอดชีพเพื่อเปิดเอกสารนี้"
         }
     }
 
