@@ -454,6 +454,40 @@ struct LexWriterTests {
         #expect(AppLanguage.thai.text(.futurePricingNote).contains("ขณะนี้เอกสารทั้งหมดใช้งานได้"))
     }
 
+    @Test func releaseAndSupportDraftsKeepPremiumPreparationMessaging() async throws {
+        let drafts = try [
+            projectFileContents("APPSTORE_SUBMISSION_NOTES.md"),
+            projectFileContents("SUPPORT_RESPONSES.md")
+        ]
+
+        for draft in drafts {
+            let lowercaseDraft = draft.localizedLowercase
+            #expect(lowercaseDraft.contains("purchases are not available in this version"))
+            #expect(lowercaseDraft.contains("all documents"))
+            #expect(lowercaseDraft.contains("not legal advice"))
+            #expect(lowercaseDraft.contains("does not collect personal data"))
+
+            #expect(!lowercaseDraft.contains("purchases are available in this version"))
+            #expect(!lowercaseDraft.contains("premium access is enforced"))
+            #expect(!lowercaseDraft.contains("premium documents are locked"))
+            #expect(!lowercaseDraft.contains("buy premium now"))
+            #expect(!lowercaseDraft.contains("restore purchases now"))
+        }
+    }
+
+    @Test func releaseChecklistKeepsPremiumPreparationGates() async throws {
+        let checklist = try projectFileContents("RELEASE_CHECKLIST.md").localizedLowercase
+
+        #expect(checklist.contains("storekit loading"))
+        #expect(checklist.contains("purchase buttons"))
+        #expect(checklist.contains("restore buttons"))
+        #expect(checklist.contains("premium enforcement"))
+        #expect(checklist.contains("disabled"))
+        #expect(checklist.contains("run ui tests only after"))
+        #expect(checklist.contains("lexwriteruitests"))
+        #expect(checklist.contains("build-for-testing succeeds"))
+    }
+
     @Test func purchaseManagerUsesExpectedPremiumProductIdentifier() async throws {
         #expect(PurchaseManager.premiumLifetimeProductID == "com.lexwriter.premium.lifetime")
     }
@@ -1186,5 +1220,13 @@ struct LexWriterTests {
         party.name = name
         party.address = "Gate 1"
         return party
+    }
+
+    private func projectFileContents(_ relativePath: String) throws -> String {
+        let testFileURL = URL(fileURLWithPath: #filePath)
+        let projectURL = testFileURL.deletingLastPathComponent().deletingLastPathComponent()
+        let fileURL = projectURL.appendingPathComponent(relativePath)
+
+        return try String(contentsOf: fileURL, encoding: .utf8)
     }
 }

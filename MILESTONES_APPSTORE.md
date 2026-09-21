@@ -42,6 +42,8 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added full PremiumView localization coverage, including exact Thai premium-preview/status copy used in the premium-preparation flow.
 - Added unit coverage for the expected premium product id.
 - Added premium product id label to the premium-preview localization coverage.
+- Added unit coverage that guards App Store submission notes and support drafts against claiming active purchases or premium locking during the premium-preparation phase.
+- Added unit coverage that guards the release checklist's premium-preparation gates and UI-test blocker note.
 - Updated the premium-marked home section title so it reads as planned premium while purchases are disabled.
 - Split monetization flags into clear responsibilities: badges, StoreKit availability, and premium enforcement.
 - Added tests that guard the current free/premium document split and ensure premium enforcement stays off for now.
@@ -78,7 +80,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Made `PurchaseManager` testable with injectable `UserDefaults` while keeping `.standard` as the app default.
 - Updated SwiftUI previews for `HomeView`, `SettingsView`, and `PremiumView` so each has the required `PurchaseManager` environment.
 - Updated unit and UI test expectations for the current premium-preview wording.
-- Current validation baseline: app build succeeds, build-for-testing succeeds, and 60 unit tests pass. UI tests compile but cannot run until the Xcode `LexWriterUITests` target application path is fixed.
+- Current validation baseline: app build succeeds, build-for-testing succeeds, and 62 unit tests pass. UI tests compile but cannot run until the Xcode `LexWriterUITests` target application path is fixed.
 - Added `RELEASE_CHECKLIST.md` for future App Store submissions.
 - Added `PREMIUM_ACTIVATION.md` with the exact preconditions and flags for enabling purchases later.
 - Added `KNOWN_LIMITATIONS.md` for support replies, App Store review notes, and release planning.
