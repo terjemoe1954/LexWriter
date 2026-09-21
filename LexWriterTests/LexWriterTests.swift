@@ -357,6 +357,32 @@ struct LexWriterTests {
         #expect(bodyText.contains("15 000 kroner"))
     }
 
+    @Test func cohabitationAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(CohabitationAgreementFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(CohabitationAgreementFormData().warnings(in: .norwegian).count == 3)
+
+        var form = CohabitationAgreementFormData()
+        form.partnerOne = cohabitationParty(name: "Samboer En")
+        form.partnerTwo = cohabitationParty(name: "Samboer To")
+        form.sharedHomeAddress = "Fellesgata 1"
+        form.ownershipDistribution = "Partene eier boligen med en halvpart hver."
+        form.separateAssets = "Hver part beholder eiendeler de eide før samlivet."
+        form.sharedExpenses = "Felles utgifter deles likt."
+        form.debtResponsibility = "Hver part svarer for egen gjeld."
+        form.breakupHandling = "Bolig og innbo fordeles etter eierandel."
+        form.specialTerms = "Ingen særvilkår."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Samboer En"))
+        #expect(bodyText.contains("Samboer To"))
+        #expect(bodyText.contains("Fellesgata 1"))
+        #expect(bodyText.contains("Felles utgifter deles likt."))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"
@@ -425,6 +451,13 @@ struct LexWriterTests {
 
     private func rentalParty(name: String) -> RentalParty {
         var party = RentalParty()
+        party.name = name
+        party.address = "Gate 1"
+        return party
+    }
+
+    private func cohabitationParty(name: String) -> CohabitationParty {
+        var party = CohabitationParty()
         party.name = name
         party.address = "Gate 1"
         return party
