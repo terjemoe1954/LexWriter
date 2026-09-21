@@ -44,6 +44,24 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added premium product id label to the premium-preview localization coverage.
 - Added unit coverage that guards App Store submission notes and support drafts against claiming active purchases or premium locking during the premium-preparation phase.
 - Added unit coverage that guards the release checklist's premium-preparation gates and UI-test blocker note.
+- Added unit coverage that keeps App Store metadata drafts focused on legal document templates, printing/PDF, and legal-scope wording.
+- Added unit coverage that keeps App Store review notes and screenshot guidance aligned with premium-preparation wording.
+- Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
+- Added unit coverage that keeps support responses clear about PDF saving, no full document history/cloud sync, and print/PDF troubleshooting details.
+- Added unit coverage that keeps `KNOWN_LIMITATIONS.md` explicit about legal scope, storage limits, premium-preparation state, StoreKit, and the UI-test blocker.
+- Added unit coverage that keeps `PREMIUM_ACTIVATION.md` explicit about product setup, sandbox/restore testing, activation flags, and the two-release recommendation.
+- Added unit coverage that keeps `PREMIUM_ACTIVATION.md` explicit about the current free and premium-marked document split.
+- Added unit coverage that keeps the version 1.1 plan explicit about deferring StoreKit, purchase/restore controls, premium enforcement, and document locking.
+- Added unit coverage that keeps `CODEX_HANDOFF.md` aligned with the current premium-preparation state, UI-test blocker, validation baseline, and safe-session instructions.
+- Added unit coverage that keeps the App Store milestone order explicit about stability before monetization and premium enforcement only after product, price, screenshots, metadata, and restore flow are confirmed.
+- Added unit coverage that keeps the recommended next build order conservative: live signals and smoke testing before StoreKit sandbox work and premium enforcement.
+- Added unit coverage that keeps the release checklist explicit about version/build, smoke tests, App Store Connect checks, archive, and TestFlight validation.
+- Added unit coverage that keeps the release checklist explicit about product smoke-test scope across devices, core screens, document creation, PDF output, and language switching.
+- Added unit coverage that keeps the release checklist explicit about legal/trust review and higher-risk templates before release.
+- Added unit coverage that keeps the release checklist explicit about App Store Connect checks, screenshots, privacy details, support email, and privacy policy links.
+- Added unit coverage that keeps App Store release notes aligned with premium-preparation, unavailable purchases, free/premium labels, and legal-scope wording.
+- Added unit coverage that keeps App Store keyword drafts focused on document, print, and PDF search terms rather than active premium purchase wording.
+- Added unit coverage that keeps support replies conservative about legal-advice scope and high-risk situations before signing.
 - Updated the premium-marked home section title so it reads as planned premium while purchases are disabled.
 - Split monetization flags into clear responsibilities: badges, StoreKit availability, and premium enforcement.
 - Added tests that guard the current free/premium document split and ensure premium enforcement stays off for now.
@@ -80,7 +98,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Made `PurchaseManager` testable with injectable `UserDefaults` while keeping `.standard` as the app default.
 - Updated SwiftUI previews for `HomeView`, `SettingsView`, and `PremiumView` so each has the required `PurchaseManager` environment.
 - Updated unit and UI test expectations for the current premium-preview wording.
-- Current validation baseline: app build succeeds, build-for-testing succeeds, and 62 unit tests pass. UI tests compile but cannot run until the Xcode `LexWriterUITests` target application path is fixed.
+- Current validation baseline: app build succeeds, build-for-testing succeeds, and 82 unit tests pass. `LexWriterUITests` now points to `LexWriter`, but UI tests have not been run in this batch.
 - Added `RELEASE_CHECKLIST.md` for future App Store submissions.
 - Added `PREMIUM_ACTIVATION.md` with the exact preconditions and flags for enabling purchases later.
 - Added `KNOWN_LIMITATIONS.md` for support replies, App Store review notes, and release planning.
@@ -154,7 +172,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 4. Test the lifetime unlock product in StoreKit and App Store Connect sandbox.
 5. Maintain `VERSION_1_1_CANDIDATES.md` from real issues first, then premium-readiness polish.
 6. Add or update validation tests for the premium-marked document types with the highest legal or UX risk.
-7. Fix the `LexWriterUITests` target application path if UI automation should be part of the release gate.
+7. Run `LexWriterUITests` if UI automation should be part of the release gate.
 8. Prepare updated App Store metadata and screenshots for the paid/premium version.
 9. Enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed.
 

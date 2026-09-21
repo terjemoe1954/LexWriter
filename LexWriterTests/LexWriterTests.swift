@@ -483,9 +483,305 @@ struct LexWriterTests {
         #expect(checklist.contains("restore buttons"))
         #expect(checklist.contains("premium enforcement"))
         #expect(checklist.contains("disabled"))
-        #expect(checklist.contains("run ui tests only after"))
+        #expect(checklist.contains("run ui tests if ui automation is part of this release gate"))
         #expect(checklist.contains("lexwriteruitests"))
-        #expect(checklist.contains("build-for-testing succeeds"))
+        #expect(checklist.contains("target application should point to `lexwriter`"))
+    }
+
+    @Test func releaseChecklistKeepsSubmissionValidationStepsExplicit() async throws {
+        let checklist = try projectFileContents("RELEASE_CHECKLIST.md").localizedLowercase
+
+        #expect(checklist.contains("confirm the intended version number and build number"))
+        #expect(checklist.contains("update app store connect release notes"))
+        #expect(checklist.contains("launch the app on a small iphone, large iphone, and ipad"))
+        #expect(checklist.contains("create at least one free document and one premium-marked document"))
+        #expect(checklist.contains("preview, print, and save pdf"))
+        #expect(checklist.contains("check crashes, hangs, reviews, ratings, installs, and product page performance"))
+        #expect(checklist.contains("confirm privacy details still match the app"))
+        #expect(checklist.contains("build the app in xcode"))
+        #expect(checklist.contains("run unit tests"))
+        #expect(checklist.contains("archive the exact build intended for submission"))
+        #expect(checklist.contains("submit to testflight first"))
+    }
+
+    @Test func releaseChecklistKeepsProductSmokeTestScopeExplicit() async throws {
+        let checklist = try projectFileContents("RELEASE_CHECKLIST.md").localizedLowercase
+
+        #expect(checklist.contains("product smoke test"))
+        #expect(checklist.contains("launch the app on a small iphone, large iphone, and ipad"))
+        #expect(checklist.contains("check home screen layout, document badges, legal note, settings, user guide, and premium preview"))
+        #expect(checklist.contains("confirm settings shows the current access status"))
+        #expect(checklist.contains("free/premium template counts"))
+        #expect(checklist.contains("planned-premium entry point"))
+        #expect(checklist.contains("confirm premium preview says purchases are not available in this version while storekit is disabled"))
+        #expect(checklist.contains("create at least one free document and one premium-marked document"))
+        #expect(checklist.contains("preview, print, and save pdf from a representative document"))
+        #expect(checklist.contains("switch language between norwegian, english, and thai"))
+    }
+
+    @Test func releaseChecklistKeepsLegalTrustReviewExplicit() async throws {
+        let checklist = try projectFileContents("RELEASE_CHECKLIST.md").localizedLowercase
+
+        #expect(checklist.contains("legal and trust"))
+        #expect(checklist.contains("review `known_limitations.md`"))
+        #expect(checklist.contains("confirm the home screen legal note is visible"))
+        #expect(checklist.contains("confirm settings includes access and privacy information"))
+        #expect(checklist.contains("documents are templates and drafts, not legal advice"))
+        #expect(checklist.contains("review higher-risk templates before release"))
+        #expect(checklist.contains("testament"))
+        #expect(checklist.contains("debt instrument"))
+        #expect(checklist.contains("power of attorney"))
+        #expect(checklist.contains("employment agreement"))
+        #expect(checklist.contains("nda"))
+    }
+
+    @Test func releaseChecklistKeepsAppStoreConnectChecksExplicit() async throws {
+        let checklist = try projectFileContents("RELEASE_CHECKLIST.md").localizedLowercase
+
+        #expect(checklist.contains("app store connect"))
+        #expect(checklist.contains("review `appstore_submission_notes.md`"))
+        #expect(checklist.contains("review `support_responses.md`"))
+        #expect(checklist.contains("crashes, hangs, reviews, ratings, installs"))
+        #expect(checklist.contains("product page performance"))
+        #expect(checklist.contains("confirm privacy details still match the app"))
+        #expect(checklist.contains("confirm screenshots match the shipped ui"))
+        #expect(checklist.contains("do not include premium preview screenshots"))
+        #expect(checklist.contains("support email and privacy policy links are active"))
+    }
+
+    @Test func appStoreMetadataDraftsKeepPrintAndLegalScopeClear() async throws {
+        let notes = try projectFileContents("APPSTORE_SUBMISSION_NOTES.md")
+        let lowercaseNotes = notes.localizedLowercase
+
+        #expect(notes.contains("Juridiske dokumentmaler for utskrift"))
+        #expect(notes.contains("Legal document templates for printing"))
+        #expect(lowercaseNotes.contains("fyll inn feltene"))
+        #expect(lowercaseNotes.contains("print or save it as a pdf"))
+        #expect(lowercaseNotes.contains("ikke juridisk rådgivning"))
+        #expect(lowercaseNotes.contains("not legal advice"))
+        #expect(lowercaseNotes.contains("do not claim premium purchase availability"))
+    }
+
+    @Test func appStoreReleaseNotesKeepPremiumPreparationScopeClear() async throws {
+        let notes = try projectFileContents("APPSTORE_SUBMISSION_NOTES.md").localizedLowercase
+
+        #expect(notes.contains("suggested release notes"))
+        #expect(notes.contains("tydeligere merking av gratis og kommende premium-dokumenter"))
+        #expect(notes.contains("home screen now labels planned premium templates"))
+        #expect(notes.contains("kjøp ikke er tilgjengelig i denne versjonen"))
+        #expect(notes.contains("purchases are not available in this version"))
+        #expect(notes.contains("brukerveiledningen forklarer nå gratis/premium-merking"))
+        #expect(notes.contains("user guide now explains free/premium labels"))
+        #expect(notes.contains("ikke juridisk rådgivning"))
+        #expect(notes.contains("not legal advice"))
+        #expect(!notes.contains("users can buy premium now"))
+        #expect(!notes.contains("premium is available for purchase"))
+        #expect(!notes.contains("start your subscription"))
+    }
+
+    @Test func appStoreKeywordDraftsKeepDocumentAndPrintScope() async throws {
+        let notes = try projectFileContents("APPSTORE_SUBMISSION_NOTES.md").localizedLowercase
+
+        #expect(notes.contains("kontrakt, avtale, testament, fullmakt, kvittering, lån, pdf, utskrift, dokumentmal"))
+        #expect(notes.contains("contract, agreement, will, power of attorney, receipt, loan, pdf, print, template"))
+        #expect(!notes.contains("premium, unlock, subscription"))
+        #expect(!notes.contains("kjøp premium"))
+        #expect(!notes.contains("buy premium"))
+    }
+
+    @Test func appStoreSubmissionNotesKeepScreenshotAndReviewScopeClear() async throws {
+        let notes = try projectFileContents("APPSTORE_SUBMISSION_NOTES.md").localizedLowercase
+
+        #expect(notes.contains("premium-preparation phase"))
+        #expect(notes.contains("premium access is not enforced yet"))
+        #expect(notes.contains("all documents remain available"))
+        #expect(notes.contains("expected product identifier"))
+        #expect(notes.contains("com.lexwriter.premium.lifetime"))
+        #expect(notes.contains("not that users can buy or unlock premium now"))
+        #expect(notes.contains("premium preview showing \"purchases are not available in this version\""))
+        #expect(notes.contains("do not use the premium preview screenshot"))
+        #expect(notes.contains("premium is being prepared but is not yet enforced"))
+    }
+
+    @Test func appStoreScreenshotChecklistKeepsCoreFlowAndPremiumCaveat() async throws {
+        let notes = try projectFileContents("APPSTORE_SUBMISSION_NOTES.md").localizedLowercase
+
+        #expect(notes.contains("screenshot checklist"))
+        #expect(notes.contains("home screen with free/premium badges visible"))
+        #expect(notes.contains("a representative document editor"))
+        #expect(notes.contains("print preview with print/pdf controls"))
+        #expect(notes.contains("settings with access status"))
+        #expect(notes.contains("3 free / 9 planned premium template count"))
+        #expect(notes.contains("privacy sections"))
+        #expect(notes.contains("premium preview showing \"purchases are not available in this version\""))
+        #expect(notes.contains("only if the app store listing mentions the premium-preparation state"))
+        #expect(notes.contains("do not use the premium preview screenshot for a normal stability release"))
+    }
+
+    @Test func uiTestTargetKeepsLexWriterAsTargetApplication() async throws {
+        let project = try projectFileContents("LexWriter.xcodeproj/project.pbxproj")
+
+        #expect(project.contains("TEST_TARGET_NAME = LexWriter;"))
+        #expect(!project.contains("TEST_TARGET_NAME = DocWriter;"))
+    }
+
+    @Test func versionOneOnePlanKeepsPremiumActivationDeferred() async throws {
+        let plan = try projectFileContents("VERSION_1_1_CANDIDATES.md").localizedLowercase
+
+        #expect(plan.contains("trust, polish, and premium-preparation release"))
+        #expect(plan.contains("should not enable paid purchases or premium locking"))
+        #expect(plan.contains("keep all documents available"))
+        #expect(plan.contains("keep storekit product loading disabled"))
+        #expect(plan.contains("keep purchase and restore controls hidden"))
+        #expect(plan.contains("keep premium enforcement disabled"))
+        #expect(plan.contains("defer until premium activation"))
+        #expect(plan.contains("enabling `ispremiumstoreenabled`"))
+        #expect(plan.contains("enabling `enforcespremiumaccess`"))
+        #expect(plan.contains("showing purchase or restore buttons"))
+        #expect(plan.contains("locking premium-marked documents"))
+    }
+
+    @Test func codexHandoffKeepsSafeSessionInstructionsCurrent() async throws {
+        let handoff = try projectFileContents("CODEX_HANDOFF.md").localizedLowercase
+
+        #expect(handoff.contains("premium badges are visible"))
+        #expect(handoff.contains("all documents remain available"))
+        #expect(handoff.contains("storekit product loading is disabled"))
+        #expect(handoff.contains("purchase and restore buttons are hidden"))
+        #expect(handoff.contains("premium enforcement is disabled"))
+        #expect(handoff.contains("unit tests: 82/82 passed"))
+        #expect(handoff.contains("build for testing: succeeded"))
+        #expect(handoff.contains("ui test target now points to `lexwriter`"))
+        #expect(handoff.contains("ui tests have not been run in this batch"))
+        #expect(handoff.contains("do not enable storekit or premium locking"))
+        #expect(handoff.contains("continue from the premium-preparation workstream"))
+    }
+
+    @Test func appStoreMilestonesKeepPremiumReadinessOrderExplicit() async throws {
+        let milestones = try projectFileContents("MILESTONES_APPSTORE.md").localizedLowercase
+
+        #expect(milestones.contains("stability and trust before monetization"))
+        #expect(milestones.contains("premium version readiness"))
+        #expect(milestones.contains("lifetime unlock first"))
+        #expect(milestones.contains("com.lexwriter.premium.lifetime"))
+        #expect(milestones.contains("before turning on premium enforcement"))
+        #expect(milestones.contains("follow `premium_activation.md`"))
+        #expect(milestones.contains("purchase/restore value copy only when storekit is enabled"))
+        #expect(milestones.contains("test purchase, restore purchase, pending purchase, cancelled purchase"))
+        #expect(milestones.contains("only enable premium locking after"))
+        #expect(milestones.contains("enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed"))
+    }
+
+    @Test func appStoreMilestonesKeepNextBuildOrderConservative() async throws {
+        let milestones = try projectFileContents("MILESTONES_APPSTORE.md").localizedLowercase
+
+        #expect(milestones.contains("recommended next build order"))
+        #expect(milestones.contains("check app store connect for crashes, ratings, reviews, installs, and product-page performance"))
+        #expect(milestones.contains("do a live-build smoke test on device"))
+        #expect(milestones.contains("language selection, document creation, preview, printing, settings, and current premium entry points"))
+        #expect(milestones.contains("decide the free-versus-premium document split and the initial lifetime price"))
+        #expect(milestones.contains("test the lifetime unlock product in storekit and app store connect sandbox"))
+        #expect(milestones.contains("maintain `version_1_1_candidates.md` from real issues first"))
+        #expect(milestones.contains("run `lexwriteruitests` if ui automation should be part of the release gate"))
+        #expect(milestones.contains("prepare updated app store metadata and screenshots for the paid/premium version"))
+        #expect(milestones.contains("enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed"))
+    }
+
+    @Test func supportDraftsKeepSavingAndPrintScopeClear() async throws {
+        let support = try projectFileContents("SUPPORT_RESPONSES.md").localizedLowercase
+
+        #expect(support.contains("lagre dokumenter som pdf"))
+        #expect(support.contains("saving documents as pdf"))
+        #expect(support.contains("ikke full dokumenthistorikk"))
+        #expect(support.contains("does not currently include a full document library"))
+        #expect(support.contains("cloud sync"))
+        #expect(support.contains("document type"))
+        #expect(support.contains("device model"))
+        #expect(support.contains("ios version"))
+    }
+
+    @Test func supportDraftsKeepPrivacyScopeLocalAndClear() async throws {
+        let support = try projectFileContents("SUPPORT_RESPONSES.md").localizedLowercase
+
+        #expect(support.contains("samler ikke inn persondata"))
+        #expect(support.contains("sporer ikke brukere"))
+        #expect(support.contains("does not collect personal data"))
+        #expect(support.contains("track users"))
+        #expect(support.contains("brukes lokalt"))
+        #expect(support.contains("used locally"))
+        #expect(support.contains("forhåndsvisning, utskrift eller pdf-eksport"))
+        #expect(support.contains("preview, printing, or pdf export"))
+        #expect(support.contains("lagre utskrevne eller eksporterte dokumenter trygt"))
+        #expect(support.contains("storing printed or exported documents safely"))
+    }
+
+    @Test func supportDraftsKeepLegalAdviceScopeConservative() async throws {
+        let support = try projectFileContents("SUPPORT_RESPONSES.md").localizedLowercase
+
+        #expect(support.contains("dokumentmaler og dokumentutkast, ikke juridisk rådgivning"))
+        #expect(support.contains("templates and document drafts, not legal advice"))
+        #expect(support.contains("viktige eller kompliserte forhold"))
+        #expect(support.contains("important or complex matters"))
+        #expect(support.contains("inheritance"))
+        #expect(support.contains("family conflict"))
+        #expect(support.contains("employment"))
+        #expect(support.contains("debt"))
+        #expect(support.contains("business-sensitive agreements"))
+        #expect(support.contains("qualified adviser before signing"))
+    }
+
+    @Test func knownLimitationsKeepReleaseRisksVisible() async throws {
+        let limitations = try projectFileContents("KNOWN_LIMITATIONS.md").localizedLowercase
+
+        #expect(limitations.contains("not legal advice"))
+        #expect(limitations.contains("qualified adviser"))
+        #expect(limitations.contains("higher-risk documents"))
+        #expect(limitations.contains("testament"))
+        #expect(limitations.contains("debt instrument"))
+        #expect(limitations.contains("full document library"))
+        #expect(limitations.contains("cloud sync"))
+        #expect(limitations.contains("premium access is not enforced yet"))
+        #expect(limitations.contains("purchases are not available"))
+        #expect(limitations.contains("storekit product loading"))
+        #expect(limitations.contains("ui test target application now points to `lexwriter`"))
+        #expect(limitations.contains("ui tests have not been run in this batch"))
+    }
+
+    @Test func premiumActivationGuideKeepsActivationPreconditionsExplicit() async throws {
+        let guide = try projectFileContents("PREMIUM_ACTIVATION.md").localizedLowercase
+
+        #expect(guide.contains("use this only when the paid version is ready"))
+        #expect(guide.contains("storekit product loading is disabled"))
+        #expect(guide.contains("premium enforcement is disabled"))
+        #expect(guide.contains("com.lexwriter.premium.lifetime"))
+        #expect(guide.contains("confirm the lifetime product exists"))
+        #expect(guide.contains("test the product in storekit local testing or sandbox"))
+        #expect(guide.contains("confirm restore purchases works"))
+        #expect(guide.contains("static let ispremiumstoreenabled = true"))
+        #expect(guide.contains("static let enforcespremiumaccess = true"))
+        #expect(guide.contains("prefer two separate releases"))
+        #expect(guide.contains("premium-preparation release"))
+        #expect(guide.contains("premium-enforcement release"))
+    }
+
+    @Test func premiumActivationGuideKeepsCurrentDocumentSplitExplicit() async throws {
+        let guide = try projectFileContents("PREMIUM_ACTIVATION.md").localizedLowercase
+
+        #expect(guide.contains("current free/premium split"))
+        #expect(guide.contains("free documents"))
+        #expect(guide.contains("purchase agreement / kjøpskontrakt"))
+        #expect(guide.contains("receipt / kvittering"))
+        #expect(guide.contains("loan agreement / låneavtale"))
+        #expect(guide.contains("premium-marked documents"))
+        #expect(guide.contains("will / testament"))
+        #expect(guide.contains("contract / kontrakt"))
+        #expect(guide.contains("power of attorney / fullmakt"))
+        #expect(guide.contains("rental agreement / husleiekontrakt"))
+        #expect(guide.contains("cohabitation agreement / samboeravtale"))
+        #expect(guide.contains("debt instrument / gjeldsbrev"))
+        #expect(guide.contains("termination of tenancy / oppsigelse av leieforhold"))
+        #expect(guide.contains("employment agreement / arbeidsavtale"))
+        #expect(guide.contains("nda"))
     }
 
     @Test func purchaseManagerUsesExpectedPremiumProductIdentifier() async throws {

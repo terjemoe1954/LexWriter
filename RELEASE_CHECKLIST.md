@@ -51,6 +51,6 @@ Use this checklist before submitting a new App Store build.
 - Build the app in Xcode.
 - Build with test targets.
 - Run unit tests.
-- Run UI tests only after the `LexWriterUITests` target application path is fixed; until then, confirm build-for-testing succeeds.
+- Run UI tests if UI automation is part of this release gate; the `LexWriterUITests` target application should point to `LexWriter`.
 - Archive the exact build intended for submission.
 - Submit to TestFlight first for a final smoke test.

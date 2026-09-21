@@ -53,6 +53,25 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added full PremiumView localization coverage, including exact Thai premium-preview/status copy used in the premium-preparation flow.
 - Added unit coverage that keeps App Store submission notes and support response drafts aligned with the current premium-preparation state.
 - Added unit coverage that keeps the release checklist aligned with disabled StoreKit, hidden purchase/restore controls, disabled premium enforcement, and the UI-test blocker.
+- Added unit coverage that keeps App Store metadata drafts aligned with print/PDF positioning and legal-scope wording.
+- Added unit coverage that keeps App Store review notes and screenshot guidance aligned with the premium-preparation state.
+- Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
+- Added unit coverage that keeps the `LexWriterUITests` target application pointed at `LexWriter`.
+- Added unit coverage that keeps support response drafts aligned with PDF saving limits, no full document history/cloud sync, and print/PDF troubleshooting details.
+- Added unit coverage that keeps known limitations visible for legal scope, storage limits, premium preparation, StoreKit, and the UI-test blocker.
+- Added unit coverage that keeps the premium activation guide explicit about product setup, sandbox/restore testing, activation flags, and the two-release recommendation.
+- Added unit coverage that keeps the premium activation guide explicit about the current free and premium-marked document split.
+- Added unit coverage that keeps this 1.1 plan explicit about deferring StoreKit, purchase/restore controls, premium enforcement, and document locking.
+- Added unit coverage that keeps the Codex handoff aligned with the current premium-preparation state, UI-test blocker, validation baseline, and safe-session instructions.
+- Added unit coverage that keeps the App Store milestone order explicit about stability before monetization and premium enforcement only after product, price, screenshots, metadata, and restore flow are confirmed.
+- Added unit coverage that keeps the recommended next build order conservative: live signals and smoke testing before StoreKit sandbox work and premium enforcement.
+- Added unit coverage that keeps the release checklist explicit about version/build, smoke tests, App Store Connect checks, archive, and TestFlight validation.
+- Added unit coverage that keeps the release checklist explicit about product smoke-test scope across devices, core screens, document creation, PDF output, and language switching.
+- Added unit coverage that keeps the release checklist explicit about legal/trust review and higher-risk templates before release.
+- Added unit coverage that keeps the release checklist explicit about App Store Connect checks, screenshots, privacy details, support email, and privacy policy links.
+- Added unit coverage that keeps App Store release notes aligned with premium-preparation, unavailable purchases, free/premium labels, and legal-scope wording.
+- Added unit coverage that keeps App Store keyword drafts focused on document, print, and PDF search terms rather than active premium purchase wording.
+- Added unit coverage that keeps support replies conservative about legal-advice scope and high-risk situations before signing.
 - Added unit coverage for the premium-preview footer explaining that all documents are currently available.
 - Added unit coverage for the free document set: purchase agreement, receipt, and loan agreement now check required-field validation, advisory warnings, generated body text, and HTML escaping for preview/PDF safety.
 - Added first premium-marked validation coverage for power of attorney.
@@ -77,7 +96,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 
 ## Technical Candidates
 
-- Fix or recreate `LexWriterUITests` so the UI test target has `LexWriter` as its target application.
+- Run `LexWriterUITests` as a separate validation step if UI automation should become part of the release gate.
 - Take Xcode `Update to recommended settings` as a separate maintenance commit after reviewing the generated project changes.
 - Add unit tests for additional premium-marked document validation logic where the legal or UX risk is highest.
 
