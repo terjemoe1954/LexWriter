@@ -408,6 +408,34 @@ struct LexWriterTests {
         #expect(bodyText.contains("21. september 2026"))
     }
 
+    @Test func contractValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(ContractFormData().blockingIssues(in: .norwegian).count == 7)
+        #expect(ContractFormData().warnings(in: .norwegian).count == 4)
+
+        var form = ContractFormData()
+        form.partyOne = contractParty(name: "Part En")
+        form.partyTwo = contractParty(name: "Part To")
+        form.agreementTitle = "Samarbeidsavtale"
+        form.subject = "Leveranse av rådgivningstjenester."
+        form.servicesOrGoods = "Månedlig rådgivning og rapportering."
+        form.payment = "25 000 kroner per måned."
+        form.duration = "Avtalen gjelder i tolv måneder."
+        form.breachConsequences = "Vesentlig mislighold gir rett til heving."
+        form.termination = "Oppsigelse kan skje med tre måneders varsel."
+        form.disputeResolution = "Tvister søkes løst ved forhandlinger."
+        form.specialTerms = "Ingen særvilkår."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Part En"))
+        #expect(bodyText.contains("Part To"))
+        #expect(bodyText.contains("Leveranse av rådgivningstjenester."))
+        #expect(bodyText.contains("25 000 kroner per måned."))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"
