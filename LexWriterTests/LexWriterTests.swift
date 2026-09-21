@@ -329,6 +329,34 @@ struct LexWriterTests {
         #expect(bodyText.contains("Vurdere mulig samarbeid."))
     }
 
+    @Test func rentalAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(RentalAgreementFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(RentalAgreementFormData().warnings(in: .norwegian).count == 3)
+
+        var form = RentalAgreementFormData()
+        form.landlord = rentalParty(name: "Utleier")
+        form.tenant = rentalParty(name: "Leietaker")
+        form.propertyAddress = "Leiegata 1"
+        form.rentalObjectDescription = "Leilighet H0201"
+        form.monthlyRent = "15 000 kroner"
+        form.deposit = "45 000 kroner"
+        form.startDate = "1. oktober 2026"
+        form.duration = "Tidsubestemt leieforhold."
+        form.utilities = "Strøm kommer i tillegg."
+        form.noticePeriod = "Tre måneder."
+        form.houseRules = "Vanlige husordensregler gjelder."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Utleier"))
+        #expect(bodyText.contains("Leietaker"))
+        #expect(bodyText.contains("Leiegata 1"))
+        #expect(bodyText.contains("15 000 kroner"))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"
@@ -390,6 +418,13 @@ struct LexWriterTests {
 
     private func debtParty(name: String) -> DebtParty {
         var party = DebtParty()
+        party.name = name
+        party.address = "Gate 1"
+        return party
+    }
+
+    private func rentalParty(name: String) -> RentalParty {
+        var party = RentalParty()
         party.name = name
         party.address = "Gate 1"
         return party

@@ -45,13 +45,13 @@ Premium-marked but still available:
 - `Views/Settings/SettingsView.swift`: access status, premium plan entry point, privacy/app info.
 - `Services/PurchaseManager.swift`: StoreKit plumbing and premium access state.
 - `Localization/AppLocalization.swift`: shared localized app text.
-- `LexWriterTests/LexWriterTests.swift`: unit coverage for premium-preview state, free-document validation/output safety, power-of-attorney validation, debt-instrument validation, employment-agreement validation, and NDA validation.
+- `LexWriterTests/LexWriterTests.swift`: unit coverage for premium-preview state, free-document validation/output safety, power-of-attorney validation, debt-instrument validation, employment-agreement validation, NDA validation, and rental-agreement validation.
 - `LexWriterUITests/LexWriterUITests.swift`: UI test expectations updated, but not runnable yet.
 - `VERSION_1_1_CANDIDATES.md`: working shortlist for the first post-launch update.
 
 ## Validation Baseline
 
-- Unit tests: 24/24 passed.
+- Unit tests: 25/25 passed.
 - Build for testing: succeeded.
 - UI tests compile, but cannot run until `LexWriterUITests` target application path is fixed in Xcode.
 - Xcode still shows one yellow project warning: `Update to recommended settings`. Leave it for a separate commit.
