@@ -40,7 +40,9 @@ struct PremiumView: View {
             }
         }
         .task {
-            await purchaseManager.loadProducts()
+            if MonetizationPlan.isPremiumStoreEnabled {
+                await purchaseManager.loadProducts()
+            }
         }
     }
 
@@ -54,59 +56,70 @@ struct PremiumView: View {
                 .font(.body)
                 .foregroundStyle(Color.white.opacity(0.82))
 
-            if let premiumProduct = purchaseManager.premiumProduct {
+            if !MonetizationPlan.isPremiumStoreEnabled {
+                Text(language.text(.comingSoon))
+                    .font(.title3.weight(.semibold))
+                    .foregroundStyle(Color(red: 0.95, green: 0.89, blue: 0.75))
+            } else if let premiumProduct = purchaseManager.premiumProduct {
                 Text(premiumProduct.displayPrice)
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(Color(red: 0.95, green: 0.89, blue: 0.75))
+            } else if purchaseManager.isLoadingProducts {
+                Text(language.text(.premiumLoadingProducts))
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(Color.white.opacity(0.7))
             } else {
                 Text(language.text(.premiumNotAvailableYet))
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(Color.white.opacity(0.7))
             }
 
-            VStack(spacing: 12) {
-                Button {
-                    Task {
-                        guard let premiumProduct = purchaseManager.premiumProduct else { return }
+            if MonetizationPlan.isPremiumStoreEnabled {
+                VStack(spacing: 12) {
+                    Button {
+                        Task {
+                            guard let premiumProduct = purchaseManager.premiumProduct else { return }
 
-                        purchaseManager.beginPurchase()
+                            purchaseManager.beginPurchase()
 
-                        do {
-                            let result = try await purchase(premiumProduct)
-                            await purchaseManager.completePurchase(result)
+                            do {
+                                let result = try await purchase(premiumProduct)
+                                await purchaseManager.completePurchase(result)
+                                if purchaseManager.hasPremiumAccess {
+                                    dismiss()
+                                }
+                            } catch {
+                                purchaseManager.handlePurchaseError(error)
+                            }
+                        }
+                    } label: {
+                        Text(language.text(.unlockPremiumLifetime))
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color(red: 0.73, green: 0.59, blue: 0.33))
+                    .disabled(purchaseManager.premiumProduct == nil || purchaseManager.isProcessingPurchase)
+                    .accessibilityIdentifier("buyPremiumButton")
+
+                    Button {
+                        Task {
+                            await purchaseManager.restorePurchases()
                             if purchaseManager.hasPremiumAccess {
                                 dismiss()
                             }
-                        } catch {
-                            purchaseManager.handlePurchaseError(error)
                         }
+                    } label: {
+                        Text(language.text(.restorePurchases))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
                     }
-                } label: {
-                    Text(language.text(.unlockPremiumLifetime))
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
+                    .buttonStyle(.bordered)
+                    .tint(.white)
+                    .disabled(purchaseManager.isProcessingPurchase)
+                    .accessibilityIdentifier("restorePurchasesButton")
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Color(red: 0.73, green: 0.59, blue: 0.33))
-                .disabled(purchaseManager.premiumProduct == nil || purchaseManager.isProcessingPurchase)
-                .accessibilityIdentifier("buyPremiumButton")
-
-                Button {
-                    Task {
-                        await purchaseManager.restorePurchases()
-                        if purchaseManager.hasPremiumAccess {
-                            dismiss()
-                        }
-                    }
-                } label: {
-                    Text(language.text(.restorePurchases))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                }
-                .buttonStyle(.bordered)
-                .tint(.white)
-                .accessibilityIdentifier("restorePurchasesButton")
             }
 
             if purchaseManager.hasPremiumAccess {
@@ -196,10 +209,18 @@ struct PremiumView: View {
     }
 
     private var footerSection: some View {
-        Text(language.text(.premiumDisclaimer))
+        Text(footerMessage)
             .font(.footnote)
             .foregroundStyle(Color.white.opacity(0.68))
             .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var footerMessage: String {
+        if MonetizationPlan.isPremiumStoreEnabled {
+            return language.text(.premiumDisclaimer)
+        }
+
+        return language.text(.futurePricingNote)
     }
 
     private var heroMessage: String {

@@ -8,7 +8,29 @@
 import Testing
 @testable import LexWriter
 
+@MainActor
 struct LexWriterTests {
+    @Test func monetizationPlanShowsBadgesWithoutEnforcingPremium() async throws {
+        #expect(MonetizationPlan.showsPremiumBadges)
+        #expect(!MonetizationPlan.isPremiumStoreEnabled)
+        #expect(!MonetizationPlan.enforcesPremiumAccess)
+        #expect(!MonetizationPlan.isPremiumEnforced)
+    }
+
+    @Test func monetizationPlanKeepsExpectedFreeAndPremiumDocuments() async throws {
+        #expect(MonetizationPlan.freeDocuments == [.purchaseAgreement, .receipt, .loanAgreement])
+        #expect(MonetizationPlan.premiumDocuments.contains(.testament))
+        #expect(MonetizationPlan.premiumDocuments.contains(.nda))
+        #expect(MonetizationPlan.premiumDocuments.count == 9)
+    }
+
+    @Test func monetizationPlanReturnsLocalizedBadgeText() async throws {
+        #expect(MonetizationPlan.badgeText(for: .purchaseAgreement, language: .norwegian) == "Gratis")
+        #expect(MonetizationPlan.badgeText(for: .testament, language: .norwegian) == "Premium")
+        #expect(MonetizationPlan.badgeText(for: .purchaseAgreement, language: .english) == "Free")
+        #expect(MonetizationPlan.badgeText(for: .testament, language: .english) == "Premium")
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"

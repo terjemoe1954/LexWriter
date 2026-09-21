@@ -18,6 +18,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     heroSection
+                    legalNoticeSection
                     documentSection
                 }
                 .padding(20)
@@ -90,16 +91,39 @@ struct HomeView: View {
         .shadow(color: Color.black.opacity(0.18), radius: 24, y: 14)
     }
 
+    private var legalNoticeSection: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "info.circle.fill")
+                .foregroundStyle(Color(red: 0.95, green: 0.89, blue: 0.75))
+                .padding(.top, 2)
+
+            Text(selectedLanguage.text(.homeLegalNote))
+                .font(.footnote)
+                .foregroundStyle(Color.white.opacity(0.76))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.08))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.white.opacity(0.08), lineWidth: 1)
+        )
+    }
+
     private var documentSection: some View {
         VStack(alignment: .leading, spacing: 22) {
             documentGroup(
                 title: selectedLanguage.text(.freeDocumentsTitle),
-                documents: AppDocument.allCases.filter { $0.accessTier == .free }
+                documents: MonetizationPlan.freeDocuments
             )
 
             documentGroup(
                 title: selectedLanguage.text(.moreDocumentTemplatesTitle),
-                documents: AppDocument.allCases.filter { $0.accessTier == .premium }
+                documents: MonetizationPlan.premiumDocuments
             )
         }
     }
@@ -199,22 +223,21 @@ private struct DocumentCard: View {
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(title)
-                        .font(.system(size: 21, weight: .semibold, design: .serif))
-                        .foregroundStyle(.white)
+                Text(title)
+                    .font(.system(size: 21, weight: .semibold, design: .serif))
+                    .foregroundStyle(.white)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                    if let badgeText {
-                        Text(badgeText)
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(accent)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(
-                                Capsule()
-                                    .fill(accent.opacity(0.18))
-                            )
-                    }
+                if let badgeText {
+                    Text(badgeText)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(accent)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(
+                            Capsule()
+                                .fill(accent.opacity(0.18))
+                        )
                 }
 
                 Text(subtitle)

@@ -194,13 +194,15 @@ enum AppDocument: String, CaseIterable, Identifiable {
 
 enum MonetizationPlan {
     static let premiumLockingDefaultsKey = "premiumLockingEnabled"
-    static let showsPremiumBadges = false
+    static let showsPremiumBadges = true
     static let showsTestingControls = false
     static let isPremiumStoreEnabled = false
+    static let enforcesPremiumAccess = false
     static let freeDocuments: [AppDocument] = AppDocument.allCases.filter { $0.accessTier == .free }
     static let premiumDocuments: [AppDocument] = AppDocument.allCases.filter { $0.accessTier == .premium }
 
     static var isPremiumEnforced: Bool {
+        if enforcesPremiumAccess { return true }
         guard showsTestingControls else { return false }
         return UserDefaults.standard.bool(forKey: premiumLockingDefaultsKey)
     }

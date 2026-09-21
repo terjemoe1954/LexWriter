@@ -56,6 +56,7 @@ final class PurchaseManager {
         guard premiumProduct == nil, !isLoadingProducts else { return }
 
         isLoadingProducts = true
+        statusMessage = nil
         defer { isLoadingProducts = false }
 
         do {
@@ -67,6 +68,10 @@ final class PurchaseManager {
     }
 
     func restorePurchases() async {
+        isProcessingPurchase = true
+        statusMessage = nil
+        defer { isProcessingPurchase = false }
+
         do {
             try await AppStore.sync()
             await refreshEntitlements()
@@ -121,7 +126,15 @@ final class PurchaseManager {
     }
 
     private func handle(transactionResult: VerificationResult<Transaction>) async {
-        guard case .verified(let transaction) = transactionResult else { return }
+        let transaction: Transaction
+
+        switch transactionResult {
+        case .verified(let verifiedTransaction):
+            transaction = verifiedTransaction
+        case .unverified(_, let error):
+            statusMessage = error.localizedDescription
+            return
+        }
 
         defer {
             Task {

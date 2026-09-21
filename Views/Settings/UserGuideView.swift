@@ -20,6 +20,10 @@ struct UserGuideView: View {
                 GuideTextBlock(text: language.guideText(.documentsBody))
             }
 
+            Section(language.guideText(.accessTitle)) {
+                GuideTextBlock(text: language.guideText(.accessBody))
+            }
+
             Section(language.guideText(.printingTitle)) {
                 GuideTextBlock(text: language.guideText(.printingBody))
             }
@@ -52,6 +56,8 @@ enum UserGuideLocalizedKey {
     case gettingStartedBody
     case documentsTitle
     case documentsBody
+    case accessTitle
+    case accessBody
     case printingTitle
     case printingBody
     case privacyTitle
@@ -71,6 +77,10 @@ extension AppLanguage {
             return "Dokumenttyper"
         case (.norwegian, .documentsBody):
             return "LexWriter støtter nå testament, kontrakt, fullmakt, husleiekontrakt, samboeravtale, gjeldsbrev, kjøpskontrakt, oppsigelse av leieforhold, kvittering, låneavtale, arbeidsavtale og NDA. Hver dokumenttype har egne felter som er tilpasset innholdet i akkurat den avtalen."
+        case (.norwegian, .accessTitle):
+            return "Gratis og premium"
+        case (.norwegian, .accessBody):
+            return "Dokumenter kan være merket som gratis eller premium. I denne utgaven er alle dokumenter fortsatt tilgjengelige, mens premium-inndelingen er forberedt for en senere betalt versjon."
         case (.norwegian, .printingTitle):
             return "Forhåndsvisning og utskrift"
         case (.norwegian, .printingBody):
@@ -91,6 +101,10 @@ extension AppLanguage {
             return "Document Types"
         case (.english, .documentsBody):
             return "LexWriter currently supports wills, contracts, powers of attorney, rental agreements, cohabitation agreements, promissory notes, purchase agreements, termination of tenancy notices, receipts, loan agreements, employment agreements, and NDAs. Each document type has fields tailored to that specific legal document."
+        case (.english, .accessTitle):
+            return "Free and Premium"
+        case (.english, .accessBody):
+            return "Documents may be marked as free or premium. In this edition, all documents remain available while the premium split is prepared for a later paid version."
         case (.english, .printingTitle):
             return "Preview and Printing"
         case (.english, .printingBody):
@@ -111,6 +125,10 @@ extension AppLanguage {
             return "ประเภทเอกสาร"
         case (.thai, .documentsBody):
             return "ขณะนี้ LexWriter รองรับพินัยกรรม สัญญา หนังสือมอบอำนาจ สัญญาเช่า สัญญาอยู่กินร่วมกัน หนังสือรับสภาพหนี้ สัญญาซื้อขาย หนังสือบอกเลิกสัญญาเช่า ใบเสร็จรับเงิน สัญญาเงินกู้ สัญญาจ้างงาน และ NDA โดยแต่ละประเภทมีช่องข้อมูลที่เหมาะกับเอกสารนั้นโดยเฉพาะ"
+        case (.thai, .accessTitle):
+            return "ฟรีและพรีเมียม"
+        case (.thai, .accessBody):
+            return "เอกสารอาจมีป้ายกำกับว่าฟรีหรือพรีเมียม ในเวอร์ชันนี้เอกสารทั้งหมดยังคงใช้งานได้ ขณะที่โครงสร้างพรีเมียมถูกเตรียมไว้สำหรับเวอร์ชันแบบชำระเงินในภายหลัง"
         case (.thai, .printingTitle):
             return "ตัวอย่างและการพิมพ์"
         case (.thai, .printingBody):

@@ -35,6 +35,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Dokumenter med preg av lov og rett"
         case (.norwegian, .heroSubtitle):
             return "Velg dokumenttype og fyll inn nødvendige opplysninger i en rolig, formell og utskriftsvennlig arbeidsflate."
+        case (.norwegian, .homeLegalNote):
+            return "Dokumentene er maler og utkast, ikke juridisk rådgivning."
         case (.norwegian, .documents):
             return "Dokumenter"
         case (.norwegian, .freeDocumentsTitle):
@@ -65,6 +67,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Innstillinger"
         case (.norwegian, .help):
             return "Hjelp"
+        case (.norwegian, .privacy):
+            return "Personvern"
+        case (.norwegian, .privacySummary):
+            return "Appen samler ikke inn persondata eller sporer deg. Opplysninger du fyller inn brukes lokalt for å lage dokumentet, og du styrer selv utskrift eller PDF-lagring."
         case (.norwegian, .userGuide):
             return "Brukerveiledning"
         case (.norwegian, .appearance):
@@ -90,7 +96,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.norwegian, .fullEdition):
             return "Full tilgang"
         case (.norwegian, .futurePricingNote):
-            return "Alle dokumenter er tilgjengelige nå. Gratis- og premium-inndeling er forberedt i kodebasen for senere bruk."
+            return "Alle dokumenter er tilgjengelige nå. Gratis- og premium-merkene viser hvordan en senere betalt versjon kan bli organisert."
         case (.norwegian, .freeTier):
             return "Gratis"
         case (.norwegian, .premiumTier):
@@ -109,6 +115,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Gjenopprett kjøp"
         case (.norwegian, .premiumUnlocked):
             return "Premium er aktivert."
+        case (.norwegian, .premiumLoadingProducts):
+            return "Henter pris fra App Store..."
         case (.norwegian, .premiumNotAvailableYet):
             return "Kjøp er ikke tilgjengelig akkurat nå. Prøv igjen senere."
         case (.norwegian, .premiumDisclaimer):
@@ -239,6 +247,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Documents with a legal character"
         case (.english, .heroSubtitle):
             return "Choose a document type and enter the required details in a calm, formal, print-ready workspace."
+        case (.english, .homeLegalNote):
+            return "Documents are templates and drafts, not legal advice."
         case (.english, .documents):
             return "Documents"
         case (.english, .freeDocumentsTitle):
@@ -269,6 +279,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Settings"
         case (.english, .help):
             return "Help"
+        case (.english, .privacy):
+            return "Privacy"
+        case (.english, .privacySummary):
+            return "The app does not collect personal data or track you. Information you enter is used locally to prepare the document, and you control printing or PDF saving."
         case (.english, .userGuide):
             return "User Guide"
         case (.english, .appearance):
@@ -294,7 +308,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.english, .fullEdition):
             return "Full access"
         case (.english, .futurePricingNote):
-            return "All documents are currently available. The free and premium split has been prepared in the codebase for later use."
+            return "All documents are currently available. The free and premium labels show how a later paid version may be organized."
         case (.english, .freeTier):
             return "Free"
         case (.english, .premiumTier):
@@ -313,6 +327,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Restore purchases"
         case (.english, .premiumUnlocked):
             return "Premium is active."
+        case (.english, .premiumLoadingProducts):
+            return "Loading price from the App Store..."
         case (.english, .premiumNotAvailableYet):
             return "Purchases are not available right now. Please try again later."
         case (.english, .premiumDisclaimer):
@@ -443,6 +459,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "เอกสารในบรรยากาศแห่งกฎหมายและความยุติธรรม"
         case (.thai, .heroSubtitle):
             return "เลือกประเภทเอกสารและกรอกข้อมูลที่จำเป็นในหน้าทำงานที่เป็นทางการ สงบ และพร้อมพิมพ์"
+        case (.thai, .homeLegalNote):
+            return "เอกสารเป็นเทมเพลตและร่าง ไม่ใช่คำปรึกษาทางกฎหมาย"
         case (.thai, .documents):
             return "เอกสาร"
         case (.thai, .freeDocumentsTitle):
@@ -473,6 +491,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "ตั้งค่า"
         case (.thai, .help):
             return "ช่วยเหลือ"
+        case (.thai, .privacy):
+            return "ความเป็นส่วนตัว"
+        case (.thai, .privacySummary):
+            return "แอปไม่เก็บรวบรวมข้อมูลส่วนบุคคลและไม่ติดตามคุณ ข้อมูลที่กรอกใช้ภายในเครื่องเพื่อจัดทำเอกสาร และคุณเป็นผู้ควบคุมการพิมพ์หรือบันทึกเป็น PDF"
         case (.thai, .userGuide):
             return "คู่มือการใช้งาน"
         case (.thai, .appearance):
@@ -498,7 +520,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.thai, .fullEdition):
             return "เข้าถึงเต็มรูปแบบ"
         case (.thai, .futurePricingNote):
-            return "ขณะนี้เอกสารทั้งหมดใช้งานได้ และมีการเตรียมโครงสร้างฟรีและพรีเมียมไว้ในโค้ดแล้วสำหรับใช้งานภายหลัง"
+            return "ขณะนี้เอกสารทั้งหมดใช้งานได้ ป้ายฟรีและพรีเมียมแสดงว่าเวอร์ชันแบบชำระเงินในอนาคตอาจจัดกลุ่มอย่างไร"
         case (.thai, .freeTier):
             return "ฟรี"
         case (.thai, .premiumTier):
@@ -517,6 +539,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "กู้คืนการซื้อ"
         case (.thai, .premiumUnlocked):
             return "เปิดใช้พรีเมียมแล้ว"
+        case (.thai, .premiumLoadingProducts):
+            return "กำลังโหลดราคาจาก App Store..."
         case (.thai, .premiumNotAvailableYet):
             return "ยังไม่สามารถซื้อได้ในขณะนี้ โปรดลองอีกครั้งภายหลัง"
         case (.thai, .premiumDisclaimer):
@@ -648,6 +672,7 @@ enum LocalizedKey {
     case appTitle
     case heroTitle
     case heroSubtitle
+    case homeLegalNote
     case documents
     case freeDocumentsTitle
     case moreDocumentTemplatesTitle
@@ -663,6 +688,8 @@ enum LocalizedKey {
     case powerOfAttorneyTitle
     case settings
     case help
+    case privacy
+    case privacySummary
     case userGuide
     case appearance
     case appInfo
@@ -685,6 +712,7 @@ enum LocalizedKey {
     case unlockPremiumLifetime
     case restorePurchases
     case premiumUnlocked
+    case premiumLoadingProducts
     case premiumNotAvailableYet
     case premiumDisclaimer
     case selectedPremiumDocument

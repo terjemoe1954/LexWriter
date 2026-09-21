@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(PurchaseManager.self) private var purchaseManager
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = AppLanguage.norwegian.rawValue
     @AppStorage("preferredAppearance") private var preferredAppearance = AppAppearance.system.rawValue
+    @State private var showsPremiumPreview = false
 
     var body: some View {
         Form {
@@ -33,12 +35,37 @@ struct SettingsView: View {
                 .accessibilityIdentifier("appearancePicker")
             }
 
+            Section(language.text(.accessPlan)) {
+                LabeledContent(language.text(.currentEdition)) {
+                    Text(currentEditionText)
+                }
+
+                Text(language.text(.futurePricingNote))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Button {
+                    showsPremiumPreview = true
+                } label: {
+                    Label(language.text(.openPremiumPreview), systemImage: "crown.fill")
+                }
+                .accessibilityIdentifier("openPremiumPreviewButton")
+            }
+
             Section(language.text(.help)) {
                 NavigationLink {
                     UserGuideView(language: language)
                 } label: {
                     Label(language.text(.userGuide), systemImage: "book.pages.fill")
                 }
+            }
+
+            Section(language.text(.privacy)) {
+                Text(language.text(.privacySummary))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             Section(language.text(.appInfo)) {
@@ -54,6 +81,9 @@ struct SettingsView: View {
             }
         }
         .navigationTitle(language.text(.settings))
+        .sheet(isPresented: $showsPremiumPreview) {
+            PremiumView(language: language, highlightedDocument: nil)
+        }
     }
 
     private var language: AppLanguage {
@@ -62,6 +92,14 @@ struct SettingsView: View {
 
     private var currentLanguage: AppLanguage {
         language
+    }
+
+    private var currentEditionText: String {
+        guard MonetizationPlan.isPremiumEnforced else {
+            return language.text(.fullEdition)
+        }
+
+        return purchaseManager.hasPremiumAccess ? language.text(.fullEdition) : language.text(.freeTier)
     }
 
     private var selectedLanguageBinding: Binding<AppLanguage> {

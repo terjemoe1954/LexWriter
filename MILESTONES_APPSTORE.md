@@ -1,64 +1,109 @@
-# LexWriter Milestones Toward App Store
+# LexWriter App Store Milestones
 
-Last updated: 2026-08-29
+Last updated: 2026-09-21
 
 ## Goal
 
-Bring `LexWriter` from a functional document-drafting app to an App Store-ready product with acceptable legal clarity, stable UX, and operational readiness.
+Keep `LexWriter` stable, trustworthy, and legally clear after its App Store launch, then move deliberately into the paid version by improving the product experience before premium access is enforced.
 
-## Milestone 1: Core Product Completion
+## Current Status
 
-- Finalize the current six document types and review every field label, warning, and print layout.
-- Make the home screen, settings, and all document flows consistent across Norwegian, English, and Thai.
-- Add missing document-specific icons, polish spacing, and verify dark/light mode throughout the app.
-- Ensure every document can be previewed and printed without layout breakage on iPhone and iPad.
+- `LexWriter` has been live on the App Store for a few days.
+- The original pre-launch readiness work is now considered complete enough for the first public release.
+- The app already contains StoreKit plumbing, a premium screen, and document access tiers, but premium locking is currently disabled in code.
+- Premium badges are now visible in the app, while all documents remain available.
+- Settings now includes access, premium preview, and privacy information.
+- The user guide and home screen now explain that documents are templates and drafts, not legal advice.
+- The next phase should combine post-launch monitoring, product polish, and premium-readiness work before submitting a paid/premium update.
 
-## Milestone 2: Legal Quality Pass
+## Completed in This Post-Launch Pass
+
+- Enabled visible `Gratis` / `Premium` document badges without enabling premium locks.
+- Split monetization flags into clear responsibilities: badges, StoreKit availability, and premium enforcement.
+- Added tests that guard the current free/premium document split and ensure premium enforcement stays off for now.
+- Made `PremiumView` safe for the current pre-purchase phase: it shows `Kommer senere`, hides purchase controls while StoreKit is disabled, and uses the App Store purchase disclaimer only when purchases are enabled.
+- Added a premium preview entry point in Settings.
+- Added Settings sections for access status and privacy.
+- Added user guide text explaining free/premium badges.
+- Added a home-screen legal note that documents are templates and drafts, not legal advice.
+- Improved document card layout so long titles and badges fit better on small screens.
+- Hardened `PurchaseManager` around product loading, restore state, repeated restore taps, and unverified transaction errors.
+- Added `RELEASE_CHECKLIST.md` for future App Store submissions.
+- Added `PREMIUM_ACTIVATION.md` with the exact preconditions and flags for enabling purchases later.
+- Checked Xcode field performance data for `com.terjemoe.LexWriter` version `1.0.1`; no App Store field versions/data were available yet.
+
+## Milestone 1: First Live Signals
+
+- Check App Store Connect daily for crashes, install numbers, ratings, and review text.
+- Watch for recurring support questions about document scope, legal responsibility, language, or printing.
+- Verify that the live App Store listing, screenshots, privacy details, age rating, and app category still match the shipped app.
+- Keep a short changelog of anything users report, even if it does not become an immediate fix.
+
+## Milestone 2: Stability and Trust Before Monetization
+
+- Re-test the highest-risk flows on the App Store build: field entry, preview, printing, language switching, settings, and premium/paywall behavior if enabled.
+- Review all disclaimers again in the live product, especially for wills, debt instruments, and other higher-risk documents.
+- Confirm that privacy messaging is easy to find before users enter sensitive personal information.
+- Check that every document can still be previewed and printed cleanly on at least one smaller iPhone, one larger iPhone, and iPad.
+
+## Milestone 3: Premium Version Readiness
+
+- Confirm the final premium model: lifetime unlock first, with no subscription unless there is a clear support or content reason.
+- Verify that the App Store Connect in-app purchase product matches the app product id: `com.lexwriter.premium.lifetime`.
+- Decide exactly which documents remain free and which are premium before turning on premium enforcement.
+- Follow `PREMIUM_ACTIVATION.md` when enabling StoreKit or premium enforcement.
+- Improve the premium screen copy so it explains value clearly without overstating legal guarantees.
+- Test purchase, restore purchase, pending purchase, cancelled purchase, and offline product-loading states with StoreKit testing before release.
+- Only enable premium locking after the purchase product, pricing, App Store metadata, and smoke tests are ready.
+
+## Milestone 4: Product Improvements
+
+- Improve the App Store subtitle, description, and keywords based on what the app actually does best after launch.
+- Prepare localized App Store metadata updates for Norwegian and English.
+- Decide whether Thai metadata should be added now or later.
+- Add or replace screenshots if the current listing does not clearly show the main document flow and print preview.
+- Improve the first-time experience so users understand that documents are templates, not legal advice.
+- Review whether the home screen should surface the most useful free documents more clearly before locked premium templates.
+
+## Milestone 5: Version 1.1 Scope
+
+- Fix any crash, layout, localization, or printing issue found during the first days live.
+- Add validation tests for the newest document types if they are not already covered.
+- Tighten long-text handling in print layouts and signature sections.
+- Improve the most confusing first-time-user area before adding new document types.
+- Consider enabling premium badges before enforcing premium locks, so users can see the future product structure without being blocked.
+
+## Milestone 6: Legal and Product Quality
 
 - Review every template against current Norwegian legal requirements and standard market practice.
-- Add clear disclaimers where a lawyer review is strongly recommended.
-- Separate "general template" documents from "higher-risk" documents such as wills and debt instruments.
-- Verify wording around witnesses, signatures, dates, and mandatory legal rules.
+- Keep conservative wording around legal claims in both the app and App Store listing.
+- Separate "general template" documents from higher-risk documents in the user guide or explanatory text.
+- Decide whether a lawyer or legal reviewer should review the live `1.1` wording before submission.
 
-## Milestone 3: Product Safety and Trust
+## Milestone 7: Operational Readiness
 
-- Add a visible privacy statement explaining that sensitive data is not intended to be stored permanently.
-- Add a help/user guide section for first-time users.
-- Decide whether any local autosave should exist; if yes, define deletion and retention behavior explicitly.
-- Review App Store policy risk around legal content, claims, and consumer expectations.
-
-## Milestone 4: App Store Readiness
-
-- Create app name, subtitle, keyword set, screenshots, and App Store description.
-- Produce polished app icon variants and launch visuals.
-- Add support email, privacy policy URL, and terms URL if required by distribution setup.
-- Prepare localized metadata for at least Norwegian and English; Thai can follow if capacity allows.
-
-## Milestone 5: Testing and Stability
-
-- Add unit tests for validation rules in each document model.
-- Add UI tests for the main flows: language selection, navigation, field entry, preview, and settings.
-- Test printing and preview behavior on device, not only in simulator.
-- Run through edge cases: empty fields, very long text, multilingual text, and unusual dates.
-
-## Milestone 6: Release Preparation
-
-- Set versioning, build numbering, signing, and archive workflow in Xcode.
-- Validate bundle metadata, app category, permissions, and deployment target.
-- Test on current iOS versions and at least one smaller and one larger device size.
-- Prepare a first review submission with conservative marketing language.
+- Keep support email, privacy policy, and any terms links active and consistent with App Store Connect.
+- Maintain `RELEASE_CHECKLIST.md` for version number, build number, archive, TestFlight smoke test, and App Store submission.
+- Record known limitations so App Store responses and support replies stay consistent.
+- Decide a normal release rhythm for small fixes versus larger feature releases.
 
 ## Recommended Next Build Order
 
-1. Add validation tests for the three newest document types.
-2. Review print layouts for long-form text and signature spacing.
-3. Add privacy/disclaimer text in a more prominent place on the home screen or first launch.
-4. Write App Store metadata draft and decide final positioning.
-5. Do a full device test and archive build.
+1. Check App Store Connect for crashes, ratings, reviews, installs, and product-page performance.
+2. Do a live-build smoke test on device for language selection, document creation, preview, printing, settings, and current premium entry points.
+3. Decide the free-versus-premium document split and the initial lifetime price.
+4. Test the lifetime unlock product in StoreKit and App Store Connect sandbox.
+5. Write a short `1.1` candidate list from real issues first, then premium-readiness polish.
+6. Add or update validation tests for the document types with the highest legal or UX risk.
+7. Prepare updated App Store metadata and screenshots for the paid/premium version.
+8. Enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed.
 
 ## Open Questions
 
-- Should LexWriter focus only on Norwegian legal documents at launch?
-- Should the app ship with all six document types, or start with a smaller, safer subset?
+- What date should be treated as the official App Store launch date in release notes and marketing?
+- Are there any App Store Connect crashes, reviews, or support emails from the first days live?
+- Which document flow should be considered the most important to polish for version `1.1`?
+- What should the first lifetime unlock price be?
+- Should premium be turned on in version `1.1`, or should `1.1` only prepare the app and leave locking for `1.2`?
 - Do you want local save/export later, or should the app stay print-first?
-- Do you want a lawyer or legal reviewer involved before App Store submission?
+- Do you want a lawyer or legal reviewer involved before the first post-launch update?
