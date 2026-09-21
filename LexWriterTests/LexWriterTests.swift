@@ -20,9 +20,18 @@ struct LexWriterTests {
 
     @Test func monetizationPlanKeepsExpectedFreeAndPremiumDocuments() async throws {
         #expect(MonetizationPlan.freeDocuments == [.purchaseAgreement, .receipt, .loanAgreement])
-        #expect(MonetizationPlan.premiumDocuments.contains(.testament))
-        #expect(MonetizationPlan.premiumDocuments.contains(.nda))
-        #expect(MonetizationPlan.premiumDocuments.count == 9)
+        #expect(MonetizationPlan.premiumDocuments == [
+            .testament,
+            .contract,
+            .powerOfAttorney,
+            .rentalAgreement,
+            .cohabitationAgreement,
+            .debtInstrument,
+            .rentalTermination,
+            .employmentAgreement,
+            .nda
+        ])
+        #expect(MonetizationPlan.freeDocuments.count + MonetizationPlan.premiumDocuments.count == AppDocument.allCases.count)
     }
 
     @Test func monetizationPlanReturnsLocalizedBadgeText() async throws {
@@ -30,6 +39,25 @@ struct LexWriterTests {
         #expect(MonetizationPlan.badgeText(for: .testament, language: .norwegian) == "Premium")
         #expect(MonetizationPlan.badgeText(for: .purchaseAgreement, language: .english) == "Free")
         #expect(MonetizationPlan.badgeText(for: .testament, language: .english) == "Premium")
+    }
+
+    @Test func appLanguageKeepsExpectedSupportedLanguages() async throws {
+        #expect(AppLanguage.allCases == [.norwegian, .english, .thai])
+        #expect(AppLanguage.norwegian.displayName == "Norsk")
+        #expect(AppLanguage.english.displayName == "English")
+        #expect(AppLanguage.thai.displayName == "ไทย")
+    }
+
+    @Test func monetizationPlanReturnsExpectedBadgeTextForEveryDocument() async throws {
+        for language in AppLanguage.allCases {
+            for document in MonetizationPlan.freeDocuments {
+                #expect(MonetizationPlan.badgeText(for: document, language: language) == language.text(.freeTier))
+            }
+
+            for document in MonetizationPlan.premiumDocuments {
+                #expect(MonetizationPlan.badgeText(for: document, language: language) == language.text(.premiumTier))
+            }
+        }
     }
 
     @Test func premiumPreviewStatusExplainsAllDocumentsAreOpen() async throws {
@@ -72,6 +100,15 @@ struct LexWriterTests {
         #expect(AppLanguage.english.text(.accessPlanSummary) == "3 free templates and 9 planned premium templates.")
     }
 
+    @Test func premiumPreviewFooterExplainsAllDocumentsAreAvailableNow() async throws {
+        #expect(AppLanguage.norwegian.text(.futurePricingNote).contains("Alle dokumenter er tilgjengelige nå"))
+        #expect(AppLanguage.english.text(.futurePricingNote).contains("All documents are currently available"))
+    }
+
+    @Test func purchaseManagerUsesExpectedPremiumProductIdentifier() async throws {
+        #expect(PurchaseManager.premiumLifetimeProductID == "com.lexwriter.premium.lifetime")
+    }
+
     @Test func premiumPreviewLocalizationExistsForEveryLanguage() async throws {
         let keys: [LocalizedKey] = [
             .allDocumentsOpenNow,
@@ -80,7 +117,9 @@ struct LexWriterTests {
             .premiumPreviewDescription,
             .premiumPurchasesUnavailableInThisVersion,
             .premiumPreviewIncludes,
-            .openPremiumPlan
+            .futurePricingNote,
+            .openPremiumPlan,
+            .premiumProductIdentifier
         ]
 
         for language in AppLanguage.allCases {
@@ -223,6 +262,60 @@ struct LexWriterTests {
         }
     }
 
+    @Test func testamentHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = TestamentFormData()
+        form.testatorName = "<script>Ola & Co</script>"
+        form.testatorAddress = "Gate <1>"
+        form.testatorPhone = "123 & 456"
+        form.testatorEmail = "ola@example.com"
+        form.testamentPlace = "Oslo <tinghus>"
+        form.hasChildren = false
+        form.beneficiaries = [
+            BeneficiaryEntry(name: "<script>Kari & Co</script>", disposition: "leiligheten <Oslo>")
+        ]
+        form.residueClause = "Kari & Per"
+        form.specialProvisions = "Innbo <liste>"
+        form.witnessOne = WitnessInfo(name: "Vitne <En>", address: "Vei & 2")
+        form.witnessTwo = WitnessInfo(name: "Vitne <To>", address: "Vei & 3")
+
+        let html = form.generatedDocument.htmlDocument
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("leiligheten &lt;Oslo&gt;"))
+        #expect(html.contains("Kari &amp; Per"))
+        #expect(html.contains("Vitne &lt;En&gt;"))
+    }
+
+    @Test func powerOfAttorneyHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = PowerOfAttorneyFormData()
+        form.principalName = "<script>Ola & Co</script>"
+        form.principalAddress = "Gate <1>"
+        form.principalPhone = "123 & 456"
+        form.principalEmail = "ola@example.com"
+        form.agentName = "<script>Kari & Co</script>"
+        form.agentAddress = "Vei <2>"
+        form.mandateScope = "Representere <banken>"
+        form.authorizationPurpose = "Bankmote & signering"
+        form.restrictions = "Bare konto <123>"
+        form.validFrom = "21. september 2026"
+        form.validUntil = "21. desember 2026"
+        form.revocationTerms = "Kan trekkes <skriftlig>"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("Representere &lt;banken&gt;"))
+        #expect(html.contains("Bankmote &amp; signering"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
+    }
+
     @Test func powerOfAttorneyValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
         #expect(PowerOfAttorneyFormData().blockingIssues(in: .norwegian).count == 5)
         #expect(PowerOfAttorneyFormData().warnings(in: .norwegian).count == 3)
@@ -249,6 +342,32 @@ struct LexWriterTests {
         #expect(bodyText.contains("Representere fullmaktsgiver overfor banken."))
     }
 
+    @Test func debtInstrumentHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = DebtInstrumentFormData()
+        form.creditor = debtParty(name: "<script>Kreditor & Co</script>")
+        form.creditor.address = "Gate <1>"
+        form.debtor = debtParty(name: "<script>Debitor & Co</script>")
+        form.debtor.address = "Vei <2>"
+        form.principalAmount = "75 000 <kroner>"
+        form.issueDateText = "21. september 2026"
+        form.dueDateText = "21. september 2027"
+        form.interestTerms = "Rentefritt & gebyrfritt"
+        form.repaymentTerms = "Tilbakebetales <samlet>"
+        form.defaultConsequences = "Forsinkelsesrente & inndriving"
+        form.collateral = "Pant i <sykkel>"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("75 000 &lt;kroner&gt;"))
+        #expect(html.contains("Rentefritt &amp; gebyrfritt"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
+    }
+
     @Test func debtInstrumentValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
         #expect(DebtInstrumentFormData().blockingIssues(in: .norwegian).count == 6)
         #expect(DebtInstrumentFormData().warnings(in: .norwegian).count == 3)
@@ -273,6 +392,34 @@ struct LexWriterTests {
         #expect(bodyText.contains("Debitor"))
         #expect(bodyText.contains("75 000 kroner"))
         #expect(bodyText.contains("21. september 2027"))
+    }
+
+    @Test func employmentAgreementHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = EmploymentAgreementFormData()
+        form.employer = contractParty(name: "<script>Arbeidsgiver & Co</script>")
+        form.employer.address = "Gate <1>"
+        form.employee = contractParty(name: "<script>Ansatt & Co</script>")
+        form.employee.address = "Vei <2>"
+        form.positionTitle = "Radgiver <senior>"
+        form.duties = "Saksbehandling & kundekontakt"
+        form.startDate = "1. oktober 2026"
+        form.workplace = "Oslo <kontor>"
+        form.salary = "600 000 <kroner> per ar"
+        form.workingHours = "37,5 timer & fleksitid"
+        form.probationPeriod = "Seks <maneder>"
+        form.terminationNotice = "Tre maneder & skriftlig"
+        form.confidentialityTerms = "Taushet om <kunder>"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("Radgiver &lt;senior&gt;"))
+        #expect(html.contains("Saksbehandling &amp; kundekontakt"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
     }
 
     @Test func employmentAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
@@ -303,6 +450,32 @@ struct LexWriterTests {
         #expect(bodyText.contains("600 000 kroner per år"))
     }
 
+    @Test func ndaHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = NDAFormData()
+        form.disclosingParty = contractParty(name: "<script>Informasjonseier & Co</script>")
+        form.disclosingParty.address = "Gate <1>"
+        form.receivingParty = contractParty(name: "<script>Mottaker & Co</script>")
+        form.receivingParty.address = "Vei <2>"
+        form.confidentialInfo = "Produktplaner <hemmelig>"
+        form.purpose = "Vurdere samarbeid & investering"
+        form.obligations = "Ikke dele med <tredjepart>"
+        form.duration = "Tre ar & videre"
+        form.exclusions = "Offentlig kjent <informasjon>"
+        form.returnMaterials = "Returnere & slette materiale"
+        form.governingLaw = "Norsk rett <Oslo tingrett>"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("Produktplaner &lt;hemmelig&gt;"))
+        #expect(html.contains("Vurdere samarbeid &amp; investering"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
+    }
+
     @Test func ndaValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
         #expect(NDAFormData().blockingIssues(in: .norwegian).count == 6)
         #expect(NDAFormData().warnings(in: .norwegian).count == 4)
@@ -327,6 +500,34 @@ struct LexWriterTests {
         #expect(bodyText.contains("Mottaker AS"))
         #expect(bodyText.contains("Produktplaner, kundelister og teknisk dokumentasjon."))
         #expect(bodyText.contains("Vurdere mulig samarbeid."))
+    }
+
+    @Test func rentalAgreementHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = RentalAgreementFormData()
+        form.landlord = rentalParty(name: "<script>Utleier & Co</script>")
+        form.landlord.address = "Gate <1>"
+        form.tenant = rentalParty(name: "<script>Leietaker & Co</script>")
+        form.tenant.address = "Vei <2>"
+        form.propertyAddress = "Leiegata <1>"
+        form.rentalObjectDescription = "Leilighet & bod"
+        form.monthlyRent = "15 000 <kroner>"
+        form.deposit = "45 000 & gebyrfritt"
+        form.startDate = "1. oktober 2026"
+        form.duration = "Tidsubestemt <leieforhold>"
+        form.utilities = "Strom & internett"
+        form.noticePeriod = "Tre <maneder>"
+        form.houseRules = "Ingen røyking & husdyr etter avtale"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("Leiegata &lt;1&gt;"))
+        #expect(html.contains("Leilighet &amp; bod"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
     }
 
     @Test func rentalAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
@@ -357,6 +558,32 @@ struct LexWriterTests {
         #expect(bodyText.contains("15 000 kroner"))
     }
 
+    @Test func cohabitationAgreementHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = CohabitationAgreementFormData()
+        form.partnerOne = cohabitationParty(name: "<script>Samboer En & Co</script>")
+        form.partnerOne.address = "Gate <1>"
+        form.partnerTwo = cohabitationParty(name: "<script>Samboer To & Co</script>")
+        form.partnerTwo.address = "Vei <2>"
+        form.sharedHomeAddress = "Fellesgata <1>"
+        form.ownershipDistribution = "Eier 50 % & 50 %"
+        form.separateAssets = "Eiendeler <forholdet>"
+        form.sharedExpenses = "Felles utgifter & vedlikehold"
+        form.debtResponsibility = "Egen gjeld <privat>"
+        form.breakupHandling = "Fordeles etter eierandel & avtale"
+        form.specialTerms = "Ingen <særvilkår>"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("Fellesgata &lt;1&gt;"))
+        #expect(html.contains("Eier 50 % &amp; 50 %"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
+    }
+
     @Test func cohabitationAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
         #expect(CohabitationAgreementFormData().blockingIssues(in: .norwegian).count == 6)
         #expect(CohabitationAgreementFormData().warnings(in: .norwegian).count == 3)
@@ -383,6 +610,31 @@ struct LexWriterTests {
         #expect(bodyText.contains("Felles utgifter deles likt."))
     }
 
+    @Test func rentalTerminationHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = RentalTerminationFormData()
+        form.landlord = rentalParty(name: "<script>Utleier & Co</script>")
+        form.landlord.address = "Gate <1>"
+        form.tenant = rentalParty(name: "<script>Leietaker & Co</script>")
+        form.tenant.address = "Vei <2>"
+        form.propertyAddress = "Leiegata <1>"
+        form.terminationDateText = "21. september 2026"
+        form.moveOutDateText = "31. desember 2026"
+        form.noticeBasis = "Oppsigelse etter <avtalt> frist"
+        form.depositSettlement = "Depositum & sluttoppgjør"
+        form.keyReturn = "Nøkler leveres <ved fraflytting>"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("Leiegata &lt;1&gt;"))
+        #expect(html.contains("Oppsigelse etter &lt;avtalt&gt; frist"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
+    }
+
     @Test func rentalTerminationValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
         #expect(RentalTerminationFormData().blockingIssues(in: .norwegian).count == 6)
         #expect(RentalTerminationFormData().warnings(in: .norwegian).count == 3)
@@ -406,6 +658,34 @@ struct LexWriterTests {
         #expect(bodyText.contains("Leietaker"))
         #expect(bodyText.contains("Leiegata 1"))
         #expect(bodyText.contains("21. september 2026"))
+    }
+
+    @Test func contractHTMLPreviewEscapesUserEnteredText() async throws {
+        var form = ContractFormData()
+        form.partyOne = contractParty(name: "<script>Part En & Co</script>")
+        form.partyOne.address = "Gate <1>"
+        form.partyTwo = contractParty(name: "<script>Part To & Co</script>")
+        form.partyTwo.address = "Vei <2>"
+        form.agreementTitle = "Samarbeidsavtale <pilot>"
+        form.subject = "Leveranse av <radgivning>"
+        form.servicesOrGoods = "Månedlig rapportering & analyse"
+        form.payment = "25 000 <kroner> per måned"
+        form.duration = "Tolv måneder & opsjon"
+        form.breachConsequences = "Heving ved <vesentlig> mislighold"
+        form.termination = "Tre måneder & skriftlig"
+        form.disputeResolution = "Forhandlinger <før søksmål>"
+        form.specialTerms = "Ingen & særvilkår"
+        form.signingPlace = "Oslo <tinghus>"
+
+        let html = form.document.htmlDocument(in: .norwegian)
+
+        #expect(!html.contains("<script>"))
+        #expect(html.contains("&lt;script&gt;"))
+        #expect(html.contains("&amp; Co"))
+        #expect(html.contains("Gate &lt;1&gt;"))
+        #expect(html.contains("Samarbeidsavtale &lt;pilot&gt;"))
+        #expect(html.contains("Leveranse av &lt;radgivning&gt;"))
+        #expect(html.contains("Oslo &lt;tinghus&gt;"))
     }
 
     @Test func contractValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
@@ -434,6 +714,36 @@ struct LexWriterTests {
         #expect(bodyText.contains("Part To"))
         #expect(bodyText.contains("Leveranse av rådgivningstjenester."))
         #expect(bodyText.contains("25 000 kroner per måned."))
+    }
+
+    @Test func testamentValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(TestamentFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(TestamentFormData().warnings(in: .norwegian).count == 2)
+
+        var form = TestamentFormData()
+        form.testatorName = "Ola Nordmann"
+        form.testatorAddress = "Gate 1"
+        form.testamentPlace = "Oslo"
+        form.hasChildren = false
+        form.beneficiaries = [
+            BeneficiaryEntry(name: "Kari Nordmann", disposition: "leiligheten i Oslo")
+        ]
+        form.residueClause = "Kari Nordmann"
+        form.specialProvisions = "Arving skal overta innbo etter egen liste."
+        form.witnessesPresentTogetherConfirmed = true
+        form.witnessesKnowItsATestamentConfirmed = true
+        form.witnessesAreEligibleConfirmed = true
+        form.witnessOne = WitnessInfo(name: "Vitne En", address: "Vei 2")
+        form.witnessTwo = WitnessInfo(name: "Vitne To", address: "Vei 3")
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.generatedDocument.formattedBody
+        #expect(bodyText.contains("Ola Nordmann"))
+        #expect(bodyText.contains("Kari Nordmann"))
+        #expect(bodyText.contains("leiligheten i Oslo"))
+        #expect(bodyText.contains("Arving skal overta innbo etter egen liste."))
     }
 
     @Test func witnessCannotAlsoBeBeneficiary() async throws {

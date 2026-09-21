@@ -17,7 +17,7 @@ Use this checklist before submitting a new App Store build.
 - Confirm Premium preview says purchases are not available in this version while StoreKit is disabled.
 - Create at least one free document and one premium-marked document.
 - Preview, print, and save PDF from a representative document.
-- Switch language between Norwegian and English and confirm the main labels update.
+- Switch language between Norwegian, English, and Thai and confirm the main labels update.
 
 ## Premium Readiness
 

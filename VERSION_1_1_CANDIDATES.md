@@ -28,6 +28,12 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 
 ## Completed Candidate Work
 
+- Tightened unit coverage for the exact free/premium document split.
+- Added unit coverage for the expected premium product id.
+- Added premium product id label to the premium-preview localization coverage.
+- Added unit coverage for localized badge text across every free and premium-marked document.
+- Added unit coverage for the expected supported app languages: Norwegian, English, and Thai.
+- Added unit coverage for the premium-preview footer explaining that all documents are currently available.
 - Added unit coverage for the free document set: purchase agreement, receipt, and loan agreement now check required-field validation, advisory warnings, generated body text, and HTML escaping for preview/PDF safety.
 - Added first premium-marked validation coverage for power of attorney.
 - Added premium-marked validation coverage for debt instrument.
@@ -37,6 +43,16 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added premium-marked validation coverage for cohabitation agreement.
 - Added premium-marked validation coverage for rental termination.
 - Added premium-marked validation coverage for contract.
+- Added premium-marked validation coverage for testament.
+- Added HTML-preview escaping coverage for testament.
+- Added HTML-preview escaping coverage for power of attorney.
+- Added HTML-preview escaping coverage for debt instrument.
+- Added HTML-preview escaping coverage for employment agreement.
+- Added HTML-preview escaping coverage for NDA.
+- Added HTML-preview escaping coverage for rental agreement.
+- Added HTML-preview escaping coverage for cohabitation agreement.
+- Added HTML-preview escaping coverage for rental termination.
+- Added HTML-preview escaping coverage for contract.
 
 ## Technical Candidates
 

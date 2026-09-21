@@ -45,14 +45,15 @@ Premium-marked but still available:
 - `Views/Settings/SettingsView.swift`: access status, premium plan entry point, privacy/app info.
 - `Services/PurchaseManager.swift`: StoreKit plumbing and premium access state.
 - `Localization/AppLocalization.swift`: shared localized app text.
-- `LexWriterTests/LexWriterTests.swift`: unit coverage for premium-preview state, free-document validation/output safety, power-of-attorney validation, debt-instrument validation, employment-agreement validation, NDA validation, rental-agreement validation, cohabitation-agreement validation, rental-termination validation, and contract validation.
+- `LexWriterTests/LexWriterTests.swift`: unit coverage for supported app languages, premium-preview state/copy/localization, exact free/premium document split, premium product identifier, badge text across all documents, free-document validation/output safety, power-of-attorney validation, power-of-attorney HTML-preview escaping, debt-instrument validation, debt-instrument HTML-preview escaping, employment-agreement validation, employment-agreement HTML-preview escaping, NDA validation, NDA HTML-preview escaping, rental-agreement validation, rental-agreement HTML-preview escaping, cohabitation-agreement validation, cohabitation-agreement HTML-preview escaping, rental-termination validation, rental-termination HTML-preview escaping, contract validation, contract HTML-preview escaping, testament validation, and testament HTML-preview escaping.
 - `LexWriterUITests/LexWriterUITests.swift`: UI test expectations updated, but not runnable yet.
 - `VERSION_1_1_CANDIDATES.md`: working shortlist for the first post-launch update.
 
 ## Validation Baseline
 
-- Unit tests: 28/28 passed.
+- Unit tests: 42/42 passed.
 - Build for testing: succeeded.
+- Added supported-language coverage, testament validation, premium product identifier coverage, badge text coverage across all documents, premium-preview footer copy coverage, and HTML-preview escaping coverage for all premium-marked document templates; unit tests pass with 42/42 and build-for-testing succeeds.
 - UI tests compile, but cannot run until `LexWriterUITests` target application path is fixed in Xcode.
 - Xcode still shows one yellow project warning: `Update to recommended settings`. Leave it for a separate commit.
 - Apple field-performance datasets were unavailable for live versions `1.0.1` and `1.0`; crash tooling did not resolve the product, so crash status should be checked manually in Xcode Organizer or App Store Connect.
