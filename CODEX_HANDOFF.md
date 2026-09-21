@@ -15,6 +15,7 @@ LexWriter is live on the App Store. The current workstream is preparing a later 
 - Premium enforcement is disabled.
 - Settings explains that all documents are open now.
 - Settings shows 3 free templates and 9 planned premium templates.
+- The home screen labels the premium-marked section as planned premium templates while StoreKit is disabled.
 - Premium preview says paid premium is planned later and purchases are not available in this version.
 
 ## Current Free/Premium Split

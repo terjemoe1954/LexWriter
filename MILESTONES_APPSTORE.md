@@ -12,6 +12,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - The original pre-launch readiness work is now considered complete enough for the first public release.
 - The app already contains StoreKit plumbing, a premium screen, and document access tiers, but premium locking is currently disabled in code.
 - Premium badges are now visible in the app, while all documents remain available.
+- The home screen now labels the premium-marked section as planned premium templates while StoreKit is disabled.
 - Settings now includes access, premium preview, privacy information, and a count summary for the current free/premium-marked split.
 - The user guide and home screen now explain that documents are templates and drafts, not legal advice.
 - Premium copy now clearly explains that paid premium is planned for a later version and that purchases are not available in this version.
@@ -20,6 +21,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 ## Completed in This Post-Launch Pass
 
 - Enabled visible `Gratis` / `Premium` document badges without enabling premium locks.
+- Updated the premium-marked home section title so it reads as planned premium while purchases are disabled.
 - Split monetization flags into clear responsibilities: badges, StoreKit availability, and premium enforcement.
 - Added tests that guard the current free/premium document split and ensure premium enforcement stays off for now.
 - Made `PremiumView` safe for the current pre-purchase phase: it explains that paid premium is planned later, says purchases are not available in this version, hides purchase controls while StoreKit is disabled, and uses the App Store purchase disclaimer only when purchases are enabled.

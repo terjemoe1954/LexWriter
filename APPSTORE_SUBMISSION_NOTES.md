@@ -7,6 +7,7 @@ Use this as a working draft for the next App Store submission.
 ### Norwegian
 
 - Tydeligere merking av gratis og kommende premium-dokumenter.
+- Hjemskjermen viser planlagte premium-maler tydeligere mens kjøp er deaktivert.
 - Ny tilgangs-, premiumplan- og personverninformasjon i Innstillinger.
 - Premiumvisningen forklarer nå at betalt premium er planlagt senere, og at kjøp ikke er tilgjengelig i denne versjonen.
 - Brukerveiledningen forklarer nå gratis/premium-merking og juridisk avgrensning tydeligere.
@@ -16,6 +17,7 @@ Use this as a working draft for the next App Store submission.
 ### English
 
 - Clearer labels for free and future premium documents.
+- The home screen now labels planned premium templates more clearly while purchases are disabled.
 - Added access, premium-plan, and privacy information in Settings.
 - The Premium preview now explains that paid premium is planned later and purchases are not available in this version.
 - The User Guide now explains free/premium labels and legal scope more clearly.

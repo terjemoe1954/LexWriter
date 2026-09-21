@@ -30,6 +30,7 @@ final class LexWriterUITests: XCTestCase {
         if !app.staticTexts["Premium"].exists {
             app.swipeUp()
         }
+        XCTAssertTrue(app.staticTexts["Planlagte premium-maler"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.staticTexts["Premium"].waitForExistence(timeout: 2))
     }
 

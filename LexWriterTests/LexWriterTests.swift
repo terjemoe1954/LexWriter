@@ -57,6 +57,11 @@ struct LexWriterTests {
         #expect(AppLanguage.english.text(.premiumPreviewIncludes) == "Planned premium collection")
     }
 
+    @Test func homeScreenExplainsPlannedPremiumTemplates() async throws {
+        #expect(AppLanguage.norwegian.text(.plannedPremiumTemplatesTitle) == "Planlagte premium-maler")
+        #expect(AppLanguage.english.text(.plannedPremiumTemplatesTitle) == "Planned premium templates")
+    }
+
     @Test func settingsPremiumButtonExplainsPlannedPremium() async throws {
         #expect(AppLanguage.norwegian.text(.openPremiumPlan) == "Se planlagt premium")
         #expect(AppLanguage.english.text(.openPremiumPlan) == "View planned premium")

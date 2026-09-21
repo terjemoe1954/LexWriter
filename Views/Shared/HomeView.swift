@@ -122,7 +122,7 @@ struct HomeView: View {
             )
 
             documentGroup(
-                title: selectedLanguage.text(.moreDocumentTemplatesTitle),
+                title: premiumDocumentsTitle,
                 documents: MonetizationPlan.premiumDocuments
             )
         }
@@ -198,6 +198,14 @@ struct HomeView: View {
     private func badgeText(for document: AppDocument) -> String? {
         let text = MonetizationPlan.badgeText(for: document, language: selectedLanguage)
         return text.isEmpty ? nil : text
+    }
+
+    private var premiumDocumentsTitle: String {
+        if MonetizationPlan.isPremiumStoreEnabled {
+            return selectedLanguage.text(.moreDocumentTemplatesTitle)
+        }
+
+        return selectedLanguage.text(.plannedPremiumTemplatesTitle)
     }
 }
 

@@ -43,6 +43,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Gratis dokumenter"
         case (.norwegian, .moreDocumentTemplatesTitle):
             return "Flere dokumentmaler"
+        case (.norwegian, .plannedPremiumTemplatesTitle):
+            return "Planlagte premium-maler"
         case (.norwegian, .testamentTitle):
             return "Testament"
         case (.norwegian, .testamentSubtitle):
@@ -267,6 +269,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Free documents"
         case (.english, .moreDocumentTemplatesTitle):
             return "More document templates"
+        case (.english, .plannedPremiumTemplatesTitle):
+            return "Planned premium templates"
         case (.english, .testamentTitle):
             return "Will"
         case (.english, .testamentSubtitle):
@@ -491,6 +495,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "เอกสารฟรี"
         case (.thai, .moreDocumentTemplatesTitle):
             return "เทมเพลตเอกสารเพิ่มเติม"
+        case (.thai, .plannedPremiumTemplatesTitle):
+            return "เทมเพลตพรีเมียมที่วางแผนไว้"
         case (.thai, .testamentTitle):
             return "พินัยกรรม"
         case (.thai, .testamentSubtitle):
@@ -712,6 +718,7 @@ enum LocalizedKey {
     case documents
     case freeDocumentsTitle
     case moreDocumentTemplatesTitle
+    case plannedPremiumTemplatesTitle
     case testamentTitle
     case testamentSubtitle
     case contractTitle
