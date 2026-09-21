@@ -18,6 +18,26 @@ The app expects this lifetime unlock product:
 
 Create and approve the same product identifier in App Store Connect before enabling StoreKit in the app.
 
+## Current Free/Premium Split
+
+Free documents:
+
+- Purchase Agreement / Kjøpskontrakt
+- Receipt / Kvittering
+- Loan Agreement / Låneavtale
+
+Premium-marked documents:
+
+- Will / Testament
+- Contract / Kontrakt
+- Power of Attorney / Fullmakt
+- Rental Agreement / Husleiekontrakt
+- Cohabitation Agreement / Samboeravtale
+- Debt Instrument / Gjeldsbrev
+- Termination of Tenancy / Oppsigelse av leieforhold
+- Employment Agreement / Arbeidsavtale
+- NDA
+
 ## Before Enabling Purchases
 
 - Confirm the lifetime product exists in App Store Connect.

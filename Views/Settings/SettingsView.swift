@@ -145,3 +145,10 @@ private enum AppMetadata {
     static let buildString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
     static let combinedVersionString: String = "\(versionString) (\(buildString))"
 }
+
+#Preview {
+    NavigationStack {
+        SettingsView()
+    }
+    .environment(PurchaseManager())
+}

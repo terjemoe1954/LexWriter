@@ -5,7 +5,8 @@ Use this checklist before submitting a new App Store build.
 ## Version and Build
 
 - Confirm the intended version number and build number.
-- Update App Store Connect release notes for Norwegian and English.
+- Update App Store Connect release notes for Norwegian and English using `APPSTORE_SUBMISSION_NOTES.md`.
+- Review subtitle, short description, and keyword drafts in `APPSTORE_SUBMISSION_NOTES.md`.
 - Confirm whether the release is a stability update, premium-preparation update, or premium-enforcement update.
 
 ## Product Smoke Test
@@ -26,6 +27,7 @@ Use this checklist before submitting a new App Store build.
 
 ## Legal and Trust
 
+- Review `KNOWN_LIMITATIONS.md`.
 - Confirm the home screen legal note is visible.
 - Confirm Settings includes access and privacy information.
 - Confirm the User Guide explains that documents are templates and drafts, not legal advice.
@@ -33,9 +35,12 @@ Use this checklist before submitting a new App Store build.
 
 ## App Store Connect
 
+- Review `APPSTORE_SUBMISSION_NOTES.md`.
+- Review `SUPPORT_RESPONSES.md` for expected support and review wording.
 - Check crashes, hangs, reviews, ratings, installs, and product page performance.
 - Confirm privacy details still match the app.
 - Confirm screenshots match the shipped UI.
+- Do not include Premium preview screenshots unless the App Store listing explains the premium-preparation state.
 - Confirm support email and privacy policy links are active.
 
 ## Final Validation

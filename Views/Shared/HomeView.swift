@@ -279,4 +279,5 @@ private struct DocumentCard: View {
 
 #Preview {
     HomeView()
+        .environment(PurchaseManager())
 }

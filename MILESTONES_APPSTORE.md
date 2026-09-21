@@ -28,8 +28,12 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added a home-screen legal note that documents are templates and drafts, not legal advice.
 - Improved document card layout so long titles and badges fit better on small screens.
 - Hardened `PurchaseManager` around product loading, restore state, repeated restore taps, and unverified transaction errors.
+- Updated SwiftUI previews for `HomeView`, `SettingsView`, and `PremiumView` so each has the required `PurchaseManager` environment.
 - Added `RELEASE_CHECKLIST.md` for future App Store submissions.
 - Added `PREMIUM_ACTIVATION.md` with the exact preconditions and flags for enabling purchases later.
+- Added `KNOWN_LIMITATIONS.md` for support replies, App Store review notes, and release planning.
+- Added `APPSTORE_SUBMISSION_NOTES.md` as a working draft for release notes, review notes, and screenshots.
+- Added `SUPPORT_RESPONSES.md` with draft replies for legal scope, privacy, premium, saving, and export questions.
 - Checked Xcode field performance data for `com.terjemoe.LexWriter` version `1.0.1`; no App Store field versions/data were available yet.
 
 ## Milestone 1: First Live Signals
@@ -60,6 +64,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 
 - Improve the App Store subtitle, description, and keywords based on what the app actually does best after launch.
 - Prepare localized App Store metadata updates for Norwegian and English.
+- Maintain `APPSTORE_SUBMISSION_NOTES.md` before each App Store submission.
 - Decide whether Thai metadata should be added now or later.
 - Add or replace screenshots if the current listing does not clearly show the main document flow and print preview.
 - Improve the first-time experience so users understand that documents are templates, not legal advice.
@@ -84,7 +89,8 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 
 - Keep support email, privacy policy, and any terms links active and consistent with App Store Connect.
 - Maintain `RELEASE_CHECKLIST.md` for version number, build number, archive, TestFlight smoke test, and App Store submission.
-- Record known limitations so App Store responses and support replies stay consistent.
+- Maintain `KNOWN_LIMITATIONS.md` so App Store responses and support replies stay consistent.
+- Maintain `SUPPORT_RESPONSES.md` as recurring support questions appear.
 - Decide a normal release rhythm for small fixes versus larger feature releases.
 
 ## Recommended Next Build Order
