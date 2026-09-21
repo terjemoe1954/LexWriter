@@ -29,7 +29,7 @@ For recurring user-facing replies, use `SUPPORT_RESPONSES.md`.
 
 ## Testing and Release
 
-- Xcode field performance data was not available yet for live version `1.0.1` when checked.
+- Apple field-performance datasets were not available for live versions `1.0.1` or `1.0` when checked. Crash tooling did not resolve the product, so crash status should be checked manually in Xcode Organizer or App Store Connect.
 - Unit tests currently cover the premium-preview state and supported languages.
 - UI tests compile, but cannot run until the `LexWriterUITests` target application path is fixed in Xcode.
 - Some test runs may need to be repeated manually if Xcode reports tests as discovered but not run.
