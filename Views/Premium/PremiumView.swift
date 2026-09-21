@@ -48,7 +48,7 @@ struct PremiumView: View {
 
     private var heroCard: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(language.text(.premiumHeadline))
+            Text(headlineText)
                 .font(.system(size: 28, weight: .bold, design: .serif))
                 .foregroundStyle(.white)
 
@@ -154,7 +154,7 @@ struct PremiumView: View {
 
     private var includedDocumentsSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text(language.text(.premiumIncludes))
+            Text(includedDocumentsTitle)
                 .font(.system(size: 22, weight: .semibold, design: .serif))
                 .foregroundStyle(.white)
 
@@ -224,11 +224,27 @@ struct PremiumView: View {
     }
 
     private var heroMessage: String {
-        if let highlightedDocument {
+        if MonetizationPlan.isPremiumStoreEnabled, let highlightedDocument {
             return language.premiumMessage(for: highlightedDocument)
         }
 
         return language.text(.premiumDescription)
+    }
+
+    private var headlineText: String {
+        if MonetizationPlan.isPremiumStoreEnabled {
+            return language.text(.premiumHeadline)
+        }
+
+        return language.text(.premiumPreviewHeadline)
+    }
+
+    private var includedDocumentsTitle: String {
+        if MonetizationPlan.isPremiumStoreEnabled {
+            return language.text(.premiumIncludes)
+        }
+
+        return language.text(.premiumPreviewIncludes)
     }
 
     private var premiumBenefits: [String] {

@@ -48,7 +48,7 @@ struct SettingsView: View {
                 Button {
                     showsPremiumPreview = true
                 } label: {
-                    Label(language.text(.openPremiumPreview), systemImage: "crown.fill")
+                    Label(premiumButtonTitle, systemImage: "crown.fill")
                 }
                 .accessibilityIdentifier("openPremiumPreviewButton")
             }
@@ -96,10 +96,18 @@ struct SettingsView: View {
 
     private var currentEditionText: String {
         guard MonetizationPlan.isPremiumEnforced else {
-            return language.text(.fullEdition)
+            return language.text(.allDocumentsOpenNow)
         }
 
         return purchaseManager.hasPremiumAccess ? language.text(.fullEdition) : language.text(.freeTier)
+    }
+
+    private var premiumButtonTitle: String {
+        if MonetizationPlan.isPremiumStoreEnabled {
+            return language.text(.openPremiumPreview)
+        }
+
+        return language.text(.openPremiumPlan)
     }
 
     private var selectedLanguageBinding: Binding<AppLanguage> {

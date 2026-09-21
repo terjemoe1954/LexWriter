@@ -15,6 +15,7 @@ final class PurchaseManager {
     static let premiumLifetimeProductID = "com.lexwriter.premium.lifetime"
 
     private let premiumAccessDefaultsKey = "hasPremiumAccess"
+    private let userDefaults: UserDefaults
 
     private(set) var hasPremiumAccess: Bool
     private(set) var premiumProduct: Product?
@@ -24,8 +25,9 @@ final class PurchaseManager {
 
     private var updatesTask: Task<Void, Never>?
 
-    init() {
-        hasPremiumAccess = UserDefaults.standard.bool(forKey: premiumAccessDefaultsKey)
+    init(userDefaults: UserDefaults = .standard) {
+        self.userDefaults = userDefaults
+        hasPremiumAccess = userDefaults.bool(forKey: premiumAccessDefaultsKey)
     }
 
     func start() {
@@ -150,6 +152,6 @@ final class PurchaseManager {
 
     private func setPremiumAccess(_ value: Bool) {
         hasPremiumAccess = value
-        UserDefaults.standard.set(value, forKey: premiumAccessDefaultsKey)
+        userDefaults.set(value, forKey: premiumAccessDefaultsKey)
     }
 }

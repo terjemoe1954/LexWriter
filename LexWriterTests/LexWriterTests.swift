@@ -5,6 +5,7 @@
 //  Created by Terje Moe on 28/08/2026.
 //
 
+import Foundation
 import Testing
 @testable import LexWriter
 
@@ -29,6 +30,45 @@ struct LexWriterTests {
         #expect(MonetizationPlan.badgeText(for: .testament, language: .norwegian) == "Premium")
         #expect(MonetizationPlan.badgeText(for: .purchaseAgreement, language: .english) == "Free")
         #expect(MonetizationPlan.badgeText(for: .testament, language: .english) == "Premium")
+    }
+
+    @Test func premiumPreviewStatusExplainsAllDocumentsAreOpen() async throws {
+        #expect(AppLanguage.norwegian.text(.allDocumentsOpenNow) == "Alle dokumenter er åpne nå")
+        #expect(AppLanguage.english.text(.allDocumentsOpenNow) == "All documents open now")
+    }
+
+    @Test func premiumPreviewHeadlineExplainsPremiumIsPlanned() async throws {
+        #expect(AppLanguage.norwegian.text(.premiumPreviewHeadline) == "Premium er planlagt")
+        #expect(AppLanguage.english.text(.premiumPreviewHeadline) == "Premium is planned")
+    }
+
+    @Test func premiumPreviewIncludesExplainsCollectionIsPlanned() async throws {
+        #expect(AppLanguage.norwegian.text(.premiumPreviewIncludes) == "Planlagt premiumsamling")
+        #expect(AppLanguage.english.text(.premiumPreviewIncludes) == "Planned premium collection")
+    }
+
+    @Test func settingsPremiumButtonExplainsPlannedPremium() async throws {
+        #expect(AppLanguage.norwegian.text(.openPremiumPlan) == "Se planlagt premium")
+        #expect(AppLanguage.english.text(.openPremiumPlan) == "View planned premium")
+    }
+
+    @Test func purchaseManagerUnlocksDocumentsByAccessTier() async throws {
+        let suiteName = "LexWriterTests.purchaseManagerUnlocksDocumentsByAccessTier"
+        let userDefaults = try #require(UserDefaults(suiteName: suiteName))
+        userDefaults.removePersistentDomain(forName: suiteName)
+        userDefaults.set(false, forKey: "hasPremiumAccess")
+        let freeManager = PurchaseManager(userDefaults: userDefaults)
+
+        #expect(freeManager.isDocumentUnlocked(.purchaseAgreement))
+        #expect(!freeManager.isDocumentUnlocked(.testament))
+
+        userDefaults.set(true, forKey: "hasPremiumAccess")
+        let premiumManager = PurchaseManager(userDefaults: userDefaults)
+
+        #expect(premiumManager.isDocumentUnlocked(.purchaseAgreement))
+        #expect(premiumManager.isDocumentUnlocked(.testament))
+
+        userDefaults.removePersistentDomain(forName: suiteName)
     }
 
     @Test func witnessCannotAlsoBeBeneficiary() async throws {

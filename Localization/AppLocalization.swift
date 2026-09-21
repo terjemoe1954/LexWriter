@@ -95,6 +95,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Nåværende utgave"
         case (.norwegian, .fullEdition):
             return "Full tilgang"
+        case (.norwegian, .allDocumentsOpenNow):
+            return "Alle dokumenter er åpne nå"
         case (.norwegian, .futurePricingNote):
             return "Alle dokumenter er tilgjengelige nå. Gratis- og premium-merkene viser hvordan en senere betalt versjon kan bli organisert."
         case (.norwegian, .freeTier):
@@ -105,10 +107,14 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "LexWriter Premium"
         case (.norwegian, .premiumHeadline):
             return "Lås opp alle dokumentmaler"
+        case (.norwegian, .premiumPreviewHeadline):
+            return "Premium er planlagt"
         case (.norwegian, .premiumDescription):
             return "Premium gir tilgang til hele dokumentsamlingen og passer for brukere som trenger flere juridiske maler i samme app."
         case (.norwegian, .premiumIncludes):
             return "Premium inkluderer"
+        case (.norwegian, .premiumPreviewIncludes):
+            return "Planlagt premiumsamling"
         case (.norwegian, .unlockPremiumLifetime):
             return "Lås opp livstidstilgang"
         case (.norwegian, .restorePurchases):
@@ -141,6 +147,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Lås premium-dokumenter"
         case (.norwegian, .openPremiumPreview):
             return "Åpne premiumvisning"
+        case (.norwegian, .openPremiumPlan):
+            return "Se planlagt premium"
         case (.norwegian, .premiumProductIdentifier):
             return "Produkt-ID"
         case (.norwegian, .comingSoon):
@@ -307,6 +315,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Current edition"
         case (.english, .fullEdition):
             return "Full access"
+        case (.english, .allDocumentsOpenNow):
+            return "All documents open now"
         case (.english, .futurePricingNote):
             return "All documents are currently available. The free and premium labels show how a later paid version may be organized."
         case (.english, .freeTier):
@@ -317,10 +327,14 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "LexWriter Premium"
         case (.english, .premiumHeadline):
             return "Unlock the full document library"
+        case (.english, .premiumPreviewHeadline):
+            return "Premium is planned"
         case (.english, .premiumDescription):
             return "Premium gives access to the full document collection for users who need more legal templates in one app."
         case (.english, .premiumIncludes):
             return "Premium includes"
+        case (.english, .premiumPreviewIncludes):
+            return "Planned premium collection"
         case (.english, .unlockPremiumLifetime):
             return "Unlock lifetime access"
         case (.english, .restorePurchases):
@@ -353,6 +367,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Lock premium documents"
         case (.english, .openPremiumPreview):
             return "Open premium preview"
+        case (.english, .openPremiumPlan):
+            return "View planned premium"
         case (.english, .premiumProductIdentifier):
             return "Product ID"
         case (.english, .comingSoon):
@@ -519,6 +535,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "รุ่นปัจจุบัน"
         case (.thai, .fullEdition):
             return "เข้าถึงเต็มรูปแบบ"
+        case (.thai, .allDocumentsOpenNow):
+            return "เอกสารทั้งหมดเปิดใช้งานอยู่ตอนนี้"
         case (.thai, .futurePricingNote):
             return "ขณะนี้เอกสารทั้งหมดใช้งานได้ ป้ายฟรีและพรีเมียมแสดงว่าเวอร์ชันแบบชำระเงินในอนาคตอาจจัดกลุ่มอย่างไร"
         case (.thai, .freeTier):
@@ -529,10 +547,14 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "LexWriter Premium"
         case (.thai, .premiumHeadline):
             return "ปลดล็อกคลังเอกสารทั้งหมด"
+        case (.thai, .premiumPreviewHeadline):
+            return "มีแผนเพิ่มพรีเมียม"
         case (.thai, .premiumDescription):
             return "พรีเมียมให้สิทธิ์เข้าถึงชุดเอกสารทั้งหมดสำหรับผู้ใช้ที่ต้องการเทมเพลตกฎหมายมากขึ้นในแอปเดียว"
         case (.thai, .premiumIncludes):
             return "พรีเมียมประกอบด้วย"
+        case (.thai, .premiumPreviewIncludes):
+            return "ชุดพรีเมียมที่วางแผนไว้"
         case (.thai, .unlockPremiumLifetime):
             return "ปลดล็อกการเข้าถึงตลอดชีพ"
         case (.thai, .restorePurchases):
@@ -565,6 +587,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "ล็อกเอกสารพรีเมียม"
         case (.thai, .openPremiumPreview):
             return "เปิดหน้าพรีเมียม"
+        case (.thai, .openPremiumPlan):
+            return "ดูแผนพรีเมียม"
         case (.thai, .premiumProductIdentifier):
             return "รหัสสินค้า"
         case (.thai, .comingSoon):
@@ -702,13 +726,16 @@ enum LocalizedKey {
     case accessPlan
     case currentEdition
     case fullEdition
+    case allDocumentsOpenNow
     case futurePricingNote
     case freeTier
     case premiumTier
     case premiumTitle
     case premiumHeadline
+    case premiumPreviewHeadline
     case premiumDescription
     case premiumIncludes
+    case premiumPreviewIncludes
     case unlockPremiumLifetime
     case restorePurchases
     case premiumUnlocked
@@ -725,6 +752,7 @@ enum LocalizedKey {
     case premiumTesting
     case lockPremiumDocuments
     case openPremiumPreview
+    case openPremiumPlan
     case premiumProductIdentifier
     case comingSoon
     case signingRequirements
