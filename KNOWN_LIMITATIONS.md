@@ -20,14 +20,18 @@ For recurring user-facing replies, use `SUPPORT_RESPONSES.md`.
 ## Premium
 
 - Premium badges are visible, but premium access is not enforced yet.
+- Purchases are not available in the current version.
 - The current free documents are purchase agreement, receipt, and loan agreement.
 - The remaining document types are premium-marked but still available.
+- Settings and Premium preview explain the current 3 free / 9 planned premium split.
 - StoreKit product loading and purchase UI remain disabled until App Store Connect setup and testing are complete.
 - The expected lifetime product identifier is `com.lexwriter.premium.lifetime`.
 
 ## Testing and Release
 
 - Xcode field performance data was not available yet for live version `1.0.1` when checked.
+- Unit tests currently cover the premium-preview state and supported languages.
+- UI tests compile, but cannot run until the `LexWriterUITests` target application path is fixed in Xcode.
 - Some test runs may need to be repeated manually if Xcode reports tests as discovered but not run.
 - Before enabling premium enforcement, purchase, restore, pending purchase, cancelled purchase, and unavailable-product states must be tested.
 

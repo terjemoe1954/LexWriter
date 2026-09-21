@@ -97,6 +97,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Full tilgang"
         case (.norwegian, .allDocumentsOpenNow):
             return "Alle dokumenter er åpne nå"
+        case (.norwegian, .accessPlanSummary):
+            return "\(MonetizationPlan.freeDocuments.count) gratis maler og \(MonetizationPlan.premiumDocuments.count) planlagte premium-maler."
         case (.norwegian, .futurePricingNote):
             return "Alle dokumenter er tilgjengelige nå. Gratis- og premium-merkene viser hvordan en senere betalt versjon kan bli organisert."
         case (.norwegian, .freeTier):
@@ -111,6 +113,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Premium er planlagt"
         case (.norwegian, .premiumDescription):
             return "Premium gir tilgang til hele dokumentsamlingen og passer for brukere som trenger flere juridiske maler i samme app."
+        case (.norwegian, .premiumPreviewDescription):
+            return "Betalt premium er planlagt for en senere versjon. Alle dokumenter er åpne nå, og merkene viser hvordan samlingen kan organiseres fremover."
         case (.norwegian, .premiumIncludes):
             return "Premium inkluderer"
         case (.norwegian, .premiumPreviewIncludes):
@@ -125,6 +129,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Henter pris fra App Store..."
         case (.norwegian, .premiumNotAvailableYet):
             return "Kjøp er ikke tilgjengelig akkurat nå. Prøv igjen senere."
+        case (.norwegian, .premiumPurchasesUnavailableInThisVersion):
+            return "Kjøp er ikke tilgjengelig i denne versjonen"
         case (.norwegian, .premiumDisclaimer):
             return "Kjøp håndteres trygt av App Store. Dokumentene er utkast og bør vurderes av kvalifisert rådgiver ved kompliserte forhold."
         case (.norwegian, .selectedPremiumDocument):
@@ -317,6 +323,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Full access"
         case (.english, .allDocumentsOpenNow):
             return "All documents open now"
+        case (.english, .accessPlanSummary):
+            return "\(MonetizationPlan.freeDocuments.count) free templates and \(MonetizationPlan.premiumDocuments.count) planned premium templates."
         case (.english, .futurePricingNote):
             return "All documents are currently available. The free and premium labels show how a later paid version may be organized."
         case (.english, .freeTier):
@@ -331,6 +339,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Premium is planned"
         case (.english, .premiumDescription):
             return "Premium gives access to the full document collection for users who need more legal templates in one app."
+        case (.english, .premiumPreviewDescription):
+            return "Paid premium is planned for a later version. All documents are open now, and the labels show how the collection may be organized going forward."
         case (.english, .premiumIncludes):
             return "Premium includes"
         case (.english, .premiumPreviewIncludes):
@@ -345,6 +355,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Loading price from the App Store..."
         case (.english, .premiumNotAvailableYet):
             return "Purchases are not available right now. Please try again later."
+        case (.english, .premiumPurchasesUnavailableInThisVersion):
+            return "Purchases are not available in this version"
         case (.english, .premiumDisclaimer):
             return "Purchases are handled securely by the App Store. Documents are drafts and should be reviewed by a qualified adviser in complex situations."
         case (.english, .selectedPremiumDocument):
@@ -537,6 +549,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "เข้าถึงเต็มรูปแบบ"
         case (.thai, .allDocumentsOpenNow):
             return "เอกสารทั้งหมดเปิดใช้งานอยู่ตอนนี้"
+        case (.thai, .accessPlanSummary):
+            return "มีเทมเพลตฟรี \(MonetizationPlan.freeDocuments.count) รายการ และเทมเพลตพรีเมียมที่วางแผนไว้ \(MonetizationPlan.premiumDocuments.count) รายการ"
         case (.thai, .futurePricingNote):
             return "ขณะนี้เอกสารทั้งหมดใช้งานได้ ป้ายฟรีและพรีเมียมแสดงว่าเวอร์ชันแบบชำระเงินในอนาคตอาจจัดกลุ่มอย่างไร"
         case (.thai, .freeTier):
@@ -551,6 +565,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "มีแผนเพิ่มพรีเมียม"
         case (.thai, .premiumDescription):
             return "พรีเมียมให้สิทธิ์เข้าถึงชุดเอกสารทั้งหมดสำหรับผู้ใช้ที่ต้องการเทมเพลตกฎหมายมากขึ้นในแอปเดียว"
+        case (.thai, .premiumPreviewDescription):
+            return "มีแผนเพิ่มพรีเมียมแบบชำระเงินในเวอร์ชันถัดไป ตอนนี้เอกสารทั้งหมดเปิดใช้งานอยู่ และป้ายกำกับแสดงว่าอาจจัดกลุ่มชุดเอกสารอย่างไรในอนาคต"
         case (.thai, .premiumIncludes):
             return "พรีเมียมประกอบด้วย"
         case (.thai, .premiumPreviewIncludes):
@@ -565,6 +581,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "กำลังโหลดราคาจาก App Store..."
         case (.thai, .premiumNotAvailableYet):
             return "ยังไม่สามารถซื้อได้ในขณะนี้ โปรดลองอีกครั้งภายหลัง"
+        case (.thai, .premiumPurchasesUnavailableInThisVersion):
+            return "ยังไม่สามารถซื้อได้ในเวอร์ชันนี้"
         case (.thai, .premiumDisclaimer):
             return "การซื้อดำเนินการอย่างปลอดภัยผ่าน App Store เอกสารเป็นร่างและควรให้ผู้เชี่ยวชาญตรวจทานเมื่อมีประเด็นซับซ้อน"
         case (.thai, .selectedPremiumDocument):
@@ -727,6 +745,7 @@ enum LocalizedKey {
     case currentEdition
     case fullEdition
     case allDocumentsOpenNow
+    case accessPlanSummary
     case futurePricingNote
     case freeTier
     case premiumTier
@@ -734,6 +753,7 @@ enum LocalizedKey {
     case premiumHeadline
     case premiumPreviewHeadline
     case premiumDescription
+    case premiumPreviewDescription
     case premiumIncludes
     case premiumPreviewIncludes
     case unlockPremiumLifetime
@@ -741,6 +761,7 @@ enum LocalizedKey {
     case premiumUnlocked
     case premiumLoadingProducts
     case premiumNotAvailableYet
+    case premiumPurchasesUnavailableInThisVersion
     case premiumDisclaimer
     case selectedPremiumDocument
     case premiumRequiredShort

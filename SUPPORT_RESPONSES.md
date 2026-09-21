@@ -26,11 +26,11 @@ LexWriter does not collect personal data or track users. Information entered in 
 
 Norwegian:
 
-Premium-merker kan være synlige i appen, men premium-tilgang håndheves ikke nå. Alle dokumenter er tilgjengelige i dagens versjon. En senere betalt versjon kan bruke premium-inndelingen etter at App Store Connect-produktet er satt opp og testet.
+Premium-merker kan være synlige i appen, men premium-tilgang håndheves ikke nå, og kjøp er ikke tilgjengelig i denne versjonen. Alle dokumenter er tilgjengelige i dagens versjon. En senere betalt versjon kan bruke premium-inndelingen etter at App Store Connect-produktet er satt opp og testet.
 
 English:
 
-Premium labels may be visible in the app, but premium access is not currently enforced. All documents remain available in the current version. A future paid version may use the premium split after App Store Connect product setup and testing are complete.
+Premium labels may be visible in the app, but premium access is not currently enforced, and purchases are not available in this version. All documents remain available in the current version. A future paid version may use the premium split after App Store Connect product setup and testing are complete.
 
 ## Saving Documents
 
@@ -56,8 +56,8 @@ If printing or PDF export does not work as expected, try updating iOS, restartin
 
 Norwegian:
 
-LexWriter viser tydelig juridisk avgrensning i appen: Dokumentene er maler og utkast, ikke juridisk rådgivning. Appen har også personverninformasjon i Innstillinger og samler ikke inn persondata eller sporer brukere.
+LexWriter viser tydelig juridisk avgrensning i appen: Dokumentene er maler og utkast, ikke juridisk rådgivning. Appen har også personverninformasjon i Innstillinger og samler ikke inn persondata eller sporer brukere. Dersom premiumvisningen er synlig, er den en forberedelse til en senere betalt versjon; kjøp og premium-låsing er ikke aktivert i denne versjonen.
 
 English:
 
-LexWriter displays clear legal-scope messaging in the app: documents are templates and drafts, not legal advice. The app also includes privacy information in Settings and does not collect personal data or track users.
+LexWriter displays clear legal-scope messaging in the app: documents are templates and drafts, not legal advice. The app also includes privacy information in Settings and does not collect personal data or track users. If the Premium preview is visible, it is preparation for a later paid version; purchases and premium locking are not active in this version.

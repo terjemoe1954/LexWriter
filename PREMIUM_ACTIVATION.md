@@ -9,6 +9,9 @@ Use this only when the paid version is ready to test or submit.
 - StoreKit product loading is disabled.
 - Premium enforcement is disabled.
 - Premium preview is available from Settings.
+- Settings shows the current split as 3 free templates and 9 planned premium templates.
+- Premium preview copy states that paid premium is planned later and purchases are not available in this version.
+- Current test baseline: unit tests pass and build-for-testing succeeds. UI tests compile but cannot run until the `LexWriterUITests` target application path is fixed in Xcode.
 
 ## Product Identifier
 
@@ -46,6 +49,8 @@ Premium-marked documents:
 - Test the product in StoreKit local testing or sandbox.
 - Confirm restore purchases works.
 - Confirm cancelled, pending, unavailable, and offline product-loading states are acceptable.
+- Re-run unit tests, app build, and build-for-testing.
+- Fix or recreate the UI test target if UI automation should be used as a release gate.
 
 ## Activation Flags
 
@@ -77,3 +82,10 @@ Prefer two separate releases:
 2. Premium-enforcement release: StoreKit enabled and premium documents locked after sandbox/TestFlight validation.
 
 This keeps the risk lower if App Store Connect product setup or restore behavior needs adjustment.
+
+## Current Validation Notes
+
+- `PurchaseManager` supports injectable `UserDefaults` for isolated tests.
+- Premium preview localization is covered for every supported app language.
+- StoreKit purchase and restore buttons stay hidden while `isPremiumStoreEnabled` is `false`.
+- The old "coming later" wording is intentionally kept only as a general localization string; the active premium preview now uses more specific copy.

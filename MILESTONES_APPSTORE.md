@@ -12,8 +12,9 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - The original pre-launch readiness work is now considered complete enough for the first public release.
 - The app already contains StoreKit plumbing, a premium screen, and document access tiers, but premium locking is currently disabled in code.
 - Premium badges are now visible in the app, while all documents remain available.
-- Settings now includes access, premium preview, and privacy information.
+- Settings now includes access, premium preview, privacy information, and a count summary for the current free/premium-marked split.
 - The user guide and home screen now explain that documents are templates and drafts, not legal advice.
+- Premium copy now clearly explains that paid premium is planned for a later version and that purchases are not available in this version.
 - The next phase should combine post-launch monitoring, product polish, and premium-readiness work before submitting a paid/premium update.
 
 ## Completed in This Post-Launch Pass
@@ -21,14 +22,17 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Enabled visible `Gratis` / `Premium` document badges without enabling premium locks.
 - Split monetization flags into clear responsibilities: badges, StoreKit availability, and premium enforcement.
 - Added tests that guard the current free/premium document split and ensure premium enforcement stays off for now.
-- Made `PremiumView` safe for the current pre-purchase phase: it shows `Kommer senere`, hides purchase controls while StoreKit is disabled, and uses the App Store purchase disclaimer only when purchases are enabled.
+- Made `PremiumView` safe for the current pre-purchase phase: it explains that paid premium is planned later, says purchases are not available in this version, hides purchase controls while StoreKit is disabled, and uses the App Store purchase disclaimer only when purchases are enabled.
 - Added a premium preview entry point in Settings.
-- Added Settings sections for access status and privacy.
+- Added Settings sections for access status, free/premium template counts, premium preview, and privacy.
 - Added user guide text explaining free/premium badges.
 - Added a home-screen legal note that documents are templates and drafts, not legal advice.
 - Improved document card layout so long titles and badges fit better on small screens.
 - Hardened `PurchaseManager` around product loading, restore state, repeated restore taps, and unverified transaction errors.
+- Made `PurchaseManager` testable with injectable `UserDefaults` while keeping `.standard` as the app default.
 - Updated SwiftUI previews for `HomeView`, `SettingsView`, and `PremiumView` so each has the required `PurchaseManager` environment.
+- Updated unit and UI test expectations for the current premium-preview wording.
+- Current validation baseline: app build succeeds, build-for-testing succeeds, and unit tests pass. UI tests compile but cannot run until the Xcode `LexWriterUITests` target application path is fixed.
 - Added `RELEASE_CHECKLIST.md` for future App Store submissions.
 - Added `PREMIUM_ACTIVATION.md` with the exact preconditions and flags for enabling purchases later.
 - Added `KNOWN_LIMITATIONS.md` for support replies, App Store review notes, and release planning.
@@ -56,7 +60,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Verify that the App Store Connect in-app purchase product matches the app product id: `com.lexwriter.premium.lifetime`.
 - Decide exactly which documents remain free and which are premium before turning on premium enforcement.
 - Follow `PREMIUM_ACTIVATION.md` when enabling StoreKit or premium enforcement.
-- Improve the premium screen copy so it explains value clearly without overstating legal guarantees.
+- Keep the premium screen copy aligned with the current activation phase: planned premium now, purchase/restore value copy only when StoreKit is enabled.
 - Test purchase, restore purchase, pending purchase, cancelled purchase, and offline product-loading states with StoreKit testing before release.
 - Only enable premium locking after the purchase product, pricing, App Store metadata, and smoke tests are ready.
 
@@ -101,8 +105,9 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 4. Test the lifetime unlock product in StoreKit and App Store Connect sandbox.
 5. Write a short `1.1` candidate list from real issues first, then premium-readiness polish.
 6. Add or update validation tests for the document types with the highest legal or UX risk.
-7. Prepare updated App Store metadata and screenshots for the paid/premium version.
-8. Enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed.
+7. Fix the `LexWriterUITests` target application path if UI automation should be part of the release gate.
+8. Prepare updated App Store metadata and screenshots for the paid/premium version.
+9. Enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed.
 
 ## Open Questions
 

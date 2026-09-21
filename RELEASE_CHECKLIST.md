@@ -13,6 +13,8 @@ Use this checklist before submitting a new App Store build.
 
 - Launch the app on a small iPhone, large iPhone, and iPad.
 - Check home screen layout, document badges, legal note, Settings, User Guide, and Premium preview.
+- Confirm Settings shows the current access status, free/premium template counts, and the planned-premium entry point.
+- Confirm Premium preview says purchases are not available in this version while StoreKit is disabled.
 - Create at least one free document and one premium-marked document.
 - Preview, print, and save PDF from a representative document.
 - Switch language between Norwegian and English and confirm the main labels update.
@@ -20,6 +22,7 @@ Use this checklist before submitting a new App Store build.
 ## Premium Readiness
 
 - Review `PREMIUM_ACTIVATION.md`.
+- For a premium-preparation release, confirm StoreKit loading, purchase buttons, restore buttons, and premium enforcement are still disabled.
 - Confirm `com.lexwriter.premium.lifetime` exists in App Store Connect before enabling purchases.
 - Confirm price, localization, review screenshot, and product description.
 - Test product loading, purchase, restore, cancelled purchase, pending purchase, and offline product loading.
@@ -47,6 +50,7 @@ Use this checklist before submitting a new App Store build.
 
 - Build the app in Xcode.
 - Build with test targets.
-- Run available unit/UI tests when Xcode test runner is working.
+- Run unit tests.
+- Run UI tests only after the `LexWriterUITests` target application path is fixed; until then, confirm build-for-testing succeeds.
 - Archive the exact build intended for submission.
 - Submit to TestFlight first for a final smoke test.

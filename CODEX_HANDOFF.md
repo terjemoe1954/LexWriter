@@ -1,0 +1,76 @@
+# LexWriter Codex Handoff
+
+Last updated: 2026-09-21
+
+## Current Goal
+
+LexWriter is live on the App Store. The current workstream is preparing a later paid/premium version while keeping the live app stable, clear, and fully usable.
+
+## Current Premium State
+
+- Premium badges are visible.
+- All documents remain available.
+- StoreKit product loading is disabled.
+- Purchase and restore buttons are hidden.
+- Premium enforcement is disabled.
+- Settings explains that all documents are open now.
+- Settings shows 3 free templates and 9 planned premium templates.
+- Premium preview says paid premium is planned later and purchases are not available in this version.
+
+## Current Free/Premium Split
+
+Free:
+
+- Purchase Agreement / Kjøpskontrakt
+- Receipt / Kvittering
+- Loan Agreement / Låneavtale
+
+Premium-marked but still available:
+
+- Will / Testament
+- Contract / Kontrakt
+- Power of Attorney / Fullmakt
+- Rental Agreement / Husleiekontrakt
+- Cohabitation Agreement / Samboeravtale
+- Debt Instrument / Gjeldsbrev
+- Termination of Tenancy / Oppsigelse av leieforhold
+- Employment Agreement / Arbeidsavtale
+- NDA
+
+## Important Files
+
+- `Config/DocumentCatalog.swift`: premium flags and document split.
+- `Views/Premium/PremiumView.swift`: premium preview and future purchase UI.
+- `Views/Settings/SettingsView.swift`: access status, premium plan entry point, privacy/app info.
+- `Services/PurchaseManager.swift`: StoreKit plumbing and premium access state.
+- `Localization/AppLocalization.swift`: shared localized app text.
+- `LexWriterTests/LexWriterTests.swift`: unit coverage for premium-preview state.
+- `LexWriterUITests/LexWriterUITests.swift`: UI test expectations updated, but not runnable yet.
+
+## Validation Baseline
+
+- Unit tests: 15/15 passed.
+- Build for testing: succeeded.
+- UI tests compile, but cannot run until `LexWriterUITests` target application path is fixed in Xcode.
+- Xcode still shows one yellow project warning: `Update to recommended settings`. Leave it for a separate commit.
+
+## Known Blocker
+
+`LexWriterUITests` cannot run because Xcode reports:
+
+`UITargetAppPath should be provided`
+
+The UI test target needs to be connected to the `LexWriter` app target, or recreated with the correct target application.
+
+## Recommended Next Steps
+
+1. Commit/push the current premium-preview and documentation updates.
+2. Decide whether to fix or recreate the UI test target now or leave it for a separate technical cleanup.
+3. Continue product polish before enabling StoreKit.
+4. Use `PREMIUM_ACTIVATION.md` before changing `isPremiumStoreEnabled` or `enforcesPremiumAccess`.
+
+## Safe Instruction For A New Codex Session
+
+Start with:
+
+`Read CODEX_HANDOFF.md, MILESTONES_APPSTORE.md, PREMIUM_ACTIVATION.md, and RELEASE_CHECKLIST.md. Do not enable StoreKit or premium locking. Continue from the premium-preparation workstream.`

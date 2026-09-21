@@ -57,7 +57,7 @@ struct PremiumView: View {
                 .foregroundStyle(Color.white.opacity(0.82))
 
             if !MonetizationPlan.isPremiumStoreEnabled {
-                Text(language.text(.comingSoon))
+                Text(language.text(.premiumPurchasesUnavailableInThisVersion))
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(Color(red: 0.95, green: 0.89, blue: 0.75))
             } else if let premiumProduct = purchaseManager.premiumProduct {
@@ -226,6 +226,10 @@ struct PremiumView: View {
     private var heroMessage: String {
         if MonetizationPlan.isPremiumStoreEnabled, let highlightedDocument {
             return language.premiumMessage(for: highlightedDocument)
+        }
+
+        if !MonetizationPlan.isPremiumStoreEnabled {
+            return language.text(.premiumPreviewDescription)
         }
 
         return language.text(.premiumDescription)

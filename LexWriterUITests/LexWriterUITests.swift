@@ -43,6 +43,9 @@ final class LexWriterUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Språk"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.staticTexts["Utseende"].exists)
         XCTAssertTrue(app.staticTexts["Tilgang"].exists)
+        XCTAssertTrue(app.staticTexts["Alle dokumenter er åpne nå"].exists)
+        XCTAssertTrue(app.staticTexts["3 gratis maler og 9 planlagte premium-maler."].exists)
+        XCTAssertTrue(app.buttons["Se planlagt premium"].exists)
         XCTAssertTrue(app.staticTexts["Hjelp"].exists)
         XCTAssertTrue(app.staticTexts["Personvern"].exists)
         XCTAssertTrue(app.staticTexts["Appinformasjon"].exists)
@@ -62,6 +65,9 @@ final class LexWriterUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Language"].exists)
         XCTAssertTrue(app.staticTexts["Appearance"].exists)
         XCTAssertTrue(app.staticTexts["Access"].exists)
+        XCTAssertTrue(app.staticTexts["All documents open now"].exists)
+        XCTAssertTrue(app.staticTexts["3 free templates and 9 planned premium templates."].exists)
+        XCTAssertTrue(app.buttons["View planned premium"].exists)
         XCTAssertTrue(app.staticTexts["Help"].exists)
         XCTAssertTrue(app.staticTexts["Privacy"].exists)
         XCTAssertTrue(app.staticTexts["App information"].exists)
@@ -76,7 +82,9 @@ final class LexWriterUITests: XCTestCase {
         app.buttons["openPremiumPreviewButton"].tap()
 
         XCTAssertTrue(app.navigationBars["LexWriter Premium"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["Kommer senere"].exists)
+        XCTAssertTrue(app.staticTexts["Premium er planlagt"].exists)
+        XCTAssertTrue(app.staticTexts["Planlagt premiumsamling"].exists)
+        XCTAssertTrue(app.staticTexts["Kjøp er ikke tilgjengelig i denne versjonen"].exists)
         XCTAssertTrue(app.buttons["closePremiumButton"].exists)
     }
 
@@ -90,6 +98,7 @@ final class LexWriterUITests: XCTestCase {
 
         XCTAssertTrue(app.navigationBars["Brukerveiledning"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.staticTexts["Gratis og premium"].exists)
+        XCTAssertTrue(app.staticTexts["Dokumenter kan være merket som gratis eller premium. I denne utgaven er alle dokumenter fortsatt tilgjengelige, mens premium-inndelingen er forberedt for en senere betalt versjon."].exists)
     }
 
     @MainActor

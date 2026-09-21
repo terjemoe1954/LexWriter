@@ -40,6 +40,11 @@ struct SettingsView: View {
                     Text(currentEditionText)
                 }
 
+                Text(language.text(.accessPlanSummary))
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
                 Text(language.text(.futurePricingNote))
                     .font(.footnote)
                     .foregroundStyle(.secondary)

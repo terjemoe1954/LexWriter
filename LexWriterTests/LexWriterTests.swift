@@ -42,6 +42,16 @@ struct LexWriterTests {
         #expect(AppLanguage.english.text(.premiumPreviewHeadline) == "Premium is planned")
     }
 
+    @Test func premiumPreviewDescriptionExplainsPaidPremiumIsLater() async throws {
+        #expect(AppLanguage.norwegian.text(.premiumPreviewDescription).contains("Betalt premium er planlagt"))
+        #expect(AppLanguage.english.text(.premiumPreviewDescription).contains("Paid premium is planned"))
+    }
+
+    @Test func premiumPreviewExplainsPurchasesAreUnavailableInThisVersion() async throws {
+        #expect(AppLanguage.norwegian.text(.premiumPurchasesUnavailableInThisVersion) == "Kjøp er ikke tilgjengelig i denne versjonen")
+        #expect(AppLanguage.english.text(.premiumPurchasesUnavailableInThisVersion) == "Purchases are not available in this version")
+    }
+
     @Test func premiumPreviewIncludesExplainsCollectionIsPlanned() async throws {
         #expect(AppLanguage.norwegian.text(.premiumPreviewIncludes) == "Planlagt premiumsamling")
         #expect(AppLanguage.english.text(.premiumPreviewIncludes) == "Planned premium collection")
@@ -50,6 +60,29 @@ struct LexWriterTests {
     @Test func settingsPremiumButtonExplainsPlannedPremium() async throws {
         #expect(AppLanguage.norwegian.text(.openPremiumPlan) == "Se planlagt premium")
         #expect(AppLanguage.english.text(.openPremiumPlan) == "View planned premium")
+    }
+
+    @Test func accessPlanSummaryShowsFreeAndPremiumCounts() async throws {
+        #expect(AppLanguage.norwegian.text(.accessPlanSummary) == "3 gratis maler og 9 planlagte premium-maler.")
+        #expect(AppLanguage.english.text(.accessPlanSummary) == "3 free templates and 9 planned premium templates.")
+    }
+
+    @Test func premiumPreviewLocalizationExistsForEveryLanguage() async throws {
+        let keys: [LocalizedKey] = [
+            .allDocumentsOpenNow,
+            .accessPlanSummary,
+            .premiumPreviewHeadline,
+            .premiumPreviewDescription,
+            .premiumPurchasesUnavailableInThisVersion,
+            .premiumPreviewIncludes,
+            .openPremiumPlan
+        ]
+
+        for language in AppLanguage.allCases {
+            for key in keys {
+                #expect(!language.text(key).isEmpty)
+            }
+        }
     }
 
     @Test func purchaseManagerUnlocksDocumentsByAccessTier() async throws {
