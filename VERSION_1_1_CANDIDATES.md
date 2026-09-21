@@ -32,6 +32,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added first premium-marked validation coverage for power of attorney.
 - Added premium-marked validation coverage for debt instrument.
 - Added premium-marked validation coverage for employment agreement.
+- Added premium-marked validation coverage for NDA.
 
 ## Technical Candidates
 

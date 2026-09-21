@@ -303,6 +303,32 @@ struct LexWriterTests {
         #expect(bodyText.contains("600 000 kroner per år"))
     }
 
+    @Test func ndaValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(NDAFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(NDAFormData().warnings(in: .norwegian).count == 4)
+
+        var form = NDAFormData()
+        form.disclosingParty = contractParty(name: "Informasjonseier AS")
+        form.receivingParty = contractParty(name: "Mottaker AS")
+        form.confidentialInfo = "Produktplaner, kundelister og teknisk dokumentasjon."
+        form.purpose = "Vurdere mulig samarbeid."
+        form.obligations = "Informasjonen skal holdes hemmelig og bare brukes til avtalt formål."
+        form.duration = "Tre år fra signering."
+        form.exclusions = "Informasjon som allerede er offentlig kjent er unntatt."
+        form.returnMaterials = "Materiale skal returneres eller slettes på forespørsel."
+        form.governingLaw = "Norsk rett."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Informasjonseier AS"))
+        #expect(bodyText.contains("Mottaker AS"))
+        #expect(bodyText.contains("Produktplaner, kundelister og teknisk dokumentasjon."))
+        #expect(bodyText.contains("Vurdere mulig samarbeid."))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"
