@@ -39,11 +39,13 @@ struct SettingsView: View {
                 LabeledContent(language.text(.currentEdition)) {
                     Text(currentEditionText)
                 }
+                .accessibilityIdentifier("settings.currentEdition")
 
                 Text(language.text(.accessPlanSummary))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("settings.accessPlanSummary")
 
                 Text(language.text(.futurePricingNote))
                     .font(.footnote)
@@ -64,6 +66,7 @@ struct SettingsView: View {
                 } label: {
                     Label(language.text(.userGuide), systemImage: "book.pages.fill")
                 }
+                .accessibilityIdentifier("settings.userGuideLink")
             }
 
             Section(language.text(.privacy)) {
@@ -71,18 +74,22 @@ struct SettingsView: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("settings.privacySummary")
             }
 
             Section(language.text(.appInfo)) {
                 LabeledContent(language.text(.version)) {
                     Text(AppMetadata.versionString)
                 }
+                .accessibilityIdentifier("settings.version")
                 LabeledContent(language.text(.build)) {
                     Text(AppMetadata.buildString)
                 }
+                .accessibilityIdentifier("settings.build")
                 LabeledContent(language.text(.versionAndBuild)) {
                     Text(AppMetadata.combinedVersionString)
                 }
+                .accessibilityIdentifier("settings.versionAndBuild")
             }
         }
         .navigationTitle(language.text(.settings))

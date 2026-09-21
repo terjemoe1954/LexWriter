@@ -57,13 +57,12 @@ final class LexWriterUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Språk"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.staticTexts["Utseende"].exists)
         XCTAssertTrue(app.staticTexts["Tilgang"].exists)
-        XCTAssertTrue(app.staticTexts["3 gratis maler og 9 planlagte premium-maler."].exists)
+        XCTAssertTrue(app.staticTexts["settings.accessPlanSummary"].exists)
         XCTAssertTrue(app.buttons["Se planlagt premium"].exists)
-        XCTAssertTrue(app.staticTexts["Hjelp"].exists)
-        XCTAssertTrue(scrollUntilVisible(app.staticTexts["Personvern"], in: app).exists)
-        XCTAssertTrue(scrollUntilVisible(app.staticTexts["Appinformasjon"], in: app).exists)
-        XCTAssertTrue(app.staticTexts["Versjon"].exists)
-        XCTAssertTrue(app.staticTexts["Build"].exists)
+        XCTAssertTrue(app.buttons["settings.userGuideLink"].exists)
+        XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.privacySummary"], in: app).exists)
+        XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.version"], in: app).exists)
+        XCTAssertTrue(app.staticTexts["settings.build"].exists)
     }
 
     @MainActor
@@ -77,11 +76,10 @@ final class LexWriterUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Language"].exists)
         XCTAssertTrue(app.staticTexts["Appearance"].exists)
         XCTAssertTrue(app.staticTexts["Access"].exists)
-        XCTAssertTrue(app.staticTexts["3 free templates and 9 planned premium templates."].exists)
+        XCTAssertTrue(app.staticTexts["settings.accessPlanSummary"].exists)
         XCTAssertTrue(app.buttons["View planned premium"].exists)
-        XCTAssertTrue(app.staticTexts["Help"].exists)
-        XCTAssertTrue(scrollUntilVisible(app.staticTexts["Privacy"], in: app).exists)
-        XCTAssertTrue(scrollUntilVisible(app.staticTexts["App information"], in: app).exists)
+        XCTAssertTrue(app.buttons["settings.userGuideLink"].exists)
+        XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.privacySummary"], in: app).exists)
     }
 
     @MainActor
