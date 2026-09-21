@@ -13,7 +13,9 @@ import Testing
 @MainActor
 struct LexWriterTests {
     @Test func monetizationPlanShowsBadgesWithoutEnforcingPremium() async throws {
+        #expect(MonetizationPlan.premiumLockingDefaultsKey == "premiumLockingEnabled")
         #expect(MonetizationPlan.showsPremiumBadges)
+        #expect(!MonetizationPlan.showsTestingControls)
         #expect(!MonetizationPlan.isPremiumStoreEnabled)
         #expect(!MonetizationPlan.enforcesPremiumAccess)
         #expect(!MonetizationPlan.isPremiumEnforced)
@@ -75,6 +77,50 @@ struct LexWriterTests {
         for language in AppLanguage.allCases {
             for appearance in AppAppearance.allCases {
                 #expect(!language.text(appearance.localizedKey).isEmpty)
+            }
+        }
+    }
+
+    @Test func settingsLocalizationExistsForEveryLanguage() async throws {
+        let keys: [LocalizedKey] = [
+            .settings,
+            .language,
+            .appearance,
+            .accessPlan,
+            .currentEdition,
+            .allDocumentsOpenNow,
+            .help,
+            .userGuide,
+            .privacy,
+            .appInfo,
+            .version,
+            .build,
+            .versionAndBuild
+        ]
+
+        for language in AppLanguage.allCases {
+            for key in keys {
+                #expect(!language.text(key).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+        }
+    }
+
+    @Test func homeLocalizationExistsForEveryLanguage() async throws {
+        let keys: [LocalizedKey] = [
+            .appTitle,
+            .heroTitle,
+            .heroSubtitle,
+            .homeLegalNote,
+            .documents,
+            .freeDocumentsTitle,
+            .moreDocumentTemplatesTitle,
+            .plannedPremiumTemplatesTitle,
+            .settings
+        ]
+
+        for language in AppLanguage.allCases {
+            for key in keys {
+                #expect(!language.text(key).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }
     }
@@ -422,7 +468,20 @@ struct LexWriterTests {
             .premiumPreviewIncludes,
             .futurePricingNote,
             .openPremiumPlan,
-            .premiumProductIdentifier
+            .premiumProductIdentifier,
+            .premiumTitle,
+            .unlockPremiumLifetime,
+            .restorePurchases,
+            .premiumUnlocked,
+            .premiumLoadingProducts,
+            .premiumNotAvailableYet,
+            .premiumDisclaimer,
+            .selectedPremiumDocument,
+            .premiumBenefitsTitle,
+            .premiumBenefitOne,
+            .premiumBenefitTwo,
+            .premiumBenefitThree,
+            .close
         ]
 
         for language in AppLanguage.allCases {
