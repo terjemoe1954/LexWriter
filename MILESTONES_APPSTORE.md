@@ -40,6 +40,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added `KNOWN_LIMITATIONS.md` for support replies, App Store review notes, and release planning.
 - Added `APPSTORE_SUBMISSION_NOTES.md` as a working draft for release notes, review notes, and screenshots.
 - Added `SUPPORT_RESPONSES.md` with draft replies for legal scope, privacy, premium, saving, and export questions.
+- Added `VERSION_1_1_CANDIDATES.md` as the working shortlist for the first post-launch update.
 - Checked Apple field-performance tooling for `com.terjemoe.LexWriter` versions `1.0.1` and `1.0`; versions were listed initially, but hangs, launch, and disk-write datasets returned no available data. Crash tooling did not resolve the product and should be checked manually in Xcode Organizer or App Store Connect.
 
 ## Milestone 1: First Live Signals
@@ -105,7 +106,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 2. Do a live-build smoke test on device for language selection, document creation, preview, printing, settings, and current premium entry points.
 3. Decide the free-versus-premium document split and the initial lifetime price.
 4. Test the lifetime unlock product in StoreKit and App Store Connect sandbox.
-5. Write a short `1.1` candidate list from real issues first, then premium-readiness polish.
+5. Maintain `VERSION_1_1_CANDIDATES.md` from real issues first, then premium-readiness polish.
 6. Add or update validation tests for the document types with the highest legal or UX risk.
 7. Fix the `LexWriterUITests` target application path if UI automation should be part of the release gate.
 8. Prepare updated App Store metadata and screenshots for the paid/premium version.

@@ -47,6 +47,7 @@ Premium-marked but still available:
 - `Localization/AppLocalization.swift`: shared localized app text.
 - `LexWriterTests/LexWriterTests.swift`: unit coverage for premium-preview state.
 - `LexWriterUITests/LexWriterUITests.swift`: UI test expectations updated, but not runnable yet.
+- `VERSION_1_1_CANDIDATES.md`: working shortlist for the first post-launch update.
 
 ## Validation Baseline
 
@@ -67,7 +68,7 @@ The UI test target needs to be connected to the `LexWriter` app target, or recre
 ## Recommended Next Steps
 
 1. Decide whether to fix or recreate the UI test target now or leave it for a separate technical cleanup.
-2. Continue product polish before enabling StoreKit.
+2. Continue product polish using `VERSION_1_1_CANDIDATES.md` as the working shortlist.
 3. Use `PREMIUM_ACTIVATION.md` before changing `isPremiumStoreEnabled` or `enforcesPremiumAccess`.
 4. Check App Store Connect or Xcode Organizer manually for crashes until Apple tooling returns field data.
 
