@@ -1,7 +1,7 @@
 //
 //  LexWriterApp.swift
 //  LexWriter
-//
+//  
 //  Created by Terje Moe on 28/08/2026.
 //
 
