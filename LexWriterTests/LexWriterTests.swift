@@ -34,6 +34,19 @@ struct LexWriterTests {
         #expect(MonetizationPlan.freeDocuments.count + MonetizationPlan.premiumDocuments.count == AppDocument.allCases.count)
     }
 
+    @Test func monetizationPlanMatchesDocumentAccessTiers() async throws {
+        for document in AppDocument.allCases {
+            switch document.accessTier {
+            case .free:
+                #expect(MonetizationPlan.freeDocuments.contains(document))
+                #expect(!MonetizationPlan.premiumDocuments.contains(document))
+            case .premium:
+                #expect(MonetizationPlan.premiumDocuments.contains(document))
+                #expect(!MonetizationPlan.freeDocuments.contains(document))
+            }
+        }
+    }
+
     @Test func monetizationPlanReturnsLocalizedBadgeText() async throws {
         #expect(MonetizationPlan.badgeText(for: .purchaseAgreement, language: .norwegian) == "Gratis")
         #expect(MonetizationPlan.badgeText(for: .testament, language: .norwegian) == "Premium")
@@ -48,6 +61,58 @@ struct LexWriterTests {
         #expect(AppLanguage.thai.displayName == "ไทย")
     }
 
+    @Test func homeLegalNoteKeepsLegalScopeClearInEveryLanguage() async throws {
+        #expect(AppLanguage.norwegian.text(.homeLegalNote) == "Dokumentene er maler og utkast, ikke juridisk rådgivning.")
+        #expect(AppLanguage.english.text(.homeLegalNote) == "Documents are templates and drafts, not legal advice.")
+        #expect(AppLanguage.thai.text(.homeLegalNote) == "เอกสารเป็นเทมเพลตและร่าง ไม่ใช่คำปรึกษาทางกฎหมาย")
+    }
+
+    @Test func privacySummaryKeepsLocalOnlyDataScopeClearInEveryLanguage() async throws {
+        #expect(AppLanguage.norwegian.text(.privacySummary).contains("samler ikke inn persondata"))
+        #expect(AppLanguage.norwegian.text(.privacySummary).contains("sporer deg"))
+        #expect(AppLanguage.english.text(.privacySummary).contains("does not collect personal data"))
+        #expect(AppLanguage.english.text(.privacySummary).contains("track you"))
+        #expect(AppLanguage.thai.text(.privacySummary).contains("ไม่เก็บรวบรวมข้อมูลส่วนบุคคล"))
+        #expect(AppLanguage.thai.text(.privacySummary).contains("ไม่ติดตามคุณ"))
+    }
+
+    @Test func userGuideKeepsAccessPrivacyAndLegalScopeClearInEveryLanguage() async throws {
+        #expect(AppLanguage.norwegian.guideText(.accessBody).contains("alle dokumenter fortsatt tilgjengelige"))
+        #expect(AppLanguage.english.guideText(.accessBody).contains("all documents remain available"))
+        #expect(AppLanguage.thai.guideText(.accessBody).contains("เอกสารทั้งหมดยังคงใช้งานได้"))
+
+        #expect(AppLanguage.norwegian.guideText(.privacyBody).contains("uten at sensitive personopplysninger må lagres permanent"))
+        #expect(AppLanguage.english.guideText(.privacyBody).contains("without requiring permanent storage of sensitive personal data"))
+        #expect(AppLanguage.thai.guideText(.privacyBody).contains("ไม่จำเป็นต้องจัดเก็บข้อมูลส่วนบุคคลที่อ่อนไหวอย่างถาวร"))
+
+        #expect(AppLanguage.norwegian.guideText(.importantBody).contains("gjennomgås av advokat eller annen kvalifisert rådgiver"))
+        #expect(AppLanguage.english.guideText(.importantBody).contains("reviewed by a lawyer or other qualified adviser"))
+        #expect(AppLanguage.thai.guideText(.importantBody).contains("ควรให้ทนายหรือผู้เชี่ยวชาญที่เหมาะสมตรวจทาน"))
+    }
+
+    @Test func userGuideLocalizationExistsForEveryLanguage() async throws {
+        let keys: [UserGuideLocalizedKey] = [
+            .gettingStartedTitle,
+            .gettingStartedBody,
+            .documentsTitle,
+            .documentsBody,
+            .accessTitle,
+            .accessBody,
+            .printingTitle,
+            .printingBody,
+            .privacyTitle,
+            .privacyBody,
+            .importantTitle,
+            .importantBody
+        ]
+
+        for language in AppLanguage.allCases {
+            for key in keys {
+                #expect(!language.guideText(key).isEmpty)
+            }
+        }
+    }
+
     @Test func monetizationPlanReturnsExpectedBadgeTextForEveryDocument() async throws {
         for language in AppLanguage.allCases {
             for document in MonetizationPlan.freeDocuments {
@@ -60,49 +125,104 @@ struct LexWriterTests {
         }
     }
 
+    @Test func documentCatalogProvidesTitlesAndSubtitlesForEveryLanguage() async throws {
+        for language in AppLanguage.allCases {
+            for document in AppDocument.allCases {
+                #expect(!document.title(for: language).isEmpty)
+                #expect(!document.subtitle(for: language).isEmpty)
+            }
+        }
+    }
+
+    @Test func documentCatalogProvidesDistinctIconsForEveryDocument() async throws {
+        let iconNames = AppDocument.allCases.map(\.iconName)
+
+        #expect(iconNames.allSatisfy { !$0.isEmpty })
+        #expect(Set(iconNames).count == AppDocument.allCases.count)
+    }
+
+    @Test func documentHTMLPreviewsKeepPrintableSignatureStructure() async throws {
+        let htmlDocuments = [
+            PurchaseAgreementFormData().document.htmlDocument(in: .norwegian),
+            ReceiptFormData().document.htmlDocument(in: .norwegian),
+            LoanAgreementFormData().document.htmlDocument(in: .norwegian),
+            TestamentFormData().generatedDocument.htmlDocument,
+            ContractFormData().document.htmlDocument(in: .norwegian),
+            PowerOfAttorneyFormData().document.htmlDocument(in: .norwegian),
+            RentalAgreementFormData().document.htmlDocument(in: .norwegian),
+            CohabitationAgreementFormData().document.htmlDocument(in: .norwegian),
+            DebtInstrumentFormData().document.htmlDocument(in: .norwegian),
+            RentalTerminationFormData().document.htmlDocument(in: .norwegian),
+            EmploymentAgreementFormData().document.htmlDocument(in: .norwegian),
+            NDAFormData().document.htmlDocument(in: .norwegian)
+        ]
+
+        #expect(htmlDocuments.count == AppDocument.allCases.count)
+
+        for html in htmlDocuments {
+            #expect(html.contains("<html>"))
+            #expect(html.contains("<head>"))
+            #expect(html.contains("<body>"))
+            #expect(html.contains("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"))
+            #expect(html.contains("<div class=\"paper\">"))
+            #expect(html.contains("<div class=\"signature\">"))
+            #expect(html.contains("class=\"line\""))
+            #expect(html.contains("</html>"))
+        }
+    }
+
     @Test func premiumPreviewStatusExplainsAllDocumentsAreOpen() async throws {
         #expect(AppLanguage.norwegian.text(.allDocumentsOpenNow) == "Alle dokumenter er åpne nå")
         #expect(AppLanguage.english.text(.allDocumentsOpenNow) == "All documents open now")
+        #expect(AppLanguage.thai.text(.allDocumentsOpenNow) == "เอกสารทั้งหมดเปิดใช้งานอยู่ตอนนี้")
     }
 
     @Test func premiumPreviewHeadlineExplainsPremiumIsPlanned() async throws {
         #expect(AppLanguage.norwegian.text(.premiumPreviewHeadline) == "Premium er planlagt")
         #expect(AppLanguage.english.text(.premiumPreviewHeadline) == "Premium is planned")
+        #expect(AppLanguage.thai.text(.premiumPreviewHeadline) == "มีแผนเพิ่มพรีเมียม")
     }
 
     @Test func premiumPreviewDescriptionExplainsPaidPremiumIsLater() async throws {
         #expect(AppLanguage.norwegian.text(.premiumPreviewDescription).contains("Betalt premium er planlagt"))
         #expect(AppLanguage.english.text(.premiumPreviewDescription).contains("Paid premium is planned"))
+        #expect(AppLanguage.thai.text(.premiumPreviewDescription).contains("มีแผนเพิ่มพรีเมียมแบบชำระเงิน"))
     }
 
     @Test func premiumPreviewExplainsPurchasesAreUnavailableInThisVersion() async throws {
         #expect(AppLanguage.norwegian.text(.premiumPurchasesUnavailableInThisVersion) == "Kjøp er ikke tilgjengelig i denne versjonen")
         #expect(AppLanguage.english.text(.premiumPurchasesUnavailableInThisVersion) == "Purchases are not available in this version")
+        #expect(AppLanguage.thai.text(.premiumPurchasesUnavailableInThisVersion) == "ยังไม่สามารถซื้อได้ในเวอร์ชันนี้")
     }
 
     @Test func premiumPreviewIncludesExplainsCollectionIsPlanned() async throws {
         #expect(AppLanguage.norwegian.text(.premiumPreviewIncludes) == "Planlagt premiumsamling")
         #expect(AppLanguage.english.text(.premiumPreviewIncludes) == "Planned premium collection")
+        #expect(AppLanguage.thai.text(.premiumPreviewIncludes) == "ชุดพรีเมียมที่วางแผนไว้")
     }
 
     @Test func homeScreenExplainsPlannedPremiumTemplates() async throws {
         #expect(AppLanguage.norwegian.text(.plannedPremiumTemplatesTitle) == "Planlagte premium-maler")
         #expect(AppLanguage.english.text(.plannedPremiumTemplatesTitle) == "Planned premium templates")
+        #expect(AppLanguage.thai.text(.plannedPremiumTemplatesTitle) == "เทมเพลตพรีเมียมที่วางแผนไว้")
     }
 
     @Test func settingsPremiumButtonExplainsPlannedPremium() async throws {
         #expect(AppLanguage.norwegian.text(.openPremiumPlan) == "Se planlagt premium")
         #expect(AppLanguage.english.text(.openPremiumPlan) == "View planned premium")
+        #expect(AppLanguage.thai.text(.openPremiumPlan) == "ดูแผนพรีเมียม")
     }
 
     @Test func accessPlanSummaryShowsFreeAndPremiumCounts() async throws {
         #expect(AppLanguage.norwegian.text(.accessPlanSummary) == "3 gratis maler og 9 planlagte premium-maler.")
         #expect(AppLanguage.english.text(.accessPlanSummary) == "3 free templates and 9 planned premium templates.")
+        #expect(AppLanguage.thai.text(.accessPlanSummary) == "มีเทมเพลตฟรี 3 รายการ และเทมเพลตพรีเมียมที่วางแผนไว้ 9 รายการ")
     }
 
     @Test func premiumPreviewFooterExplainsAllDocumentsAreAvailableNow() async throws {
         #expect(AppLanguage.norwegian.text(.futurePricingNote).contains("Alle dokumenter er tilgjengelige nå"))
         #expect(AppLanguage.english.text(.futurePricingNote).contains("All documents are currently available"))
+        #expect(AppLanguage.thai.text(.futurePricingNote).contains("ขณะนี้เอกสารทั้งหมดใช้งานได้"))
     }
 
     @Test func purchaseManagerUsesExpectedPremiumProductIdentifier() async throws {

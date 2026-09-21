@@ -28,11 +28,19 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 
 ## Completed Candidate Work
 
+- Added unit coverage for home-screen legal-scope copy across Norwegian, English, and Thai.
+- Added unit coverage for Settings privacy copy across Norwegian, English, and Thai.
+- Added unit coverage for User Guide access, privacy, and legal-scope copy across Norwegian, English, and Thai.
+- Added unit coverage for User Guide localization completeness across every supported app language.
+- Added unit coverage for document card titles and subtitles across every supported app language.
+- Added unit coverage for distinct document card icons.
 - Tightened unit coverage for the exact free/premium document split.
+- Added unit coverage that keeps each document's access tier aligned with the monetization plan.
 - Added unit coverage for the expected premium product id.
 - Added premium product id label to the premium-preview localization coverage.
 - Added unit coverage for localized badge text across every free and premium-marked document.
 - Added unit coverage for the expected supported app languages: Norwegian, English, and Thai.
+- Added exact Thai unit coverage for the premium-preview/status copy used in the premium-preparation flow.
 - Added unit coverage for the premium-preview footer explaining that all documents are currently available.
 - Added unit coverage for the free document set: purchase agreement, receipt, and loan agreement now check required-field validation, advisory warnings, generated body text, and HTML escaping for preview/PDF safety.
 - Added first premium-marked validation coverage for power of attorney.
@@ -53,6 +61,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added HTML-preview escaping coverage for cohabitation agreement.
 - Added HTML-preview escaping coverage for rental termination.
 - Added HTML-preview escaping coverage for contract.
+- Added unit coverage that keeps printable HTML-preview and signature structure present across every document template.
 
 ## Technical Candidates
 
