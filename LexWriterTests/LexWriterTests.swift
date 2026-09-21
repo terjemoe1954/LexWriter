@@ -249,6 +249,32 @@ struct LexWriterTests {
         #expect(bodyText.contains("Representere fullmaktsgiver overfor banken."))
     }
 
+    @Test func debtInstrumentValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(DebtInstrumentFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(DebtInstrumentFormData().warnings(in: .norwegian).count == 3)
+
+        var form = DebtInstrumentFormData()
+        form.creditor = debtParty(name: "Kreditor")
+        form.debtor = debtParty(name: "Debitor")
+        form.principalAmount = "75 000 kroner"
+        form.issueDateText = "21. september 2026"
+        form.dueDateText = "21. september 2027"
+        form.interestTerms = "Rentefritt."
+        form.repaymentTerms = "Tilbakebetales i ett avdrag."
+        form.defaultConsequences = "Vanlige regler ved mislighold."
+        form.collateral = "Usikret krav."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Kreditor"))
+        #expect(bodyText.contains("Debitor"))
+        #expect(bodyText.contains("75 000 kroner"))
+        #expect(bodyText.contains("21. september 2027"))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"
@@ -303,6 +329,13 @@ struct LexWriterTests {
 
     private func contractParty(name: String) -> ContractParty {
         var party = ContractParty()
+        party.name = name
+        party.address = "Gate 1"
+        return party
+    }
+
+    private func debtParty(name: String) -> DebtParty {
+        var party = DebtParty()
         party.name = name
         party.address = "Gate 1"
         return party
