@@ -11,6 +11,13 @@ import SwiftUI
 struct LexWriterApp: App {
     @State private var purchaseManager = PurchaseManager()
 
+    init() {
+        if ProcessInfo.processInfo.arguments.contains("-resetUITestState") {
+            UserDefaults.standard.removeObject(forKey: "selectedLanguage")
+            UserDefaults.standard.removeObject(forKey: "preferredAppearance")
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             HomeView()

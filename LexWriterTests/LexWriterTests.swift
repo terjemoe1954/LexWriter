@@ -652,7 +652,7 @@ struct LexWriterTests {
         #expect(handoff.contains("unit tests: 82/82 passed"))
         #expect(handoff.contains("build for testing: succeeded"))
         #expect(handoff.contains("ui test target now points to `lexwriter`"))
-        #expect(handoff.contains("ui tests have not been run in this batch"))
+        #expect(handoff.contains("ui tests: 7/7 passed"))
         #expect(handoff.contains("do not enable storekit or premium locking"))
         #expect(handoff.contains("continue from the premium-preparation workstream"))
     }
@@ -744,7 +744,7 @@ struct LexWriterTests {
         #expect(limitations.contains("purchases are not available"))
         #expect(limitations.contains("storekit product loading"))
         #expect(limitations.contains("ui test target application now points to `lexwriter`"))
-        #expect(limitations.contains("ui tests have not been run in this batch"))
+        #expect(limitations.contains("ui tests pass with 7/7"))
     }
 
     @Test func premiumActivationGuideKeepsActivationPreconditionsExplicit() async throws {

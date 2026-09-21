@@ -11,7 +11,7 @@ Use this only when the paid version is ready to test or submit.
 - Premium preview is available from Settings.
 - Settings shows the current split as 3 free templates and 9 planned premium templates.
 - Premium preview copy states that paid premium is planned later and purchases are not available in this version.
-- Current test baseline: 82 unit tests pass and build-for-testing succeeds. `LexWriterUITests` now points to `LexWriter`, but UI tests have not been run in this batch.
+- Current test baseline: 82 unit tests pass, 7 UI tests pass, and build-for-testing succeeds. `LexWriterUITests` now points to `LexWriter`.
 
 ## Product Identifier
 
