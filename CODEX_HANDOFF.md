@@ -50,10 +50,11 @@ Premium-marked but still available:
 
 ## Validation Baseline
 
-- Unit tests: 15/15 passed.
+- Unit tests: 16/16 passed.
 - Build for testing: succeeded.
 - UI tests compile, but cannot run until `LexWriterUITests` target application path is fixed in Xcode.
 - Xcode still shows one yellow project warning: `Update to recommended settings`. Leave it for a separate commit.
+- Apple field-performance datasets were unavailable for live versions `1.0.1` and `1.0`; crash tooling did not resolve the product, so crash status should be checked manually in Xcode Organizer or App Store Connect.
 
 ## Known Blocker
 
@@ -65,10 +66,10 @@ The UI test target needs to be connected to the `LexWriter` app target, or recre
 
 ## Recommended Next Steps
 
-1. Commit/push the current premium-preview and documentation updates.
-2. Decide whether to fix or recreate the UI test target now or leave it for a separate technical cleanup.
-3. Continue product polish before enabling StoreKit.
-4. Use `PREMIUM_ACTIVATION.md` before changing `isPremiumStoreEnabled` or `enforcesPremiumAccess`.
+1. Decide whether to fix or recreate the UI test target now or leave it for a separate technical cleanup.
+2. Continue product polish before enabling StoreKit.
+3. Use `PREMIUM_ACTIVATION.md` before changing `isPremiumStoreEnabled` or `enforcesPremiumAccess`.
+4. Check App Store Connect or Xcode Organizer manually for crashes until Apple tooling returns field data.
 
 ## Safe Instruction For A New Codex Session
 
