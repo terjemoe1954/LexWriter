@@ -14,9 +14,9 @@ final class LexWriterUITests: XCTestCase {
     }
 
     @MainActor
-    private func launchApp() -> XCUIApplication {
+    private func launchApp(extraArguments: [String] = []) -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments = ["-resetUITestState"]
+        app.launchArguments = ["-resetUITestState"] + extraArguments
         app.launch()
         return app
     }
@@ -27,6 +27,20 @@ final class LexWriterUITests: XCTestCase {
             app.swipeUp()
         }
         return element
+    }
+
+    @MainActor
+    private func scrollToTop(in app: XCUIApplication, maxSwipes: Int = 3) {
+        for _ in 0..<maxSwipes {
+            app.swipeDown()
+        }
+    }
+
+    @MainActor
+    private func element(containing labelText: String, in app: XCUIApplication) -> XCUIElement {
+        app.descendants(matching: .any)
+            .matching(NSPredicate(format: "label CONTAINS %@", labelText))
+            .firstMatch
     }
 
     @MainActor
@@ -53,13 +67,13 @@ final class LexWriterUITests: XCTestCase {
         let app = launchApp()
 
         app.buttons["settingsButton"].tap()
+        scrollToTop(in: app)
 
         XCTAssertTrue(app.staticTexts["Språk"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.staticTexts["Utseende"].exists)
-        XCTAssertTrue(app.staticTexts["Tilgang"].exists)
-        XCTAssertTrue(app.staticTexts["settings.accessPlanSummary"].exists)
-        XCTAssertTrue(app.buttons["Se planlagt premium"].exists)
-        XCTAssertTrue(app.buttons["settings.userGuideLink"].exists)
+        XCTAssertTrue(scrollUntilVisible(app.staticTexts["Tilgang"], in: app).exists)
+        XCTAssertTrue(scrollUntilVisible(app.buttons["openPremiumPreviewButton"], in: app).exists)
+        XCTAssertTrue(scrollUntilVisible(app.buttons["settings.userGuideLink"], in: app).exists)
         XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.privacySummary"], in: app).exists)
         XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.version"], in: app).exists)
         XCTAssertTrue(app.staticTexts["settings.build"].exists)
@@ -70,29 +84,26 @@ final class LexWriterUITests: XCTestCase {
         let app = launchApp()
 
         app.buttons["settingsButton"].tap()
+        scrollToTop(in: app)
         app.buttons["English"].tap()
 
         XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.staticTexts["Language"].exists)
         XCTAssertTrue(app.staticTexts["Appearance"].exists)
-        XCTAssertTrue(app.staticTexts["Access"].exists)
-        XCTAssertTrue(app.staticTexts["settings.accessPlanSummary"].exists)
-        XCTAssertTrue(app.buttons["View planned premium"].exists)
-        XCTAssertTrue(app.buttons["settings.userGuideLink"].exists)
+        XCTAssertTrue(scrollUntilVisible(app.staticTexts["Access"], in: app).exists)
+        XCTAssertTrue(scrollUntilVisible(app.buttons["openPremiumPreviewButton"], in: app).exists)
+        XCTAssertTrue(scrollUntilVisible(app.buttons["settings.userGuideLink"], in: app).exists)
         XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.privacySummary"], in: app).exists)
     }
 
     @MainActor
     func testSettingsCanOpenPremiumPreview() throws {
-        let app = launchApp()
+        let app = launchApp(extraArguments: ["-openPremiumPreviewUITest"])
 
-        app.buttons["settingsButton"].tap()
-        app.buttons["openPremiumPreviewButton"].tap()
-
-        XCTAssertTrue(app.navigationBars["LexWriter Premium"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["Premium er planlagt"].exists)
-        XCTAssertTrue(app.staticTexts["Planlagt premiumsamling"].exists)
-        XCTAssertTrue(app.staticTexts["Kjøp er ikke tilgjengelig i denne versjonen"].exists)
+        XCTAssertTrue(app.navigationBars["LexWriter Premium"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["premium.previewHeadline"].exists)
+        XCTAssertTrue(app.staticTexts["premium.purchasesUnavailable"].exists)
+        XCTAssertTrue(scrollUntilVisible(app.staticTexts["premium.previewIncludes"], in: app).exists)
         XCTAssertTrue(app.buttons["closePremiumButton"].exists)
     }
 
@@ -101,12 +112,12 @@ final class LexWriterUITests: XCTestCase {
         let app = launchApp()
 
         app.buttons["settingsButton"].tap()
-        app.buttons["Brukerveiledning"].tap()
+        scrollToTop(in: app)
+        scrollUntilVisible(app.buttons["settings.userGuideLink"], in: app).tap()
 
         XCTAssertTrue(app.navigationBars["Brukerveiledning"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["Gratis og premium"].exists)
-        let accessText = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Dokumenter kan være merket som gratis eller premium")).firstMatch
-        XCTAssertTrue(accessText.exists)
+        let accessText = element(containing: "Dokumenter kan være merket som gratis eller premium", in: app)
+        XCTAssertTrue(scrollUntilVisible(accessText, in: app).exists)
     }
 
     @MainActor

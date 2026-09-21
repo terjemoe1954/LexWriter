@@ -11,7 +11,7 @@ Use this only when the paid version is ready to test or submit.
 - Premium preview is available from Settings.
 - Settings shows the current split as 3 free templates and 9 planned premium templates.
 - Premium preview copy states that paid premium is planned later and purchases are not available in this version.
-- Current test baseline: 82 unit tests pass, 7 UI tests pass, and build-for-testing succeeds. `LexWriterUITests` now points to `LexWriter`.
+- Current test baseline: 82 unit tests pass, 7 UI tests pass, the launch test passes, and build-for-testing succeeds. `LexWriterUITests` now points to `LexWriter`.
 
 ## Product Identifier
 
@@ -87,5 +87,6 @@ This keeps the risk lower if App Store Connect product setup or restore behavior
 
 - `PurchaseManager` supports injectable `UserDefaults` for isolated tests.
 - Premium preview localization is covered for every supported app language.
+- Premium preview UI assertions use stable accessibility identifiers instead of visible copy and open through a UI-test-only launch route; this does not enable StoreKit, purchases, restore, or premium enforcement.
 - StoreKit purchase and restore buttons stay hidden while `isPremiumStoreEnabled` is `false`.
 - The old generic "coming later" wording has been removed from active app localization; premium preview uses more specific copy.

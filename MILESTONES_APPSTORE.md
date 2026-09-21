@@ -98,7 +98,8 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Made `PurchaseManager` testable with injectable `UserDefaults` while keeping `.standard` as the app default.
 - Updated SwiftUI previews for `HomeView`, `SettingsView`, and `PremiumView` so each has the required `PurchaseManager` environment.
 - Updated unit and UI test expectations for the current premium-preview wording.
-- Current validation baseline: app build succeeds, build-for-testing succeeds, 82 unit tests pass, 7 UI tests pass, and manual simulator smoke passes for Home, Settings, Premium preview, language switching, one free document, one premium-marked document, and empty Will preview validation. `LexWriterUITests` now points to `LexWriter`.
+- Current validation baseline: app build succeeds, build-for-testing succeeds, 82 unit tests pass, 7 UI tests pass, the launch test passes, and manual simulator smoke passes for Home, Settings, Premium preview, language switching, one free document, one premium-marked document, and empty Will preview validation. `LexWriterUITests` now points to `LexWriter`.
+- Premium preview UI assertions now use stable accessibility identifiers instead of visible copy, opened through a UI-test-only launch route to avoid flaky Form sheet taps.
 - Added `RELEASE_CHECKLIST.md` for future App Store submissions.
 - Added `PREMIUM_ACTIVATION.md` with the exact preconditions and flags for enabling purchases later.
 - Added `KNOWN_LIMITATIONS.md` for support replies, App Store review notes, and release planning.

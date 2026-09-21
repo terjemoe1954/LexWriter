@@ -51,15 +51,18 @@ struct PremiumView: View {
             Text(headlineText)
                 .font(.system(size: 28, weight: .bold, design: .serif))
                 .foregroundStyle(.white)
+                .accessibilityIdentifier("premium.previewHeadline")
 
             Text(heroMessage)
                 .font(.body)
                 .foregroundStyle(Color.white.opacity(0.82))
+                .accessibilityIdentifier("premium.previewDescription")
 
             if !MonetizationPlan.isPremiumStoreEnabled {
                 Text(language.text(.premiumPurchasesUnavailableInThisVersion))
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(Color(red: 0.95, green: 0.89, blue: 0.75))
+                    .accessibilityIdentifier("premium.purchasesUnavailable")
             } else if let premiumProduct = purchaseManager.premiumProduct {
                 Text(premiumProduct.displayPrice)
                     .font(.title3.weight(.semibold))
@@ -157,6 +160,7 @@ struct PremiumView: View {
             Text(includedDocumentsTitle)
                 .font(.system(size: 22, weight: .semibold, design: .serif))
                 .foregroundStyle(.white)
+                .accessibilityIdentifier("premium.previewIncludes")
 
             ForEach(MonetizationPlan.premiumDocuments) { document in
                 HStack(spacing: 12) {
@@ -213,6 +217,7 @@ struct PremiumView: View {
             .font(.footnote)
             .foregroundStyle(Color.white.opacity(0.68))
             .fixedSize(horizontal: false, vertical: true)
+            .accessibilityIdentifier("premium.footerNote")
     }
 
     private var footerMessage: String {

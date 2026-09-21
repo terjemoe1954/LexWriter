@@ -20,13 +20,22 @@ struct LexWriterApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environment(purchaseManager)
-                .task {
-                    if MonetizationPlan.isPremiumStoreEnabled {
-                        purchaseManager.start()
+            if opensPremiumPreviewForUITest {
+                PremiumView(language: .norwegian, highlightedDocument: nil)
+                    .environment(purchaseManager)
+            } else {
+                HomeView()
+                    .environment(purchaseManager)
+                    .task {
+                        if MonetizationPlan.isPremiumStoreEnabled {
+                            purchaseManager.start()
+                        }
                     }
-                }
+            }
         }
+    }
+
+    private var opensPremiumPreviewForUITest: Bool {
+        ProcessInfo.processInfo.arguments.contains("-openPremiumPreviewUITest")
     }
 }
