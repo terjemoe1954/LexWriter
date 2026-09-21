@@ -115,7 +115,7 @@ final class LexWriterUITests: XCTestCase {
     func testTestamentEditorShowsPreviewValidationGate() throws {
         let app = launchApp()
 
-        app.staticTexts["Testament"].tap()
+        app.buttons["documentCard.testament"].tap()
         let previewButton = scrollUntilVisible(app.buttons["Vis testament"], in: app, maxSwipes: 8)
 
         XCTAssertTrue(previewButton.exists)

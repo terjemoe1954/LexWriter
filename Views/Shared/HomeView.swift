@@ -151,7 +151,8 @@ struct HomeView: View {
                     subtitle: document.subtitle(for: selectedLanguage),
                     iconName: document.iconName,
                     accent: document.accent,
-                    badgeText: badgeText(for: document)
+                    badgeText: badgeText(for: document),
+                    accessibilityID: "documentCard.\(document.id)"
                 )
             }
             .buttonStyle(.plain)
@@ -166,7 +167,8 @@ struct HomeView: View {
                     accent: document.accent,
                     badgeText: badgeText(for: document),
                     lockedMessage: selectedLanguage.text(.premiumRequiredShort),
-                    isEnabled: false
+                    isEnabled: false,
+                    accessibilityID: "documentCard.\(document.id)"
                 )
             }
             .buttonStyle(.plain)
@@ -217,6 +219,7 @@ private struct DocumentCard: View {
     var badgeText: String? = nil
     var lockedMessage: String? = nil
     var isEnabled = true
+    let accessibilityID: String
 
     var body: some View {
         HStack(spacing: 16) {
@@ -281,7 +284,7 @@ private struct DocumentCard: View {
         )
         .opacity(isEnabled ? 1.0 : 0.82)
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("documentCard.\(title)")
+        .accessibilityIdentifier(accessibilityID)
     }
 }
 
