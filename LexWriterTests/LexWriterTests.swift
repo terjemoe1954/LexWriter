@@ -109,6 +109,146 @@ struct LexWriterTests {
         userDefaults.removePersistentDomain(forName: suiteName)
     }
 
+    @Test func purchaseAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(PurchaseAgreementFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(PurchaseAgreementFormData().warnings(in: .norwegian).count == 3)
+
+        var form = PurchaseAgreementFormData()
+        form.seller = contractParty(name: "Selger")
+        form.buyer = contractParty(name: "Kjoper")
+        form.itemDescription = "Brukt sykkel"
+        form.purchasePrice = "3 000 kroner"
+        form.handoverDate = "1. oktober 2026"
+        form.conditionDescription = "Selges som besiktiget."
+        form.paymentTerms = "Betales ved overlevering."
+        form.defectsAndClaims = "Ingen kjente mangler."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Selger"))
+        #expect(bodyText.contains("Kjoper"))
+        #expect(bodyText.contains("Brukt sykkel"))
+        #expect(bodyText.contains("3 000 kroner"))
+    }
+
+    @Test func receiptValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(ReceiptFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(ReceiptFormData().warnings(in: .norwegian).count == 2)
+
+        var form = ReceiptFormData()
+        form.issuer = contractParty(name: "Utsteder")
+        form.payer = contractParty(name: "Betaler")
+        form.receiptFor = "Depositum"
+        form.amount = "10 000 kroner"
+        form.paymentDateText = "21. september 2026"
+        form.paymentMethod = "Bankoverforing"
+        form.notes = "Referanse 123"
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Utsteder"))
+        #expect(bodyText.contains("Betaler"))
+        #expect(bodyText.contains("Depositum"))
+        #expect(bodyText.contains("10 000 kroner"))
+    }
+
+    @Test func loanAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(LoanAgreementFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(LoanAgreementFormData().warnings(in: .norwegian).count == 4)
+
+        var form = LoanAgreementFormData()
+        form.lender = contractParty(name: "Langiver")
+        form.borrower = contractParty(name: "Lantaker")
+        form.amount = "50 000 kroner"
+        form.disbursementDate = "21. september 2026"
+        form.dueDate = "21. september 2027"
+        form.repaymentTerms = "Tilbakebetales i ett avdrag."
+        form.interestTerms = "Rentefritt."
+        form.latePaymentTerms = "Vanlige regler ved forsinkelse."
+        form.security = "Usikret lan."
+        form.purpose = "Privat lan."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Langiver"))
+        #expect(bodyText.contains("Lantaker"))
+        #expect(bodyText.contains("50 000 kroner"))
+        #expect(bodyText.contains("21. september 2027"))
+    }
+
+    @Test func freeDocumentHTMLPreviewEscapesUserEnteredText() async throws {
+        var purchaseAgreement = PurchaseAgreementFormData()
+        purchaseAgreement.seller = contractParty(name: "<script>Selger & Co</script>")
+        purchaseAgreement.buyer = contractParty(name: "Kjoper")
+        purchaseAgreement.itemDescription = "Sykkel <ny>"
+        purchaseAgreement.purchasePrice = "3 000 kroner"
+        purchaseAgreement.handoverDate = "1. oktober 2026"
+        purchaseAgreement.signingPlace = "Oslo"
+
+        var receipt = ReceiptFormData()
+        receipt.issuer = contractParty(name: "<script>Utsteder & Co</script>")
+        receipt.payer = contractParty(name: "Betaler")
+        receipt.receiptFor = "Depositum <leie>"
+        receipt.amount = "10 000 kroner"
+        receipt.paymentDateText = "21. september 2026"
+        receipt.signingPlace = "Oslo"
+
+        var loanAgreement = LoanAgreementFormData()
+        loanAgreement.lender = contractParty(name: "<script>Langiver & Co</script>")
+        loanAgreement.borrower = contractParty(name: "Lantaker")
+        loanAgreement.amount = "50 000 kroner"
+        loanAgreement.dueDate = "21. september 2027"
+        loanAgreement.repaymentTerms = "Tilbakebetales i ett avdrag."
+        loanAgreement.signingPlace = "Oslo"
+
+        let htmlDocuments = [
+            purchaseAgreement.document.htmlDocument(in: .norwegian),
+            receipt.document.htmlDocument(in: .norwegian),
+            loanAgreement.document.htmlDocument(in: .norwegian)
+        ]
+
+        for html in htmlDocuments {
+            #expect(!html.contains("<script>"))
+            #expect(html.contains("&lt;script&gt;"))
+            #expect(html.contains("&amp; Co"))
+        }
+    }
+
+    @Test func powerOfAttorneyValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(PowerOfAttorneyFormData().blockingIssues(in: .norwegian).count == 5)
+        #expect(PowerOfAttorneyFormData().warnings(in: .norwegian).count == 3)
+
+        var form = PowerOfAttorneyFormData()
+        form.principalName = "Ola Nordmann"
+        form.principalAddress = "Gate 1"
+        form.agentName = "Kari Nordmann"
+        form.agentAddress = "Vei 2"
+        form.mandateScope = "Representere fullmaktsgiver overfor banken."
+        form.authorizationPurpose = "Bankmote og signering av nodvendige dokumenter."
+        form.restrictions = "Fullmakten gjelder bare kontoavslutning."
+        form.validFrom = "21. september 2026"
+        form.validUntil = "21. desember 2026"
+        form.revocationTerms = "Kan trekkes tilbake skriftlig."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Ola Nordmann"))
+        #expect(bodyText.contains("Kari Nordmann"))
+        #expect(bodyText.contains("Representere fullmaktsgiver overfor banken."))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"
@@ -159,5 +299,12 @@ struct LexWriterTests {
         form.witnessTwo = WitnessInfo(name: "Vitne To", address: "Vei 3")
 
         #expect(form.blockingIssues(in: .norwegian).isEmpty)
+    }
+
+    private func contractParty(name: String) -> ContractParty {
+        var party = ContractParty()
+        party.name = name
+        party.address = "Gate 1"
+        return party
     }
 }

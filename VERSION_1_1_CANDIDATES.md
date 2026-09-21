@@ -26,11 +26,16 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Prepare App Store metadata that explains the current free/premium preparation state without implying that purchases are available.
 - Add or update screenshots if the listing does not clearly show document creation and print preview.
 
+## Completed Candidate Work
+
+- Added unit coverage for the free document set: purchase agreement, receipt, and loan agreement now check required-field validation, advisory warnings, generated body text, and HTML escaping for preview/PDF safety.
+- Added first premium-marked validation coverage for power of attorney.
+
 ## Technical Candidates
 
 - Fix or recreate `LexWriterUITests` so the UI test target has `LexWriter` as its target application.
 - Take Xcode `Update to recommended settings` as a separate maintenance commit after reviewing the generated project changes.
-- Add unit tests for additional document validation logic where the legal or UX risk is highest.
+- Add unit tests for additional premium-marked document validation logic where the legal or UX risk is highest.
 
 ## Defer Until Premium Activation
 
