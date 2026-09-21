@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Testing
 @testable import LexWriter
 
@@ -56,9 +57,26 @@ struct LexWriterTests {
 
     @Test func appLanguageKeepsExpectedSupportedLanguages() async throws {
         #expect(AppLanguage.allCases == [.norwegian, .english, .thai])
+        #expect(AppLanguage.allCases.map(\.rawValue) == ["norwegian", "english", "thai"])
+        #expect(AppLanguage.allCases.map(\.id) == ["norwegian", "english", "thai"])
         #expect(AppLanguage.norwegian.displayName == "Norsk")
         #expect(AppLanguage.english.displayName == "English")
         #expect(AppLanguage.thai.displayName == "ไทย")
+    }
+
+    @Test func appAppearanceKeepsStableStoredIdentifiers() async throws {
+        #expect(AppAppearance.allCases == [.system, .light, .dark])
+        #expect(AppAppearance.allCases.map(\.rawValue) == ["system", "light", "dark"])
+        #expect(AppAppearance.allCases.map(\.id) == ["system", "light", "dark"])
+        #expect(AppAppearance.system.colorScheme == nil)
+        #expect(AppAppearance.light.colorScheme == .light)
+        #expect(AppAppearance.dark.colorScheme == .dark)
+
+        for language in AppLanguage.allCases {
+            for appearance in AppAppearance.allCases {
+                #expect(!language.text(appearance.localizedKey).isEmpty)
+            }
+        }
     }
 
     @Test func homeLegalNoteKeepsLegalScopeClearInEveryLanguage() async throws {
@@ -134,11 +152,176 @@ struct LexWriterTests {
         }
     }
 
+    @Test func documentCatalogProvidesDistinctTitlesForEveryLanguage() async throws {
+        for language in AppLanguage.allCases {
+            let titles = AppDocument.allCases.map { $0.title(for: language) }
+
+            #expect(Set(titles).count == AppDocument.allCases.count)
+        }
+    }
+
+    @Test func documentCatalogProvidesDistinctSubtitlesForEveryLanguage() async throws {
+        for language in AppLanguage.allCases {
+            let subtitles = AppDocument.allCases.map { $0.subtitle(for: language) }
+
+            #expect(Set(subtitles).count == AppDocument.allCases.count)
+        }
+    }
+
+    @Test func documentCatalogKeepsStableDocumentOrderAndIdentifiers() async throws {
+        #expect(AppDocument.allCases == [
+            .testament,
+            .contract,
+            .powerOfAttorney,
+            .rentalAgreement,
+            .cohabitationAgreement,
+            .debtInstrument,
+            .purchaseAgreement,
+            .rentalTermination,
+            .receipt,
+            .loanAgreement,
+            .employmentAgreement,
+            .nda
+        ])
+
+        let identifiers = AppDocument.allCases.map(\.id)
+
+        #expect(identifiers == [
+            "testament",
+            "contract",
+            "powerOfAttorney",
+            "rentalAgreement",
+            "cohabitationAgreement",
+            "debtInstrument",
+            "purchaseAgreement",
+            "rentalTermination",
+            "receipt",
+            "loanAgreement",
+            "employmentAgreement",
+            "nda"
+        ])
+        #expect(Set(identifiers).count == AppDocument.allCases.count)
+    }
+
     @Test func documentCatalogProvidesDistinctIconsForEveryDocument() async throws {
         let iconNames = AppDocument.allCases.map(\.iconName)
 
         #expect(iconNames.allSatisfy { !$0.isEmpty })
         #expect(Set(iconNames).count == AppDocument.allCases.count)
+    }
+
+    @Test func documentChecklistsProvideThreeDistinctItemsForEveryLanguage() async throws {
+        for language in AppLanguage.allCases {
+            let checklistSections = [
+                (language.purchaseText(.legalChecklistTitle), language.purchaseChecklist),
+                (language.receiptText(.legalChecklistTitle), language.receiptChecklist),
+                (language.loanAgreementText(.legalChecklistTitle), language.loanAgreementChecklist),
+                (language.contractText(.legalChecklistTitle), language.contractChecklist),
+                (language.powerOfAttorneyText(.legalChecklistTitle), language.powerOfAttorneyChecklist),
+                (language.rentalText(.legalChecklistTitle), language.rentalChecklist),
+                (language.cohabitationText(.legalChecklistTitle), language.cohabitationChecklist),
+                (language.debtText(.legalChecklistTitle), language.debtChecklist),
+                (language.rentalTerminationText(.legalChecklistTitle), language.rentalTerminationChecklist),
+                (language.employmentAgreementText(.legalChecklistTitle), language.employmentAgreementChecklist),
+                (language.ndaText(.legalChecklistTitle), language.ndaChecklist)
+            ]
+
+            for (title, items) in checklistSections {
+                #expect(!title.isEmpty)
+                #expect(items.count == 3)
+                #expect(items.allSatisfy { !$0.isEmpty })
+                #expect(Set(items).count == items.count)
+            }
+        }
+    }
+
+    @Test func documentPreviewButtonsExistForEveryLanguage() async throws {
+        for language in AppLanguage.allCases {
+            let previewButtonTexts = [
+                language.purchaseText(.previewButton),
+                language.receiptText(.previewButton),
+                language.loanAgreementText(.previewButton),
+                language.text(.showWill),
+                language.contractText(.previewButton),
+                language.powerOfAttorneyText(.previewButton),
+                language.rentalText(.previewButton),
+                language.cohabitationText(.previewButton),
+                language.debtText(.previewButton),
+                language.rentalTerminationText(.previewButton),
+                language.employmentAgreementText(.previewButton),
+                language.ndaText(.previewButton)
+            ]
+
+            #expect(previewButtonTexts.count == AppDocument.allCases.count)
+            #expect(previewButtonTexts.allSatisfy { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
+
+            switch language {
+            case .norwegian:
+                #expect(previewButtonTexts.allSatisfy { $0.hasPrefix("Vis") })
+            case .english:
+                #expect(previewButtonTexts.allSatisfy { $0.hasPrefix("Show") })
+            case .thai:
+                #expect(previewButtonTexts.allSatisfy { $0.hasPrefix("แสดง") })
+            }
+        }
+    }
+
+    @Test func printPreviewControlsExistForEveryLanguage() async throws {
+        for language in AppLanguage.allCases {
+            let previewControls = [
+                language.text(.previewTitle),
+                language.text(.close),
+                language.text(.printButton),
+                language.text(.savePDFButton),
+                language.text(.signatureAndDate)
+            ]
+
+            #expect(previewControls.allSatisfy { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
+            #expect(language.text(.printButton) != language.text(.savePDFButton))
+
+            switch language {
+            case .norwegian:
+                #expect(language.text(.savePDFButton).contains("PDF"))
+            case .english:
+                #expect(language.text(.savePDFButton).contains("PDF"))
+            case .thai:
+                #expect(language.text(.savePDFButton).contains("PDF"))
+            }
+        }
+    }
+
+    @Test func documentValidationMessagesExistForEveryLanguage() async throws {
+        for language in AppLanguage.allCases {
+            let validationSets: [(blocking: [ValidationMessage], warnings: [ValidationMessage])] = [
+                (PurchaseAgreementFormData().blockingIssues(in: language), PurchaseAgreementFormData().warnings(in: language)),
+                (ReceiptFormData().blockingIssues(in: language), ReceiptFormData().warnings(in: language)),
+                (LoanAgreementFormData().blockingIssues(in: language), LoanAgreementFormData().warnings(in: language)),
+                (TestamentFormData().blockingIssues(in: language), TestamentFormData().warnings(in: language)),
+                (ContractFormData().blockingIssues(in: language), ContractFormData().warnings(in: language)),
+                (PowerOfAttorneyFormData().blockingIssues(in: language), PowerOfAttorneyFormData().warnings(in: language)),
+                (RentalAgreementFormData().blockingIssues(in: language), RentalAgreementFormData().warnings(in: language)),
+                (CohabitationAgreementFormData().blockingIssues(in: language), CohabitationAgreementFormData().warnings(in: language)),
+                (DebtInstrumentFormData().blockingIssues(in: language), DebtInstrumentFormData().warnings(in: language)),
+                (RentalTerminationFormData().blockingIssues(in: language), RentalTerminationFormData().warnings(in: language)),
+                (EmploymentAgreementFormData().blockingIssues(in: language), EmploymentAgreementFormData().warnings(in: language)),
+                (NDAFormData().blockingIssues(in: language), NDAFormData().warnings(in: language))
+            ]
+
+            for validationSet in validationSets {
+                #expect(!validationSet.blocking.isEmpty)
+                #expect(!validationSet.warnings.isEmpty)
+                #expect(validationSet.blocking.allSatisfy { $0.severity == .blocking && !$0.message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
+                #expect(validationSet.warnings.allSatisfy { $0.severity == .warning && !$0.message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
+            }
+
+            let signingRequirements = TestamentFormData.signingRequirements(in: language)
+            #expect(signingRequirements.count == 4)
+            #expect(signingRequirements.allSatisfy { !$0.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
+
+            let completionRequirements = TestamentFormData().completionRequirements(in: language)
+            #expect(completionRequirements.count == 6)
+            #expect(completionRequirements.allSatisfy { !$0.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
+        }
     }
 
     @Test func documentHTMLPreviewsKeepPrintableSignatureStructure() async throws {

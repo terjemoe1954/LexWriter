@@ -26,10 +26,17 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added unit coverage for Settings privacy copy across Norwegian, English, and Thai.
 - Added unit coverage for User Guide access, privacy, and legal-scope copy across Norwegian, English, and Thai.
 - Added unit coverage for User Guide localization completeness across every supported app language.
+- Added unit coverage for stable document order and identifiers.
+- Added unit coverage for distinct document titles and subtitles across every supported app language.
 - Added unit coverage for document card titles and subtitles across every supported app language.
 - Added unit coverage for distinct document card icons.
+- Added unit coverage for document checklist titles and checklist items across every supported app language.
+- Added unit coverage for document preview button labels across every supported app language.
+- Added unit coverage for print-preview controls across every supported app language.
+- Added unit coverage for validation and requirement messages across every supported app language.
 - Added unit coverage for localized badge text across every free and premium-marked document.
-- Added unit coverage for the expected supported app languages: Norwegian, English, and Thai.
+- Added unit coverage for the expected supported app languages and stable language identifiers: Norwegian, English, and Thai.
+- Added unit coverage for stable appearance identifiers and localized appearance labels.
 - Added exact Thai unit coverage for the premium-preview/status copy used in the premium-preparation flow.
 - Added unit coverage for the expected premium product id.
 - Added premium product id label to the premium-preview localization coverage.
@@ -68,7 +75,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Made `PurchaseManager` testable with injectable `UserDefaults` while keeping `.standard` as the app default.
 - Updated SwiftUI previews for `HomeView`, `SettingsView`, and `PremiumView` so each has the required `PurchaseManager` environment.
 - Updated unit and UI test expectations for the current premium-preview wording.
-- Current validation baseline: app build succeeds, build-for-testing succeeds, and 50 unit tests pass. UI tests compile but cannot run until the Xcode `LexWriterUITests` target application path is fixed.
+- Current validation baseline: app build succeeds, build-for-testing succeeds, and 58 unit tests pass. UI tests compile but cannot run until the Xcode `LexWriterUITests` target application path is fixed.
 - Added `RELEASE_CHECKLIST.md` for future App Store submissions.
 - Added `PREMIUM_ACTIVATION.md` with the exact preconditions and flags for enabling purchases later.
 - Added `KNOWN_LIMITATIONS.md` for support replies, App Store review notes, and release planning.

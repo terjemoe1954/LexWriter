@@ -11,7 +11,7 @@ Use this only when the paid version is ready to test or submit.
 - Premium preview is available from Settings.
 - Settings shows the current split as 3 free templates and 9 planned premium templates.
 - Premium preview copy states that paid premium is planned later and purchases are not available in this version.
-- Current test baseline: 50 unit tests pass and build-for-testing succeeds. UI tests compile but cannot run until the `LexWriterUITests` target application path is fixed in Xcode.
+- Current test baseline: 58 unit tests pass and build-for-testing succeeds. UI tests compile but cannot run until the `LexWriterUITests` target application path is fixed in Xcode.
 
 ## Product Identifier
 

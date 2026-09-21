@@ -32,14 +32,21 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage for Settings privacy copy across Norwegian, English, and Thai.
 - Added unit coverage for User Guide access, privacy, and legal-scope copy across Norwegian, English, and Thai.
 - Added unit coverage for User Guide localization completeness across every supported app language.
+- Added unit coverage for stable document order and identifiers.
+- Added unit coverage for distinct document titles and subtitles across every supported app language.
 - Added unit coverage for document card titles and subtitles across every supported app language.
 - Added unit coverage for distinct document card icons.
+- Added unit coverage for document checklist titles and checklist items across every supported app language.
+- Added unit coverage for document preview button labels across every supported app language.
+- Added unit coverage for print-preview controls across every supported app language.
+- Added unit coverage for validation and requirement messages across every supported app language.
 - Tightened unit coverage for the exact free/premium document split.
 - Added unit coverage that keeps each document's access tier aligned with the monetization plan.
 - Added unit coverage for the expected premium product id.
 - Added premium product id label to the premium-preview localization coverage.
 - Added unit coverage for localized badge text across every free and premium-marked document.
-- Added unit coverage for the expected supported app languages: Norwegian, English, and Thai.
+- Added unit coverage for the expected supported app languages and stable language identifiers: Norwegian, English, and Thai.
+- Added unit coverage for stable appearance identifiers and localized appearance labels.
 - Added exact Thai unit coverage for the premium-preview/status copy used in the premium-preparation flow.
 - Added unit coverage for the premium-preview footer explaining that all documents are currently available.
 - Added unit coverage for the free document set: purchase agreement, receipt, and loan agreement now check required-field validation, advisory warnings, generated body text, and HTML escaping for preview/PDF safety.
