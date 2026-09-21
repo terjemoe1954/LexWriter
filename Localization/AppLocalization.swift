@@ -157,8 +157,6 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Se planlagt premium"
         case (.norwegian, .premiumProductIdentifier):
             return "Produkt-ID"
-        case (.norwegian, .comingSoon):
-            return "Kommer senere"
         case (.norwegian, .signingRequirements):
             return "Formkrav for gyldig testament"
         case (.norwegian, .mustFillIn):
@@ -383,8 +381,6 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "View planned premium"
         case (.english, .premiumProductIdentifier):
             return "Product ID"
-        case (.english, .comingSoon):
-            return "Coming later"
         case (.english, .signingRequirements):
             return "Signing requirements for a valid will"
         case (.english, .mustFillIn):
@@ -609,8 +605,6 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "ดูแผนพรีเมียม"
         case (.thai, .premiumProductIdentifier):
             return "รหัสสินค้า"
-        case (.thai, .comingSoon):
-            return "จะเพิ่มภายหลัง"
         case (.thai, .signingRequirements):
             return "ข้อกำหนดในการลงนามเพื่อให้พินัยกรรมมีผล"
         case (.thai, .mustFillIn):
@@ -775,7 +769,6 @@ enum LocalizedKey {
     case openPremiumPreview
     case openPremiumPlan
     case premiumProductIdentifier
-    case comingSoon
     case signingRequirements
     case mustFillIn
     case legalWarnings

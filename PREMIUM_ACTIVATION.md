@@ -88,4 +88,4 @@ This keeps the risk lower if App Store Connect product setup or restore behavior
 - `PurchaseManager` supports injectable `UserDefaults` for isolated tests.
 - Premium preview localization is covered for every supported app language.
 - StoreKit purchase and restore buttons stay hidden while `isPremiumStoreEnabled` is `false`.
-- The old "coming later" wording is intentionally kept only as a general localization string; the active premium preview now uses more specific copy.
+- The old generic "coming later" wording has been removed from active app localization; premium preview uses more specific copy.
