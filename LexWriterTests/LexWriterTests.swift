@@ -383,6 +383,31 @@ struct LexWriterTests {
         #expect(bodyText.contains("Felles utgifter deles likt."))
     }
 
+    @Test func rentalTerminationValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(RentalTerminationFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(RentalTerminationFormData().warnings(in: .norwegian).count == 3)
+
+        var form = RentalTerminationFormData()
+        form.landlord = rentalParty(name: "Utleier")
+        form.tenant = rentalParty(name: "Leietaker")
+        form.propertyAddress = "Leiegata 1"
+        form.terminationDateText = "21. september 2026"
+        form.moveOutDateText = "31. desember 2026"
+        form.noticeBasis = "Oppsigelse etter avtalt oppsigelsestid."
+        form.depositSettlement = "Depositum frigis etter sluttoppgjør."
+        form.keyReturn = "Nøkler leveres ved fraflytting."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Utleier"))
+        #expect(bodyText.contains("Leietaker"))
+        #expect(bodyText.contains("Leiegata 1"))
+        #expect(bodyText.contains("21. september 2026"))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"

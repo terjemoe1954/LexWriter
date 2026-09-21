@@ -35,6 +35,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added premium-marked validation coverage for NDA.
 - Added premium-marked validation coverage for rental agreement.
 - Added premium-marked validation coverage for cohabitation agreement.
+- Added premium-marked validation coverage for rental termination.
 
 ## Technical Candidates
 
