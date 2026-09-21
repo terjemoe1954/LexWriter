@@ -275,6 +275,34 @@ struct LexWriterTests {
         #expect(bodyText.contains("21. september 2027"))
     }
 
+    @Test func employmentAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
+        #expect(EmploymentAgreementFormData().blockingIssues(in: .norwegian).count == 6)
+        #expect(EmploymentAgreementFormData().warnings(in: .norwegian).count == 5)
+
+        var form = EmploymentAgreementFormData()
+        form.employer = contractParty(name: "Arbeidsgiver AS")
+        form.employee = contractParty(name: "Ansatt Person")
+        form.positionTitle = "Rådgiver"
+        form.duties = "Saksbehandling og kundekontakt."
+        form.startDate = "1. oktober 2026"
+        form.workplace = "Oslo"
+        form.salary = "600 000 kroner per år"
+        form.workingHours = "37,5 timer per uke."
+        form.probationPeriod = "Seks måneder."
+        form.terminationNotice = "Tre måneder."
+        form.confidentialityTerms = "Vanlig taushetsplikt gjelder."
+        form.signingPlace = "Oslo"
+
+        #expect(form.blockingIssues(in: .norwegian).isEmpty)
+        #expect(form.warnings(in: .norwegian).isEmpty)
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        #expect(bodyText.contains("Arbeidsgiver AS"))
+        #expect(bodyText.contains("Ansatt Person"))
+        #expect(bodyText.contains("Rådgiver"))
+        #expect(bodyText.contains("600 000 kroner per år"))
+    }
+
     @Test func witnessCannotAlsoBeBeneficiary() async throws {
         var form = TestamentFormData()
         form.testatorName = "Ola Nordmann"

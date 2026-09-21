@@ -31,6 +31,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage for the free document set: purchase agreement, receipt, and loan agreement now check required-field validation, advisory warnings, generated body text, and HTML escaping for preview/PDF safety.
 - Added first premium-marked validation coverage for power of attorney.
 - Added premium-marked validation coverage for debt instrument.
+- Added premium-marked validation coverage for employment agreement.
 
 ## Technical Candidates
 
