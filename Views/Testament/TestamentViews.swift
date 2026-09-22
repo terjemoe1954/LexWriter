@@ -100,11 +100,13 @@ struct TestamentEditorView: View {
                     presentPreview()
                 }
                 .disabled(formData.blockingIssues(in: language).isEmpty == false)
+                .accessibilityIdentifier("testament.previewButton")
 
                 if formData.blockingIssues(in: language).isEmpty == false {
                     Text(language.text(.fillAllRequired))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                        .accessibilityIdentifier("testament.previewValidationMessage")
                 }
             }
 

@@ -125,10 +125,20 @@ final class LexWriterUITests: XCTestCase {
         let app = launchApp()
 
         app.buttons["documentCard.testament"].tap()
-        let previewButton = scrollUntilVisible(app.buttons["Vis testament"], in: app, maxSwipes: 8)
+        XCTAssertTrue(app.navigationBars["Testament"].waitForExistence(timeout: 2))
+        let previewButton = scrollUntilVisible(
+            app.descendants(matching: .any)["testament.previewButton"],
+            in: app,
+            maxSwipes: 8
+        )
+        let validationMessage = scrollUntilVisible(
+            app.descendants(matching: .any)["testament.previewValidationMessage"],
+            in: app,
+            maxSwipes: 2
+        )
 
         XCTAssertTrue(previewButton.exists)
         XCTAssertFalse(previewButton.isEnabled)
-        XCTAssertTrue(app.staticTexts["Fyll inn alle påkrevde data og vitneopplysninger før testamentet kan vises."].exists)
+        XCTAssertTrue(validationMessage.exists)
     }
 }
