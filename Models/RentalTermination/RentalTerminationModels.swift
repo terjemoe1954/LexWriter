@@ -154,7 +154,7 @@ struct RentalTerminationDocument {
         h1 { text-align: center; letter-spacing: 3px; margin-bottom: 30px; }
         .paper { border: 1px solid #8d7358; padding: 36px; background: #f8efdd; overflow-wrap: anywhere; }
         .line { border-bottom: 1px solid #4a3c2d; margin-top: 20px; padding-top: 20px; overflow-wrap: anywhere; }
-        .signature { margin-top: 44px; }
+        .signature { margin-top: 44px; break-inside: avoid; page-break-inside: avoid; }
         </style>
         </head>
         <body>

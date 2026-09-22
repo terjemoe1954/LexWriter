@@ -320,6 +320,8 @@ struct TestamentDocument {
         }
         .signature {
             margin-top: 44px;
+            break-inside: avoid;
+            page-break-inside: avoid;
         }
         .line {
             border-bottom: 1px solid #4a3c2d;

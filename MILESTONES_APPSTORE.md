@@ -95,6 +95,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added unit coverage that keeps printable HTML-preview and signature structure present across every document template.
 - Added `overflow-wrap` to printable HTML signature lines so long names, addresses, and labels wrap more safely in preview/PDF output.
 - Added `overflow-wrap` to printable HTML paper containers so long free-text fields wrap more safely in preview/PDF output.
+- Added printable HTML signature page-break protection so signature blocks are less likely to split across printed/PDF pages.
 - Made `PremiumView` safe for the current pre-purchase phase: it explains that paid premium is planned later, says purchases are not available in this version, hides purchase controls while StoreKit is disabled, and uses the App Store purchase disclaimer only when purchases are enabled.
 - Added a premium preview entry point in Settings.
 - Added Settings sections for access status, free/premium template counts, premium preview, and privacy.

@@ -402,6 +402,12 @@ struct LexWriterTests {
             let paperRuleEnd = try #require(paperRuleRemainder.range(of: ".line") ?? paperRuleRemainder.range(of: "</style>"))
             let paperRule = paperRuleRemainder[..<paperRuleEnd.lowerBound]
             #expect(paperRule.contains("overflow-wrap: anywhere"))
+            let signatureRuleStart = try #require(html.range(of: ".signature"))
+            let signatureRuleRemainder = html[signatureRuleStart.lowerBound...]
+            let signatureRuleEnd = try #require(signatureRuleRemainder.range(of: ".line") ?? signatureRuleRemainder.range(of: "</style>"))
+            let signatureRule = signatureRuleRemainder[..<signatureRuleEnd.lowerBound]
+            #expect(signatureRule.contains("break-inside: avoid"))
+            #expect(signatureRule.contains("page-break-inside: avoid"))
             #expect(html.contains("</html>"))
         }
     }
@@ -679,6 +685,7 @@ struct LexWriterTests {
         #expect(plan.contains("print/pdf review criteria"))
         #expect(plan.contains("`overflow-wrap` to printable html signature lines"))
         #expect(plan.contains("`overflow-wrap` to printable html paper containers"))
+        #expect(plan.contains("printable html signature page-break protection"))
         #expect(plan.contains("long names, addresses, and labels wrap more safely"))
         #expect(plan.contains("long free-text fields wrap more safely"))
         #expect(plan.contains("norwegian, english, and thai character rendering"))
@@ -704,6 +711,7 @@ struct LexWriterTests {
         #expect(handoff.contains("release checklist device/document matrix"))
         #expect(handoff.contains("release checklist print/pdf review criteria"))
         #expect(handoff.contains("printable html signature-line and paper-container `overflow-wrap` protection"))
+        #expect(handoff.contains("printable html signature page-break protection"))
         #expect(handoff.contains("unit tests: 83/83 passed"))
         #expect(handoff.contains("full active test plan can leave an incomplete `.xcresult`"))
         #expect(handoff.contains("run unit tests, ui tests, and launch tests as separate validation steps"))
@@ -744,6 +752,7 @@ struct LexWriterTests {
         #expect(milestones.contains("print/pdf review criteria"))
         #expect(milestones.contains("`overflow-wrap` to printable html signature lines"))
         #expect(milestones.contains("`overflow-wrap` to printable html paper containers"))
+        #expect(milestones.contains("printable html signature page-break protection"))
         #expect(milestones.contains("long names, addresses, and labels wrap more safely"))
         #expect(milestones.contains("long free-text fields wrap more safely"))
         #expect(milestones.contains("norwegian, english, and thai character rendering"))
@@ -821,6 +830,7 @@ struct LexWriterTests {
         #expect(limitations.contains("release checklist device/document matrix"))
         #expect(limitations.contains("release checklist print/pdf review criteria"))
         #expect(limitations.contains("printable html signature-line and paper-container `overflow-wrap` protection"))
+        #expect(limitations.contains("printable html signature page-break protection"))
         #expect(limitations.contains("release checklist separate unit/ui/launch validation guidance"))
         #expect(limitations.contains("ui test target application now points to `lexwriter`"))
         #expect(limitations.contains("ui tests pass with 7/7"))
