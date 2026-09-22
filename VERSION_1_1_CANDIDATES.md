@@ -117,6 +117,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Reverified the separate validation gates after premium activation guide baseline cleanup: unit tests 84/84, build-for-testing, app build, UI tests 7/7, and launch test 1/1.
 - Reverified unit tests after milestone coverage status sync: unit tests 84/84.
 - Reverified build-for-testing after latest unit validation: succeeded.
+- Reverified app build after latest build-for-testing validation: succeeded.
 - Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers.
 
 ## Technical Candidates
