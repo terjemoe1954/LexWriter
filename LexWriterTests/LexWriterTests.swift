@@ -810,6 +810,7 @@ struct LexWriterTests {
         #expect(limitations.contains("storekit product loading"))
         #expect(limitations.contains("release checklist device/document matrix"))
         #expect(limitations.contains("release checklist print/pdf review criteria"))
+        #expect(limitations.contains("printable html `overflow-wrap` protection"))
         #expect(limitations.contains("release checklist separate unit/ui/launch validation guidance"))
         #expect(limitations.contains("ui test target application now points to `lexwriter`"))
         #expect(limitations.contains("ui tests pass with 7/7"))
