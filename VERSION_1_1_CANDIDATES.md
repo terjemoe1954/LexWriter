@@ -66,6 +66,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Completed a manual simulator smoke test covering Home, Settings, Premium preview, language switching, one free document, one premium-marked document, and empty Will preview validation.
 - Added unit coverage that keeps support response drafts aligned with PDF saving limits, no full document history/cloud sync, and print/PDF troubleshooting details.
 - Added support troubleshooting wording for print/PDF issues involving long fields, free text, and signature sections.
+- Added unit coverage that keeps support premium replies explicit about all documents remaining available and future App Store Connect product setup/testing.
 - Added unit coverage that keeps known limitations visible for legal scope, storage limits, premium preparation, StoreKit, and current UI-test status.
 - Added unit coverage that keeps the premium activation guide explicit about product setup, sandbox/restore testing, activation flags, and the two-release recommendation.
 - Added unit coverage that keeps the premium activation guide explicit about the current free and premium-marked document split.

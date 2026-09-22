@@ -849,6 +849,10 @@ struct LexWriterTests {
         #expect(support.contains("qualified adviser before signing"))
         #expect(support.contains("premiumvisningen er synlig"))
         #expect(support.contains("kjøp og premium-låsing er ikke aktivert"))
+        #expect(support.contains("alle dokumenter er tilgjengelige i dagens versjon"))
+        #expect(support.contains("app store connect-produktet er satt opp og testet"))
+        #expect(support.contains("all documents remain available in the current version"))
+        #expect(support.contains("app store connect product setup and testing are complete"))
         #expect(support.contains("premium preview screenshots should only be used"))
         #expect(support.contains("submission text explains that purchases are not available"))
     }
