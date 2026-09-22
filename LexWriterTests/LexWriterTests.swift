@@ -625,6 +625,16 @@ struct LexWriterTests {
         #expect(!project.contains("TEST_TARGET_NAME = DocWriter;"))
     }
 
+    @Test func premiumPreviewLaunchRouteStaysUITestOnly() async throws {
+        let app = try projectFileContents("App/LexWriterApp.swift").localizedLowercase
+
+        #expect(app.contains("openspremiumpreviewforuitest"))
+        #expect(app.contains("processinfo.processinfo.arguments.contains(\"-openpremiumpreviewuitest\")"))
+        #expect(app.contains("premiumview(language: .norwegian, highlighteddocument: nil)"))
+        #expect(app.contains("if monetizationplan.ispremiumstoreenabled"))
+        #expect(app.contains("purchasemanager.start()"))
+    }
+
     @Test func versionOneOnePlanKeepsPremiumActivationDeferred() async throws {
         let plan = try projectFileContents("VERSION_1_1_CANDIDATES.md").localizedLowercase
 
@@ -634,6 +644,7 @@ struct LexWriterTests {
         #expect(plan.contains("keep storekit product loading disabled"))
         #expect(plan.contains("keep purchase and restore controls hidden"))
         #expect(plan.contains("keep premium enforcement disabled"))
+        #expect(plan.contains("ui-test-only `-openpremiumpreviewuitest` launch route"))
         #expect(plan.contains("defer until premium activation"))
         #expect(plan.contains("enabling `ispremiumstoreenabled`"))
         #expect(plan.contains("enabling `enforcespremiumaccess`"))
@@ -649,10 +660,11 @@ struct LexWriterTests {
         #expect(handoff.contains("storekit product loading is disabled"))
         #expect(handoff.contains("purchase and restore buttons are hidden"))
         #expect(handoff.contains("premium enforcement is disabled"))
-        #expect(handoff.contains("unit tests: 82/82 passed"))
+        #expect(handoff.contains("unit tests: 83/83 passed"))
         #expect(handoff.contains("build for testing: succeeded"))
         #expect(handoff.contains("ui test target now points to `lexwriter`"))
         #expect(handoff.contains("ui tests: 7/7 passed"))
+        #expect(handoff.contains("ui-test-only `-openpremiumpreviewuitest` launch argument"))
         #expect(handoff.contains("do not enable storekit or premium locking"))
         #expect(handoff.contains("continue from the premium-preparation workstream"))
     }
@@ -759,6 +771,8 @@ struct LexWriterTests {
         #expect(guide.contains("confirm restore purchases works"))
         #expect(guide.contains("static let ispremiumstoreenabled = true"))
         #expect(guide.contains("static let enforcespremiumaccess = true"))
+        #expect(guide.contains("ui-test-only launch route"))
+        #expect(guide.contains("does not enable storekit, purchases, restore, or premium enforcement"))
         #expect(guide.contains("prefer two separate releases"))
         #expect(guide.contains("premium-preparation release"))
         #expect(guide.contains("premium-enforcement release"))

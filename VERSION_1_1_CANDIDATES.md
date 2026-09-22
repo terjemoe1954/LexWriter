@@ -1,6 +1,6 @@
 # LexWriter 1.1 Candidate Plan
 
-Last updated: 2026-09-21
+Last updated: 2026-09-22
 
 Use this as the working shortlist for the first post-launch update. Keep the scope conservative unless real user feedback or App Store data points to something urgent.
 
@@ -59,6 +59,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps the `LexWriterUITests` target application pointed at `LexWriter`.
 - Updated UI tests so each run resets language and appearance state, and verified `LexWriterUITests` passes with 7/7 plus the launch test passes with 1/1.
 - Stabilized the Premium preview UI test with dedicated accessibility identifiers for the planned-premium headline, included-documents heading, and unavailable-purchases message, opened through the UI-test-only `-openPremiumPreviewUITest` launch route.
+- Added unit coverage that keeps the Premium preview UI-test launch route documented as test-only and separate from StoreKit, purchases, restore, and premium enforcement.
 - Completed a manual simulator smoke test covering Home, Settings, Premium preview, language switching, one free document, one premium-marked document, and empty Will preview validation.
 - Added unit coverage that keeps support response drafts aligned with PDF saving limits, no full document history/cloud sync, and print/PDF troubleshooting details.
 - Added unit coverage that keeps known limitations visible for legal scope, storage limits, premium preparation, StoreKit, and the UI-test blocker.
