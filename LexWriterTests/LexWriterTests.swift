@@ -684,6 +684,8 @@ struct LexWriterTests {
         #expect(handoff.contains("storekit product loading is disabled"))
         #expect(handoff.contains("purchase and restore buttons are hidden"))
         #expect(handoff.contains("premium enforcement is disabled"))
+        #expect(handoff.contains("release checklist device/document matrix"))
+        #expect(handoff.contains("release checklist print/pdf review criteria"))
         #expect(handoff.contains("unit tests: 83/83 passed"))
         #expect(handoff.contains("build for testing: succeeded"))
         #expect(handoff.contains("ui test target now points to `lexwriter`"))
