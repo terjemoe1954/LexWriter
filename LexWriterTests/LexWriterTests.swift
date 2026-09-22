@@ -700,6 +700,31 @@ struct LexWriterTests {
         #expect(plan.contains("locking premium-marked documents"))
     }
 
+    @Test func versionOneOneCompletedCandidateWorkHasNoDuplicateBullets() async throws {
+        let plan = try projectFileContents("VERSION_1_1_CANDIDATES.md")
+        let lines = plan.components(separatedBy: .newlines)
+        var isInCompletedWorkSection = false
+        var bullets: [String] = []
+
+        for line in lines {
+            if line == "## Completed Candidate Work" {
+                isInCompletedWorkSection = true
+                continue
+            }
+
+            if isInCompletedWorkSection && line.hasPrefix("## ") {
+                break
+            }
+
+            if isInCompletedWorkSection && line.hasPrefix("- ") {
+                bullets.append(line)
+            }
+        }
+
+        #expect(bullets.isEmpty == false)
+        #expect(Set(bullets).count == bullets.count)
+    }
+
     @Test func codexHandoffKeepsSafeSessionInstructionsCurrent() async throws {
         let handoff = try projectFileContents("CODEX_HANDOFF.md").localizedLowercase
 
@@ -712,7 +737,7 @@ struct LexWriterTests {
         #expect(handoff.contains("release checklist print/pdf review criteria"))
         #expect(handoff.contains("printable html signature-line and paper-container `overflow-wrap` protection"))
         #expect(handoff.contains("printable html signature page-break protection"))
-        #expect(handoff.contains("unit tests: 83/83 passed"))
+        #expect(handoff.contains("unit tests: 84/84 passed"))
         #expect(handoff.contains("full active test plan can leave an incomplete `.xcresult`"))
         #expect(handoff.contains("run unit tests, ui tests, and launch tests as separate validation steps"))
         #expect(handoff.contains("build for testing: succeeded"))
