@@ -783,6 +783,8 @@ struct LexWriterTests {
         #expect(limitations.contains("premium access is not enforced yet"))
         #expect(limitations.contains("purchases are not available"))
         #expect(limitations.contains("storekit product loading"))
+        #expect(limitations.contains("release checklist device/document matrix"))
+        #expect(limitations.contains("release checklist print/pdf review criteria"))
         #expect(limitations.contains("ui test target application now points to `lexwriter`"))
         #expect(limitations.contains("ui tests pass with 7/7"))
     }
