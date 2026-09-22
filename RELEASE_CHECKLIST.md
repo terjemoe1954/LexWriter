@@ -66,5 +66,6 @@ Print/PDF review:
 - Build with test targets.
 - Run unit tests.
 - Run UI tests if UI automation is part of this release gate; the `LexWriterUITests` target application should point to `LexWriter`.
+- If the full active test plan leaves an incomplete `.xcresult`, run unit tests, UI tests, and launch tests as separate validation steps.
 - Archive the exact build intended for submission.
 - Submit to TestFlight first for a final smoke test.
