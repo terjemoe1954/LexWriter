@@ -115,6 +115,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps the completed-candidate work list free of duplicate bullets.
 - Updated `PREMIUM_ACTIVATION.md` so the current test baseline and UI-test target guidance match the stabilized release gate.
 - Reverified the separate validation gates after premium activation guide baseline cleanup: unit tests 84/84, build-for-testing, app build, UI tests 7/7, and launch test 1/1.
+- Reverified unit tests after milestone coverage status sync: unit tests 84/84.
 - Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers.
 
 ## Technical Candidates
