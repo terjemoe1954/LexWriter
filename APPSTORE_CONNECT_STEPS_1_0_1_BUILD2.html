@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <title>LexWriter App Store Connect steg for steg</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.45;
+      margin: 36px;
+      color: #111;
+    }
+    h1, h2 {
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 26px;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 24px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+    p, li {
+      font-size: 13px;
+    }
+    .important {
+      border: 1px solid #c77;
+      background: #fff7f7;
+      padding: 10px 12px;
+      border-radius: 6px;
+    }
+    .ok {
+      border: 1px solid #7a9;
+      background: #f6fffa;
+      padding: 10px 12px;
+      border-radius: 6px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+    ul, ol {
+      padding-left: 22px;
+    }
+    .checklist li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>LexWriter App Store Connect steg for steg</h1>
+  <p><strong>Status:</strong> App Store har allerede <code>1.0.1 (1)</code> live. Xcode er nå satt til <code>1.0.1 (2)</code>.</p>
+
+  <div class="important">
+    <strong>Viktig anbefaling:</strong> Hvis <code>1.0.1 (1)</code> allerede er live, bør neste App Store-oppdatering normalt være en ny versjon, for eksempel <code>1.1 (2)</code> eller <code>1.0.2 (2)</code>. Ikke bruk <code>1.0.1 (2)</code> til en ny live-oppdatering med mindre App Store Connect fortsatt lar deg erstatte builden i en ikke-utgitt 1.0.1-versjon.
+  </div>
+
+  <h2>1. Velg riktig versjon</h2>
+  <ol class="checklist">
+    <li>Bruk <code>1.1</code> hvis dette er premium-forberedelse og polish, slik planen beskriver.</li>
+    <li>Bruk <code>1.0.2</code> hvis du vil behandle dette som en liten patch/stability update.</li>
+    <li>Sett build til <code>2</code> for å være tryggere siden <code>1.0.1 (1)</code> allerede er brukt.</li>
+    <li>Anbefalt for denne planen: <strong>Version <code>1.1</code>, Build <code>2</code></strong>.</li>
+  </ol>
+
+  <h2>2. Endre i Xcode</h2>
+  <ol class="checklist">
+    <li>Åpne target <strong>LexWriter</strong>.</li>
+    <li>Gå til <strong>General</strong> eller target identity/version-feltet.</li>
+    <li>Sett <strong>Version</strong> til <code>1.1</code> eller <code>1.0.2</code>.</li>
+    <li>Sett <strong>Build</strong> til <code>2</code>.</li>
+    <li>Ikke endre StoreKit, purchase, restore eller premium enforcement.</li>
+  </ol>
+
+  <h2>3. Verifiser lokalt etter versjonsendringen</h2>
+  <ol class="checklist">
+    <li>Bekreft Xcode build settings viser riktig <code>MARKETING_VERSION</code> og <code>CURRENT_PROJECT_VERSION</code>.</li>
+    <li>Kjør vanlig app-build.</li>
+    <li>Kjør build-for-testing.</li>
+    <li>Kjør unit tests: forventet <code>84/84</code>.</li>
+    <li>Kjør UI tests: forventet <code>7/7</code>.</li>
+    <li>Kjør launch test: forventet <code>1/1</code>.</li>
+  </ol>
+
+  <h2>4. Manuell smoke før archive</h2>
+  <ol class="checklist">
+    <li>Åpne appen på simulator eller fysisk enhet.</li>
+    <li>Sjekk Home, gratis/premium-badges og juridisk merknad.</li>
+    <li>Åpne Settings og bekreft 3 gratis og 9 planlagte premium-maler.</li>
+    <li>Åpne Premium preview og bekreft at kjøp ikke er tilgjengelig i denne versjonen.</li>
+    <li>Åpne minst én gratis mal og én premium-merket mal. Begge skal være åpne.</li>
+    <li>Sjekk print/PDF preview, spesielt lange felt og signaturseksjoner.</li>
+  </ol>
+
+  <h2>5. Archive og upload</h2>
+  <ol class="checklist">
+    <li>Velg riktig signing/team i Xcode.</li>
+    <li>Velg <strong>Any iOS Device</strong> eller riktig generic destination.</li>
+    <li>Kjør <strong>Product &gt; Archive</strong>.</li>
+    <li>Når Organizer åpner: velg arkivet og trykk <strong>Distribute App</strong>.</li>
+    <li>Velg <strong>App Store Connect</strong> og last opp builden.</li>
+    <li>Vent til App Store Connect er ferdig med processing.</li>
+  </ol>
+
+  <h2>6. App Store Connect</h2>
+  <ol class="checklist">
+    <li>Opprett ny appversjon: <code>1.1</code> eller <code>1.0.2</code>.</li>
+    <li>Velg den opplastede builden.</li>
+    <li>Lim inn release notes fra <code>APPSTORE_SUBMISSION_NOTES.md</code>.</li>
+    <li>Kontroller at metadata ikke sier at kjøp eller opplåsing er tilgjengelig nå.</li>
+    <li>Kontroller privacy details, support email og privacy policy link.</li>
+    <li>Bruk Premium preview-screenshot bare hvis listing-teksten forklarer at premium er under forberedelse og kjøp ikke er tilgjengelig.</li>
+  </ol>
+
+  <h2>7. TestFlight før innsending</h2>
+  <ol class="checklist">
+    <li>Legg builden i intern TestFlight-testing.</li>
+    <li>Installer TestFlight-builden på minst én enhet.</li>
+    <li>Gjenta rask smoke: Home, Settings, Premium preview, én gratis mal, én premium-merket mal, PDF/print preview.</li>
+    <li>Bekreft igjen at purchase/restore-knapper ikke vises.</li>
+  </ol>
+
+  <h2>8. Submit for Review</h2>
+  <ol class="checklist">
+    <li>Sjekk at riktig build er valgt.</li>
+    <li>Sjekk at App Review Notes forklarer premium-forberedelse: badges synlige, alle dokumenter åpne, kjøp utilgjengelig.</li>
+    <li>Sjekk at release notes er på norsk og engelsk.</li>
+    <li>Send til review.</li>
+  </ol>
+
+  <div class="ok">
+    <strong>Ikke gjør ennå:</strong> Ikke slå på <code>isPremiumStoreEnabled</code>, ikke vis kjøpsknapper, ikke vis restore-knapp, og ikke slå på <code>enforcesPremiumAccess</code>.
+  </div>
+</body>
+</html>

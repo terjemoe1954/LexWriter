@@ -17,6 +17,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A86A99E23041853A00695D5E"
                BuildableName = "LexWriter.app"
+               BlueprintName = "LexWriter"
                ReferencedContainer = "container:LexWriter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -24,8 +25,8 @@
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
@@ -68,6 +69,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A86A99E23041853A00695D5E"
             BuildableName = "LexWriter.app"
+            BlueprintName = "LexWriter"
             ReferencedContainer = "container:LexWriter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -84,6 +86,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A86A99E23041853A00695D5E"
             BuildableName = "LexWriter.app"
+            BlueprintName = "LexWriter"
             ReferencedContainer = "container:LexWriter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
