@@ -85,7 +85,7 @@ This keeps the risk lower if App Store Connect product setup or restore behavior
 
 ## Current Validation Notes
 
-- Latest separate validation sequence on 2026-09-22 after milestone/status sync: unit tests 84/84 passed, build-for-testing succeeded, app build succeeded, UI tests 7/7 passed, and launch test 1/1 passed.
+- Latest separate validation sequence on 2026-09-22 after final local gate refresh: unit tests 84/84 passed, build-for-testing succeeded, app build succeeded, UI tests 7/7 passed, and launch test 1/1 passed.
 - `PurchaseManager` supports injectable `UserDefaults` for isolated tests.
 - Premium preview localization is covered for every supported app language.
 - Premium preview UI assertions use stable accessibility identifiers instead of visible copy and open through a UI-test-only launch route; this does not enable StoreKit, purchases, restore, or premium enforcement.

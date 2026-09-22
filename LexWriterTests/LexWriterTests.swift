@@ -921,7 +921,7 @@ struct LexWriterTests {
         #expect(guide.contains("current test baseline: 84 unit tests pass"))
         #expect(guide.contains("7 ui tests pass"))
         #expect(guide.contains("app build succeeds"))
-        #expect(guide.contains("latest separate validation sequence on 2026-09-22 after milestone/status sync"))
+        #expect(guide.contains("latest separate validation sequence on 2026-09-22 after final local gate refresh"))
         #expect(guide.contains("unit tests 84/84 passed"))
         #expect(guide.contains("build-for-testing succeeded"))
         #expect(guide.contains("launch test 1/1 passed"))
