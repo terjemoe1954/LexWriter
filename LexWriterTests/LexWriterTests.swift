@@ -517,6 +517,12 @@ struct LexWriterTests {
         #expect(checklist.contains("create at least one free document and one premium-marked document"))
         #expect(checklist.contains("preview, print, and save pdf from a representative document"))
         #expect(checklist.contains("switch language between norwegian, english, and thai"))
+        #expect(checklist.contains("device and document matrix"))
+        #expect(checklist.contains("small iphone: verify home, settings, premium preview"))
+        #expect(checklist.contains("large iphone: verify document card layout, long field labels"))
+        #expect(checklist.contains("ipad: verify navigation, form width, print/pdf preview"))
+        #expect(checklist.contains("highest-risk templates"))
+        #expect(checklist.contains("required-field validation, advisory warnings, preview layout, and signature/completion text"))
     }
 
     @Test func releaseChecklistKeepsLegalTrustReviewExplicit() async throws {

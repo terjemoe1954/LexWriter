@@ -19,6 +19,13 @@ Use this checklist before submitting a new App Store build.
 - Preview, print, and save PDF from a representative document.
 - Switch language between Norwegian, English, and Thai and confirm the main labels update.
 
+Device and document matrix:
+
+- Small iPhone: verify Home, Settings, Premium preview, one free document editor, one premium-marked document editor, and print/PDF preview.
+- Large iPhone: verify document card layout, long field labels, validation messages, preview spacing, and signature sections.
+- iPad: verify navigation, form width, print/PDF preview, language switching, and Settings/User Guide readability.
+- Highest-risk templates: review testament, power of attorney, debt instrument, employment agreement, and NDA for required-field validation, advisory warnings, preview layout, and signature/completion text.
+
 ## Premium Readiness
 
 - Review `PREMIUM_ACTIVATION.md`.
