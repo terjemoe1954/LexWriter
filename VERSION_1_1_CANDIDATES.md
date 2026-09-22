@@ -126,6 +126,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Reverified app build after latest build-for-testing validation: succeeded.
 - Reverified UI tests after latest app build validation: UI tests 7/7.
 - Reverified launch test after latest UI-test validation: launch test 1/1.
+- Reverified local simulator smoke after latest launch-test validation: Home, badges, free/premium-marked document access, Settings access summary, Premium preview unavailable-purchases copy, and absent purchase/restore controls passed with no clear layout issues.
 - Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers.
 
 ## Technical Candidates
