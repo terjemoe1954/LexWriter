@@ -79,6 +79,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps the release checklist explicit about legal/trust review and higher-risk templates before release.
 - Added unit coverage that keeps the release checklist explicit about App Store Connect checks, screenshots, privacy details, support email, and privacy policy links.
 - Added unit coverage that keeps App Store release notes aligned with premium-preparation, unavailable purchases, free/premium labels, and legal-scope wording.
+- Added App Store release-note wording for improved print/PDF layout around long fields and signature sections.
 - Added unit coverage that keeps App Store keyword drafts focused on document, print, and PDF search terms rather than active premium purchase wording.
 - Added unit coverage that keeps support replies conservative about legal-advice scope and high-risk situations before signing.
 - Added unit coverage for the premium-preview footer explaining that all documents are currently available.

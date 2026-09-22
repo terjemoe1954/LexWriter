@@ -598,6 +598,8 @@ struct LexWriterTests {
         #expect(notes.contains("purchases are not available in this version"))
         #expect(notes.contains("brukerveiledningen forklarer nå gratis/premium-merking"))
         #expect(notes.contains("user guide now explains free/premium labels"))
+        #expect(notes.contains("forbedret print/pdf-layout for lange felt og signaturseksjoner"))
+        #expect(notes.contains("improved print/pdf layout for long fields and signature sections"))
         #expect(notes.contains("ikke juridisk rådgivning"))
         #expect(notes.contains("not legal advice"))
         #expect(!notes.contains("users can buy premium now"))

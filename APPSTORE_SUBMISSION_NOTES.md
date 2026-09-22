@@ -13,6 +13,7 @@ Use this as a working draft for the next App Store submission.
 - Brukerveiledningen forklarer nå gratis/premium-merking og juridisk avgrensning tydeligere.
 - Hjemskjermen viser en kort merknad om at dokumentene er maler og utkast, ikke juridisk rådgivning.
 - Forbedret layout for dokumentkort med lange titler.
+- Forbedret print/PDF-layout for lange felt og signaturseksjoner.
 
 ### English
 
@@ -23,6 +24,7 @@ Use this as a working draft for the next App Store submission.
 - The User Guide now explains free/premium labels and legal scope more clearly.
 - The home screen now states that documents are templates and drafts, not legal advice.
 - Improved document card layout for longer titles.
+- Improved print/PDF layout for long fields and signature sections.
 
 ## Metadata Drafts
 
