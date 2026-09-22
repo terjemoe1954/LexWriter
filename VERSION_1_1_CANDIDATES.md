@@ -72,6 +72,8 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps the recommended next build order conservative: live signals and smoke testing before StoreKit sandbox work and premium enforcement.
 - Added unit coverage that keeps the release checklist explicit about version/build, smoke tests, App Store Connect checks, archive, and TestFlight validation.
 - Added unit coverage that keeps the release checklist explicit about product smoke-test scope across devices, core screens, document creation, PDF output, and language switching.
+- Added a release-checklist device and document matrix for small iPhone, large iPhone, iPad, and highest-risk template smoke testing.
+- Added release-checklist print/PDF review criteria for clipping, overlap, advisory text, signature/completion sections, and Norwegian, English, and Thai character rendering.
 - Added unit coverage that keeps the release checklist explicit about legal/trust review and higher-risk templates before release.
 - Added unit coverage that keeps the release checklist explicit about App Store Connect checks, screenshots, privacy details, support email, and privacy policy links.
 - Added unit coverage that keeps App Store release notes aligned with premium-preparation, unavailable purchases, free/premium labels, and legal-scope wording.
