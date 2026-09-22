@@ -119,7 +119,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added `SUPPORT_RESPONSES.md` with draft replies for legal scope, privacy, premium, saving, and export questions.
 - Added `VERSION_1_1_CANDIDATES.md` as the working shortlist for the first post-launch update.
 - Updated version 1.1 milestones so premium badges are treated as visible without premium locks, not future work.
-- Checked Apple field-performance tooling for `com.terjemoe.LexWriter` versions `1.0.1` and `1.0`; versions were listed initially, but hangs, launch, and disk-write datasets returned no available data. Crash tooling did not resolve the product and should be checked manually in Xcode Organizer or App Store Connect.
+- Rechecked Apple field-performance tooling for `com.terjemoe.LexWriter` versions `1.0.1` and `1.0` on 2026-09-22; launches, hangs, and disk writes returned no available versions. Crash/review status should still be checked manually in Xcode Organizer or App Store Connect.
 
 ## Milestone 1: First Live Signals
 

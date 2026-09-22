@@ -779,6 +779,8 @@ struct LexWriterTests {
         #expect(handoff.contains("ui-test-only `-openpremiumpreviewuitest` launch argument"))
         #expect(handoff.contains("do not enable storekit or premium locking"))
         #expect(handoff.contains("continue from the premium-preparation workstream"))
+        #expect(handoff.contains("apple field-performance datasets were rechecked on 2026-09-22"))
+        #expect(handoff.contains("field-performance tooling still returns no available versions"))
     }
 
     @Test func appStoreMilestonesKeepPremiumReadinessOrderExplicit() async throws {
@@ -822,6 +824,8 @@ struct LexWriterTests {
         #expect(milestones.contains("run `lexwriteruitests` if ui automation should be part of the release gate"))
         #expect(milestones.contains("prepare updated app store metadata and screenshots for the paid/premium version"))
         #expect(milestones.contains("enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed"))
+        #expect(milestones.contains("rechecked apple field-performance tooling"))
+        #expect(milestones.contains("returned no available versions"))
     }
 
     @Test func supportDraftsKeepSavingAndPrintScopeClear() async throws {
@@ -902,6 +906,8 @@ struct LexWriterTests {
         #expect(limitations.contains("launch test passes with 1/1"))
         #expect(limitations.contains("full active test plan leaves an incomplete `.xcresult`"))
         #expect(limitations.contains("run unit tests, ui tests, and launch tests as separate validation steps"))
+        #expect(limitations.contains("apple field-performance datasets were rechecked on 2026-09-22"))
+        #expect(limitations.contains("returned no available versions"))
     }
 
     @Test func premiumActivationGuideKeepsActivationPreconditionsExplicit() async throws {

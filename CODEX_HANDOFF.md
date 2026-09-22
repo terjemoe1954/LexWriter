@@ -70,7 +70,7 @@ Premium-marked but still available:
 - UI test target now points to `LexWriter`; UI tests pass with 7/7, and the launch test passes with 1/1.
 - Manual simulator smoke confirmed all documents remain reachable, purchase/restore controls are absent, and empty Will preview validation is visible.
 - Xcode still shows one yellow project warning: `Update to recommended settings`. Leave it for a separate commit.
-- Apple field-performance datasets were unavailable for live versions `1.0.1` and `1.0`; crash tooling did not resolve the product, so crash status should be checked manually in Xcode Organizer or App Store Connect.
+- Apple field-performance datasets were rechecked on 2026-09-22 for live versions `1.0.1` and `1.0`; launches, hangs, and disk writes returned no available versions, so crash/review status should still be checked manually in Xcode Organizer or App Store Connect.
 
 ## UI Test Status
 
@@ -80,7 +80,7 @@ Premium-marked but still available:
 
 1. Continue with manual 1.1 checks: App Store Connect or Xcode Organizer crash/review checks, broader device smoke testing, visual exported-PDF review, and screenshot/metadata review.
 2. Use `PREMIUM_ACTIVATION.md` before changing `isPremiumStoreEnabled` or `enforcesPremiumAccess`.
-3. Check App Store Connect or Xcode Organizer manually for crashes until Apple tooling returns field data.
+3. Check App Store Connect or Xcode Organizer manually for crashes because Apple field-performance tooling still returns no available versions.
 
 ## Safe Instruction For A New Codex Session
 
