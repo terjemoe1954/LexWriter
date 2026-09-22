@@ -757,6 +757,8 @@ struct LexWriterTests {
         #expect(handoff.contains("ui tests: 7/7 passed"))
         #expect(handoff.contains("settings app-info assertions scroll to the build label"))
         #expect(handoff.contains("support print/pdf troubleshooting"))
+        #expect(handoff.contains("support legal-advice and premium-availability scope coverage"))
+        #expect(handoff.contains("visible-badges-without-locks"))
         #expect(handoff.contains("ui-test-only `-openpremiumpreviewuitest` launch argument"))
         #expect(handoff.contains("do not enable storekit or premium locking"))
         #expect(handoff.contains("continue from the premium-preparation workstream"))

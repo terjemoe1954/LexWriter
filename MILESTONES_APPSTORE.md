@@ -46,10 +46,12 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added unit coverage that guards the release checklist's premium-preparation gates and current UI-test status note.
 - Added unit coverage that keeps App Store metadata drafts focused on legal document templates, printing/PDF, and legal-scope wording.
 - Added unit coverage that keeps App Store review notes and screenshot guidance aligned with premium-preparation wording.
+- Added unit coverage that keeps Norwegian App Store review notes explicit about premium preparation, unavailable purchases, and all documents remaining available.
 - Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
 - Added screenshot-priority guidance so normal stability or premium-preparation updates lead with Home, document editor, print/PDF preview, and Settings before any Premium preview screenshot.
 - Added unit coverage that keeps support responses clear about PDF saving, no full document history/cloud sync, and print/PDF troubleshooting details.
 - Added support troubleshooting wording for print/PDF issues involving long fields, free text, and signature sections.
+- Added unit coverage that keeps support premium replies explicit about all documents remaining available and future App Store Connect product setup/testing.
 - Added unit coverage that keeps `KNOWN_LIMITATIONS.md` explicit about legal scope, storage limits, premium-preparation state, StoreKit, and current UI-test status.
 - Added unit coverage that keeps `PREMIUM_ACTIVATION.md` explicit about product setup, sandbox/restore testing, activation flags, and the two-release recommendation.
 - Added unit coverage that keeps `PREMIUM_ACTIVATION.md` explicit about the current free and premium-marked document split.
@@ -116,6 +118,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added `APPSTORE_SUBMISSION_NOTES.md` as a working draft for release notes, review notes, and screenshots.
 - Added `SUPPORT_RESPONSES.md` with draft replies for legal scope, privacy, premium, saving, and export questions.
 - Added `VERSION_1_1_CANDIDATES.md` as the working shortlist for the first post-launch update.
+- Updated version 1.1 milestones so premium badges are treated as visible without premium locks, not future work.
 - Checked Apple field-performance tooling for `com.terjemoe.LexWriter` versions `1.0.1` and `1.0`; versions were listed initially, but hangs, launch, and disk-write datasets returned no available data. Crash tooling did not resolve the product and should be checked manually in Xcode Organizer or App Store Connect.
 
 ## Milestone 1: First Live Signals
