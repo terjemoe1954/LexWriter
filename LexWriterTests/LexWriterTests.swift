@@ -772,6 +772,7 @@ struct LexWriterTests {
         #expect(milestones.contains("before turning on premium enforcement"))
         #expect(milestones.contains("follow `premium_activation.md`"))
         #expect(milestones.contains("purchase/restore value copy only when storekit is enabled"))
+        #expect(milestones.contains("keep premium badges visible without premium locks"))
         #expect(milestones.contains("test purchase, restore purchase, pending purchase, cancelled purchase"))
         #expect(milestones.contains("only enable premium locking after"))
         #expect(milestones.contains("enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed"))

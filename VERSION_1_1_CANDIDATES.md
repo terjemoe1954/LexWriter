@@ -28,6 +28,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 
 ## Completed Candidate Work
 
+- Updated the App Store milestones so premium badges are treated as visible-and-unlocked state, not future work.
 - Added unit coverage for Home screen localization across every supported app language.
 - Added unit coverage for home-screen legal-scope copy across Norwegian, English, and Thai.
 - Added unit coverage for Settings privacy copy across Norwegian, English, and Thai.

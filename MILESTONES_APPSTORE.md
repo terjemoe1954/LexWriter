@@ -158,7 +158,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Add validation tests for the highest-risk premium-marked document types if they are not already covered.
 - Tighten long-text handling in print layouts and signature sections.
 - Improve the most confusing first-time-user area before adding new document types.
-- Consider enabling premium badges before enforcing premium locks, so users can see the future product structure without being blocked.
+- Keep premium badges visible without premium locks, so users can see the future product structure without being blocked.
 
 ## Milestone 6: Legal and Product Quality
 
