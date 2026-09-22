@@ -26,6 +26,13 @@ Device and document matrix:
 - iPad: verify navigation, form width, print/PDF preview, language switching, and Settings/User Guide readability.
 - Highest-risk templates: review testament, power of attorney, debt instrument, employment agreement, and NDA for required-field validation, advisory warnings, preview layout, and signature/completion text.
 
+Print/PDF review:
+
+- Confirm long names, addresses, dates, amounts, and free-text fields do not clip or overlap in preview or exported PDF.
+- Confirm advisory warnings and legal-scope text remain readable before printing or saving.
+- Confirm signature, place, date, witness, and completion sections are present where the document type requires them.
+- Confirm Norwegian, English, and Thai characters render correctly in the preview/PDF path.
+
 ## Premium Readiness
 
 - Review `PREMIUM_ACTIVATION.md`.

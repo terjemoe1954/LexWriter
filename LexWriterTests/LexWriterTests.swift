@@ -523,6 +523,11 @@ struct LexWriterTests {
         #expect(checklist.contains("ipad: verify navigation, form width, print/pdf preview"))
         #expect(checklist.contains("highest-risk templates"))
         #expect(checklist.contains("required-field validation, advisory warnings, preview layout, and signature/completion text"))
+        #expect(checklist.contains("print/pdf review"))
+        #expect(checklist.contains("long names, addresses, dates, amounts, and free-text fields do not clip or overlap"))
+        #expect(checklist.contains("advisory warnings and legal-scope text remain readable"))
+        #expect(checklist.contains("signature, place, date, witness, and completion sections are present"))
+        #expect(checklist.contains("norwegian, english, and thai characters render correctly"))
     }
 
     @Test func releaseChecklistKeepsLegalTrustReviewExplicit() async throws {
