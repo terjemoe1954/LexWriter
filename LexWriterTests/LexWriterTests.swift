@@ -869,6 +869,7 @@ struct LexWriterTests {
         #expect(limitations.contains("release checklist device/document matrix"))
         #expect(limitations.contains("release checklist print/pdf review criteria"))
         #expect(limitations.contains("support print/pdf troubleshooting details"))
+        #expect(limitations.contains("norwegian review-note premium-preparation wording"))
         #expect(limitations.contains("printable html signature-line and paper-container `overflow-wrap` protection"))
         #expect(limitations.contains("printable html signature page-break protection"))
         #expect(limitations.contains("release checklist separate unit/ui/launch validation guidance"))
