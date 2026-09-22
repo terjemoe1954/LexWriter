@@ -15,7 +15,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Keep purchase and restore controls hidden.
 - Keep premium enforcement disabled.
 - Preserve clear legal-scope messaging: documents are templates and drafts, not legal advice.
-- Verify build, build-for-testing, and unit tests before archive.
+- Verify app build, build-for-testing, unit tests, UI tests, and launch test before archive.
 - Check App Store Connect or Xcode Organizer manually for crashes and user feedback.
 
 ## Strong Candidates
