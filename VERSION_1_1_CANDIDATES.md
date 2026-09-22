@@ -119,6 +119,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Reverified build-for-testing after latest unit validation: succeeded.
 - Reverified app build after latest build-for-testing validation: succeeded.
 - Reverified UI tests after latest app build validation: UI tests 7/7.
+- Reverified launch test after latest UI-test validation: launch test 1/1.
 - Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers.
 
 ## Technical Candidates
