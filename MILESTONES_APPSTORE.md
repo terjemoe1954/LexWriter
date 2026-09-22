@@ -193,6 +193,6 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Are there any App Store Connect crashes, reviews, or support emails from the first days live?
 - Which document flow should be considered the most important to polish for version `1.1`?
 - What should the first lifetime unlock price be?
-- Should premium be turned on in version `1.1`, or should `1.1` only prepare the app and leave locking for `1.2`?
+- Current recommendation: keep version `1.1` premium-preparation only, and leave paid premium plus premium locking for a later release after StoreKit, metadata, screenshots, and restore behavior are confirmed.
 - Do you want local save/export later, or should the app stay print-first?
 - Do you want a lawyer or legal reviewer involved before the first post-launch update?

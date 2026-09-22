@@ -683,6 +683,8 @@ struct LexWriterTests {
         #expect(plan.contains("keep storekit product loading disabled"))
         #expect(plan.contains("keep purchase and restore controls hidden"))
         #expect(plan.contains("keep premium enforcement disabled"))
+        #expect(plan.contains("1.1 should remain premium-preparation only"))
+        #expect(plan.contains("paid premium and premium locking should wait for a later release"))
         #expect(plan.contains("verify app build, build-for-testing, unit tests, ui tests, and launch test before archive"))
         #expect(plan.contains("device and document matrix"))
         #expect(plan.contains("small iphone, large iphone, ipad, and highest-risk template smoke testing"))

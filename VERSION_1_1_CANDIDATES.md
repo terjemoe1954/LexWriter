@@ -128,7 +128,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 
 ## Open Decisions
 
-- Should 1.1 remain premium-preparation only, or should paid premium wait for 1.2?
+- 1.1 should remain premium-preparation only; paid premium and premium locking should wait for a later release after StoreKit, metadata, screenshots, and restore behavior are confirmed.
 - What should the first lifetime unlock price be?
 - Which document flow should get the first deeper polish pass?
 - Should a legal reviewer check the highest-risk templates before the next App Store submission?
