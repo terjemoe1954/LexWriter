@@ -694,6 +694,8 @@ struct LexWriterTests {
         #expect(handoff.contains("full active test plan can leave an incomplete `.xcresult`"))
         #expect(handoff.contains("run unit tests, ui tests, and launch tests as separate validation steps"))
         #expect(handoff.contains("build for testing: succeeded"))
+        #expect(handoff.contains("app build: succeeded"))
+        #expect(handoff.contains("app build succeeds"))
         #expect(handoff.contains("ui test target now points to `lexwriter`"))
         #expect(handoff.contains("ui tests: 7/7 passed"))
         #expect(handoff.contains("ui-test-only `-openpremiumpreviewuitest` launch argument"))
