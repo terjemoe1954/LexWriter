@@ -127,6 +127,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Reverified app build after latest build-for-testing validation: succeeded.
 - Reverified UI tests after latest app build validation: UI tests 7/7.
 - Reverified launch test after latest UI-test validation: launch test 1/1.
+- Reverified the full local automated gate sequence after final local gate refresh: unit tests 84/84, build-for-testing, app build, UI tests 7/7, and launch test 1/1.
 - Reverified local simulator smoke after latest launch-test validation: Home, badges, free/premium-marked document access, Settings access summary, Premium preview unavailable-purchases copy, and absent purchase/restore controls passed with no clear layout issues.
 - Reverified source-level print/PDF structure after local simulator smoke: printable HTML structure, paper/signature `overflow-wrap`, and signature page-break protection passed; visual exported-PDF inspection remains a manual checklist item.
 - Rechecked Apple field-performance tooling for live versions `1.0.1` and `1.0`; launches, hangs, and disk writes returned no available versions, so crash/review status still needs manual Xcode Organizer or App Store Connect review.

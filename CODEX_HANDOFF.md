@@ -57,7 +57,7 @@ Premium-marked but still available:
 - Full active test plan can leave an incomplete `.xcresult`; when that happens, run unit tests, UI tests, and launch tests as separate validation steps.
 - Build for testing: succeeded.
 - App build: succeeded.
-- Latest separate validation run on 2026-09-22 after premium activation guide baseline cleanup: unit tests 84/84 passed, build-for-testing succeeded, app build succeeded, UI tests 7/7 passed, and launch test 1/1 passed.
+- Latest separate validation refresh on 2026-09-22 after final local gate rerun: unit tests 84/84 passed, build-for-testing succeeded, app build succeeded, UI tests 7/7 passed, and launch test 1/1 passed.
 - Latest unit-only validation run on 2026-09-22 after milestone coverage status sync: unit tests 84/84 passed.
 - Latest build-for-testing validation run on 2026-09-22 after latest unit validation: succeeded.
 - Latest app build validation run on 2026-09-22 after latest build-for-testing validation: succeeded.
