@@ -92,4 +92,12 @@ Current app copy should say that paid premium is planned later, not that users c
 - Settings with access status, 3 free / 9 planned premium template count, and privacy sections.
 - Premium preview showing "purchases are not available in this version", only if the App Store listing mentions the premium-preparation state.
 
+Screenshot priority for a normal stability or premium-preparation update:
+
+1. Home screen and document list.
+2. Document editor with clear fields.
+3. Print/PDF preview.
+4. Settings access and privacy information.
+5. Premium preview only when the listing text explicitly explains that purchases are unavailable.
+
 Do not use the Premium preview screenshot for a normal stability release unless the listing text also explains that premium is being prepared but is not yet enforced.

@@ -613,9 +613,18 @@ struct LexWriterTests {
         #expect(notes.contains("settings with access status"))
         #expect(notes.contains("3 free / 9 planned premium template count"))
         #expect(notes.contains("privacy sections"))
+        #expect(notes.contains("screenshot priority for a normal stability or premium-preparation update"))
+        #expect(notes.contains("home screen and document list"))
+        #expect(notes.contains("document editor with clear fields"))
+        #expect(notes.contains("premium preview only when the listing text explicitly explains that purchases are unavailable"))
         #expect(notes.contains("premium preview showing \"purchases are not available in this version\""))
         #expect(notes.contains("only if the app store listing mentions the premium-preparation state"))
         #expect(notes.contains("do not use the premium preview screenshot for a normal stability release"))
+
+        let plan = try projectFileContents("VERSION_1_1_CANDIDATES.md").localizedLowercase
+        let milestones = try projectFileContents("MILESTONES_APPSTORE.md").localizedLowercase
+        #expect(plan.contains("screenshot-priority guidance"))
+        #expect(milestones.contains("screenshot-priority guidance"))
     }
 
     @Test func uiTestTargetKeepsLexWriterAsTargetApplication() async throws {

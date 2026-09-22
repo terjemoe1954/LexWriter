@@ -56,6 +56,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps App Store metadata drafts aligned with print/PDF positioning and legal-scope wording.
 - Added unit coverage that keeps App Store review notes and screenshot guidance aligned with the premium-preparation state.
 - Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
+- Added screenshot-priority guidance so normal stability or premium-preparation updates lead with Home, document editor, print/PDF preview, and Settings before any Premium preview screenshot.
 - Added unit coverage that keeps the `LexWriterUITests` target application pointed at `LexWriter`.
 - Updated UI tests so each run resets language and appearance state, and verified `LexWriterUITests` passes with 7/7 plus the launch test passes with 1/1.
 - Stabilized the Premium preview UI test with dedicated accessibility identifiers for the planned-premium headline, included-documents heading, and unavailable-purchases message, opened through the UI-test-only `-openPremiumPreviewUITest` launch route.
