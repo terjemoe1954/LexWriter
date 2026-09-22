@@ -86,4 +86,4 @@ Premium-marked but still available:
 
 Start with:
 
-`Read CODEX_HANDOFF.md, MILESTONES_APPSTORE.md, PREMIUM_ACTIVATION.md, and RELEASE_CHECKLIST.md. Do not enable StoreKit or premium locking. Continue from the premium-preparation workstream.`
+`Read CODEX_HANDOFF.md, MILESTONES_APPSTORE.md, VERSION_1_1_CANDIDATES.md, PREMIUM_ACTIVATION.md, and RELEASE_CHECKLIST.md. Do not enable StoreKit or premium locking. Continue from the premium-preparation workstream.`
