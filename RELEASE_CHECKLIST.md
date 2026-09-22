@@ -46,6 +46,7 @@ Print/PDF review:
 
 ## Legal and Trust
 
+- Record reviewer, date checked, scope, and pass/fail result for the legal/trust review.
 - Review `KNOWN_LIMITATIONS.md`.
 - Confirm the home screen legal note is visible.
 - Confirm Settings includes access and privacy information.

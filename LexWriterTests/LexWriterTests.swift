@@ -551,6 +551,7 @@ struct LexWriterTests {
         let checklist = try projectFileContents("RELEASE_CHECKLIST.md").localizedLowercase
 
         #expect(checklist.contains("legal and trust"))
+        #expect(checklist.contains("record reviewer, date checked, scope, and pass/fail result"))
         #expect(checklist.contains("review `known_limitations.md`"))
         #expect(checklist.contains("confirm the home screen legal note is visible"))
         #expect(checklist.contains("confirm settings includes access and privacy information"))
