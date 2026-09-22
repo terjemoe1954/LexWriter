@@ -75,6 +75,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added a release-checklist device and document matrix for small iPhone, large iPhone, iPad, and highest-risk template smoke testing.
 - Added release-checklist print/PDF review criteria for clipping, overlap, advisory text, signature/completion sections, and Norwegian, English, and Thai character rendering.
 - Added release-checklist guidance to run unit tests, UI tests, and launch tests separately if the full active test plan leaves an incomplete `.xcresult`.
+- Added release-checklist guidance to run the launch test before archive.
 - Added unit coverage that keeps the release checklist explicit about legal/trust review and higher-risk templates before release.
 - Added unit coverage that keeps the release checklist explicit about App Store Connect checks, screenshots, privacy details, support email, and privacy policy links.
 - Added unit coverage that keeps App Store release notes aligned with premium-preparation, unavailable purchases, free/premium labels, and legal-scope wording.
