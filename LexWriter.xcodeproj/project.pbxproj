@@ -107,11 +107,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A86A99E53041853A00695D5E /* LexWriter */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LexWriter;
-			sourceTree = "<group>";
-		};
 		A86A99F33041853C00695D5E /* LexWriterTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = LexWriterTests;
@@ -152,7 +147,6 @@
 		A86A99DA3041853A00695D5E = {
 			isa = PBXGroup;
 			children = (
-				A86A99E53041853A00695D5E /* LexWriter */,
 				A86A99F33041853C00695D5E /* LexWriterTests */,
 				A86A99FD3041853C00695D5E /* LexWriterUITests */,
 				A86A99E43041853A00695D5E /* Products */,
@@ -493,9 +487,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				A86A99E53041853A00695D5E /* LexWriter */,
-			);
 			name = LexWriter;
 			packageProductDependencies = (
 			);
@@ -832,7 +823,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terjemoe.LexWriter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -868,7 +859,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terjemoe.LexWriter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
