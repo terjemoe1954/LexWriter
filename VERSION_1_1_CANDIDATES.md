@@ -124,7 +124,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 
 ## Technical Candidates
 
-- Run `LexWriterUITests` as a separate validation step if UI automation should become part of the release gate.
+- Automated gates are current as separate checks: unit tests, build-for-testing, app build, UI tests, and launch test all passed on 2026-09-22. The next 1.1 work should be manual App Store Connect or Xcode Organizer checks, device smoke testing, print/PDF review, and screenshot/metadata review.
 - Take Xcode `Update to recommended settings` as a separate maintenance commit after reviewing the generated project changes.
 - Add unit tests for additional premium-marked document validation logic where the legal or UX risk is highest.
 

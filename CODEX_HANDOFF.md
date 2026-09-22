@@ -76,7 +76,7 @@ Premium-marked but still available:
 
 ## Recommended Next Steps
 
-1. Continue product polish using `VERSION_1_1_CANDIDATES.md` as the working shortlist.
+1. Continue with manual 1.1 checks: App Store Connect or Xcode Organizer crash/review checks, device smoke testing, print/PDF review, and screenshot/metadata review.
 2. Use `PREMIUM_ACTIVATION.md` before changing `isPremiumStoreEnabled` or `enforcesPremiumAccess`.
 3. Check App Store Connect or Xcode Organizer manually for crashes until Apple tooling returns field data.
 
