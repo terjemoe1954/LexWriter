@@ -733,6 +733,7 @@ struct LexWriterTests {
         #expect(milestones.contains("norwegian, english, and thai character rendering"))
         #expect(milestones.contains("run unit tests, ui tests, and launch tests separately"))
         #expect(milestones.contains("full active test plan leaves an incomplete `.xcresult`"))
+        #expect(milestones.contains("run the launch test before archive"))
         #expect(milestones.contains("decide the free-versus-premium document split and the initial lifetime price"))
         #expect(milestones.contains("test the lifetime unlock product in storekit and app store connect sandbox"))
         #expect(milestones.contains("maintain `version_1_1_candidates.md` from real issues first"))
