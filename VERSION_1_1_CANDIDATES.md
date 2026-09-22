@@ -55,6 +55,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps the release checklist aligned with disabled StoreKit, hidden purchase/restore controls, disabled premium enforcement, and current UI-test status.
 - Added unit coverage that keeps App Store metadata drafts aligned with print/PDF positioning and legal-scope wording.
 - Added unit coverage that keeps App Store review notes and screenshot guidance aligned with the premium-preparation state.
+- Added unit coverage that keeps Norwegian App Store review notes explicit about premium preparation, unavailable purchases, and all documents remaining available.
 - Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
 - Added screenshot-priority guidance so normal stability or premium-preparation updates lead with Home, document editor, print/PDF preview, and Settings before any Premium preview screenshot.
 - Added unit coverage that keeps the `LexWriterUITests` target application pointed at `LexWriter`.

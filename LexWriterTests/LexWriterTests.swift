@@ -623,8 +623,12 @@ struct LexWriterTests {
         let notes = try projectFileContents("APPSTORE_SUBMISSION_NOTES.md").localizedLowercase
 
         #expect(notes.contains("premium-preparation phase"))
+        #expect(notes.contains("premium-forberedende fase"))
         #expect(notes.contains("premium access is not enforced yet"))
+        #expect(notes.contains("premium-tilgang håndheves ikke ennå"))
+        #expect(notes.contains("kjøp er ikke tilgjengelig i denne versjonen"))
         #expect(notes.contains("all documents remain available"))
+        #expect(notes.contains("alle dokumenter er fortsatt tilgjengelige"))
         #expect(notes.contains("expected product identifier"))
         #expect(notes.contains("com.lexwriter.premium.lifetime"))
         #expect(notes.contains("not that users can buy or unlock premium now"))
