@@ -397,6 +397,11 @@ struct LexWriterTests {
             #expect(html.contains("<div class=\"signature\">"))
             #expect(html.contains("class=\"line\""))
             #expect(html.contains("overflow-wrap: anywhere"))
+            let paperRuleStart = try #require(html.range(of: ".paper"))
+            let paperRuleRemainder = html[paperRuleStart.lowerBound...]
+            let paperRuleEnd = try #require(paperRuleRemainder.range(of: ".line") ?? paperRuleRemainder.range(of: "</style>"))
+            let paperRule = paperRuleRemainder[..<paperRuleEnd.lowerBound]
+            #expect(paperRule.contains("overflow-wrap: anywhere"))
             #expect(html.contains("</html>"))
         }
     }

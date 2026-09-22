@@ -316,6 +316,7 @@ struct TestamentDocument {
             border: 1px solid #8d7358;
             padding: 36px;
             background: #f8efdd;
+            overflow-wrap: anywhere;
         }
         .signature {
             margin-top: 44px;
