@@ -65,6 +65,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added release-checklist guidance to run the launch test before archive.
 - Added unit coverage that keeps the release checklist explicit about legal/trust review and higher-risk templates before release.
 - Added unit coverage that keeps the release checklist explicit about App Store Connect checks, screenshots, privacy details, support email, and privacy policy links.
+- Added release-checklist guidance to mention print/PDF layout improvements for long fields and signature sections when included in the build.
 - Added unit coverage that keeps App Store release notes aligned with premium-preparation, unavailable purchases, free/premium labels, and legal-scope wording.
 - Added unit coverage that keeps App Store keyword drafts focused on document, print, and PDF search terms rather than active premium purchase wording.
 - Added unit coverage that keeps support replies conservative about legal-advice scope and high-risk situations before signing.

@@ -53,6 +53,7 @@ Print/PDF review:
 ## App Store Connect
 
 - Review `APPSTORE_SUBMISSION_NOTES.md`.
+- Confirm release notes mention the print/PDF layout improvements for long fields and signature sections when included in the build.
 - Review `SUPPORT_RESPONSES.md` for expected support and review wording.
 - Check crashes, hangs, reviews, ratings, installs, and product page performance.
 - Confirm privacy details still match the app.

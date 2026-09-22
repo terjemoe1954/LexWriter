@@ -566,6 +566,8 @@ struct LexWriterTests {
 
         #expect(checklist.contains("app store connect"))
         #expect(checklist.contains("review `appstore_submission_notes.md`"))
+        #expect(checklist.contains("release notes mention the print/pdf layout improvements"))
+        #expect(checklist.contains("long fields and signature sections"))
         #expect(checklist.contains("review `support_responses.md`"))
         #expect(checklist.contains("crashes, hangs, reviews, ratings, installs"))
         #expect(checklist.contains("product page performance"))
