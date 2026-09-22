@@ -749,6 +749,10 @@ struct LexWriterTests {
         #expect(support.contains("debt"))
         #expect(support.contains("business-sensitive agreements"))
         #expect(support.contains("qualified adviser before signing"))
+        #expect(support.contains("premiumvisningen er synlig"))
+        #expect(support.contains("kjøp og premium-låsing er ikke aktivert"))
+        #expect(support.contains("premium preview screenshots should only be used"))
+        #expect(support.contains("submission text explains that purchases are not available"))
     }
 
     @Test func knownLimitationsKeepReleaseRisksVisible() async throws {

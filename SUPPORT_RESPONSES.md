@@ -56,8 +56,8 @@ If printing or PDF export does not work as expected, try updating iOS, restartin
 
 Norwegian:
 
-LexWriter viser tydelig juridisk avgrensning i appen: Dokumentene er maler og utkast, ikke juridisk rådgivning. Appen har også personverninformasjon i Innstillinger og samler ikke inn persondata eller sporer brukere. Dersom premiumvisningen er synlig, er den en forberedelse til en senere betalt versjon; kjøp og premium-låsing er ikke aktivert i denne versjonen.
+LexWriter viser tydelig juridisk avgrensning i appen: Dokumentene er maler og utkast, ikke juridisk rådgivning. Appen har også personverninformasjon i Innstillinger og samler ikke inn persondata eller sporer brukere. Dersom premiumvisningen er synlig, er den en forberedelse til en senere betalt versjon; kjøp og premium-låsing er ikke aktivert i denne versjonen. Skjermbilder av Premiumvisningen bør bare brukes når innsendingsteksten forklarer at kjøp ikke er tilgjengelig.
 
 English:
 
-LexWriter displays clear legal-scope messaging in the app: documents are templates and drafts, not legal advice. The app also includes privacy information in Settings and does not collect personal data or track users. If the Premium preview is visible, it is preparation for a later paid version; purchases and premium locking are not active in this version.
+LexWriter displays clear legal-scope messaging in the app: documents are templates and drafts, not legal advice. The app also includes privacy information in Settings and does not collect personal data or track users. If the Premium preview is visible, it is preparation for a later paid version; purchases and premium locking are not active in this version. Premium preview screenshots should only be used when the submission text explains that purchases are not available.
