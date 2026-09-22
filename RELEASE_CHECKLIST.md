@@ -4,6 +4,7 @@ Use this checklist before submitting a new App Store build.
 
 ## Version and Build
 
+- Record date checked, result, intended version number, intended build number, and whether the release is stability, premium-preparation, or premium-enforcement.
 - Confirm the intended version number and build number.
 - Update App Store Connect release notes for Norwegian and English using `APPSTORE_SUBMISSION_NOTES.md`.
 - Review subtitle, short description, and keyword drafts in `APPSTORE_SUBMISSION_NOTES.md`.

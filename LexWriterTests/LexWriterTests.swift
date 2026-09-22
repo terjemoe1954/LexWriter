@@ -503,6 +503,7 @@ struct LexWriterTests {
     @Test func releaseChecklistKeepsSubmissionValidationStepsExplicit() async throws {
         let checklist = try projectFileContents("RELEASE_CHECKLIST.md").localizedLowercase
 
+        #expect(checklist.contains("record date checked, result, intended version number, intended build number"))
         #expect(checklist.contains("confirm the intended version number and build number"))
         #expect(checklist.contains("update app store connect release notes"))
         #expect(checklist.contains("launch the app on a small iphone, large iphone, and ipad"))

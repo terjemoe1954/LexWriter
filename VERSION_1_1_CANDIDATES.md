@@ -76,6 +76,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps the App Store milestone order explicit about stability before monetization and premium enforcement only after product, price, screenshots, metadata, and restore flow are confirmed.
 - Added unit coverage that keeps the recommended next build order conservative: live signals and smoke testing before StoreKit sandbox work and premium enforcement.
 - Added unit coverage that keeps the release checklist explicit about version/build, smoke tests, App Store Connect checks, archive, and TestFlight validation.
+- Added release-checklist guidance to record date checked, result, intended version/build, and release type for version/build review.
 - Added unit coverage that keeps the release checklist explicit about product smoke-test scope across devices, core screens, document creation, PDF output, and language switching.
 - Added release-checklist guidance to record device model, iOS version, app version/build, date checked, and pass/fail result for each manual smoke-test device.
 - Added a release-checklist device and document matrix for small iPhone, large iPhone, iPad, and highest-risk template smoke testing.
