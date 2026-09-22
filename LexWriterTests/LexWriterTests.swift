@@ -528,6 +528,7 @@ struct LexWriterTests {
         #expect(checklist.contains("confirm settings shows the current access status"))
         #expect(checklist.contains("free/premium template counts"))
         #expect(checklist.contains("planned-premium entry point"))
+        #expect(checklist.contains("record device model, ios version, app version/build, date checked, and pass/fail result"))
         #expect(checklist.contains("confirm premium preview says purchases are not available in this version while storekit is disabled"))
         #expect(checklist.contains("create at least one free document and one premium-marked document"))
         #expect(checklist.contains("preview, print, and save pdf from a representative document"))
@@ -566,6 +567,7 @@ struct LexWriterTests {
 
         #expect(checklist.contains("app store connect"))
         #expect(checklist.contains("review `appstore_submission_notes.md`"))
+        #expect(checklist.contains("record the date checked and result"))
         #expect(checklist.contains("release notes mention the print/pdf layout improvements"))
         #expect(checklist.contains("long fields and signature sections"))
         #expect(checklist.contains("review `support_responses.md`"))

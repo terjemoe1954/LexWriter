@@ -12,6 +12,7 @@ Use this checklist before submitting a new App Store build.
 ## Product Smoke Test
 
 - Launch the app on a small iPhone, large iPhone, and iPad.
+- Record device model, iOS version, app version/build, date checked, and pass/fail result for each smoke-test device.
 - Check home screen layout, document badges, legal note, Settings, User Guide, and Premium preview.
 - Confirm Settings shows the current access status, free/premium template counts, and the planned-premium entry point.
 - Confirm Premium preview says purchases are not available in this version while StoreKit is disabled.
@@ -53,6 +54,7 @@ Print/PDF review:
 ## App Store Connect
 
 - Review `APPSTORE_SUBMISSION_NOTES.md`.
+- Record the date checked and result for crashes, hangs, reviews, ratings, installs, product page performance, privacy details, screenshots, support email, and privacy policy links.
 - Confirm release notes mention the print/PDF layout improvements for long fields and signature sections when included in the build.
 - Review `SUPPORT_RESPONSES.md` for expected support and review wording.
 - Check crashes, hangs, reviews, ratings, installs, and product page performance.
