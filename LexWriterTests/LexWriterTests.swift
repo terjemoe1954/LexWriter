@@ -696,6 +696,7 @@ struct LexWriterTests {
         #expect(handoff.contains("premium enforcement is disabled"))
         #expect(handoff.contains("release checklist device/document matrix"))
         #expect(handoff.contains("release checklist print/pdf review criteria"))
+        #expect(handoff.contains("printable html `overflow-wrap` protection"))
         #expect(handoff.contains("unit tests: 83/83 passed"))
         #expect(handoff.contains("full active test plan can leave an incomplete `.xcresult`"))
         #expect(handoff.contains("run unit tests, ui tests, and launch tests as separate validation steps"))
