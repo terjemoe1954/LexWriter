@@ -183,7 +183,7 @@ struct EmploymentAgreementDocument {
         body { font-family: Georgia, 'Times New Roman', serif; color: #2c2218; margin: 44px; line-height: 1.6; background: #fbf4e7; }
         h1 { text-align: center; letter-spacing: 3px; margin-bottom: 30px; }
         .paper { border: 1px solid #8d7358; padding: 36px; background: #f8efdd; }
-        .line { border-bottom: 1px solid #4a3c2d; margin-top: 20px; padding-top: 20px; }
+        .line { border-bottom: 1px solid #4a3c2d; margin-top: 20px; padding-top: 20px; overflow-wrap: anywhere; }
         .signature { margin-top: 44px; }
         </style>
         </head>

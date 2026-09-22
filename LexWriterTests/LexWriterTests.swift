@@ -396,6 +396,7 @@ struct LexWriterTests {
             #expect(html.contains("<div class=\"paper\">"))
             #expect(html.contains("<div class=\"signature\">"))
             #expect(html.contains("class=\"line\""))
+            #expect(html.contains("overflow-wrap: anywhere"))
             #expect(html.contains("</html>"))
         }
     }

@@ -324,6 +324,7 @@ struct TestamentDocument {
             border-bottom: 1px solid #4a3c2d;
             margin-top: 20px;
             padding-top: 20px;
+            overflow-wrap: anywhere;
         }
         </style>
         </head>
