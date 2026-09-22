@@ -11,7 +11,7 @@ Use this only when the paid version is ready to test or submit.
 - Premium preview is available from Settings.
 - Settings shows the current split as 3 free templates and 9 planned premium templates.
 - Premium preview copy states that paid premium is planned later and purchases are not available in this version.
-- Current test baseline: 83 unit tests pass, 7 UI tests pass, the launch test passes, and build-for-testing succeeds. `LexWriterUITests` now points to `LexWriter`.
+- Current test baseline: 84 unit tests pass, 7 UI tests pass, the launch test passes, app build succeeds, and build-for-testing succeeds. `LexWriterUITests` now points to `LexWriter`.
 
 ## Product Identifier
 
@@ -49,8 +49,8 @@ Premium-marked documents:
 - Test the product in StoreKit local testing or sandbox.
 - Confirm restore purchases works.
 - Confirm cancelled, pending, unavailable, and offline product-loading states are acceptable.
-- Re-run unit tests, app build, and build-for-testing.
-- Fix or recreate the UI test target if UI automation should be used as a release gate.
+- Re-run unit tests, UI tests, the launch test, app build, and build-for-testing.
+- Confirm `LexWriterUITests` still points to `LexWriter` if UI automation is used as a release gate.
 
 ## Activation Flags
 
