@@ -76,7 +76,7 @@ final class LexWriterUITests: XCTestCase {
         XCTAssertTrue(scrollUntilVisible(app.buttons["settings.userGuideLink"], in: app).exists)
         XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.privacySummary"], in: app).exists)
         XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.version"], in: app).exists)
-        XCTAssertTrue(app.staticTexts["settings.build"].exists)
+        XCTAssertTrue(scrollUntilVisible(app.staticTexts["settings.build"], in: app).exists)
     }
 
     @MainActor
