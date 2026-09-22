@@ -52,7 +52,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage for stable appearance identifiers and localized appearance labels.
 - Added full PremiumView localization coverage, including exact Thai premium-preview/status copy used in the premium-preparation flow.
 - Added unit coverage that keeps App Store submission notes and support response drafts aligned with the current premium-preparation state.
-- Added unit coverage that keeps the release checklist aligned with disabled StoreKit, hidden purchase/restore controls, disabled premium enforcement, and the UI-test blocker.
+- Added unit coverage that keeps the release checklist aligned with disabled StoreKit, hidden purchase/restore controls, disabled premium enforcement, and current UI-test status.
 - Added unit coverage that keeps App Store metadata drafts aligned with print/PDF positioning and legal-scope wording.
 - Added unit coverage that keeps App Store review notes and screenshot guidance aligned with the premium-preparation state.
 - Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
@@ -65,11 +65,11 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Completed a manual simulator smoke test covering Home, Settings, Premium preview, language switching, one free document, one premium-marked document, and empty Will preview validation.
 - Added unit coverage that keeps support response drafts aligned with PDF saving limits, no full document history/cloud sync, and print/PDF troubleshooting details.
 - Added support troubleshooting wording for print/PDF issues involving long fields, free text, and signature sections.
-- Added unit coverage that keeps known limitations visible for legal scope, storage limits, premium preparation, StoreKit, and the UI-test blocker.
+- Added unit coverage that keeps known limitations visible for legal scope, storage limits, premium preparation, StoreKit, and current UI-test status.
 - Added unit coverage that keeps the premium activation guide explicit about product setup, sandbox/restore testing, activation flags, and the two-release recommendation.
 - Added unit coverage that keeps the premium activation guide explicit about the current free and premium-marked document split.
 - Added unit coverage that keeps this 1.1 plan explicit about deferring StoreKit, purchase/restore controls, premium enforcement, and document locking.
-- Added unit coverage that keeps the Codex handoff aligned with the current premium-preparation state, UI-test blocker, validation baseline, and safe-session instructions.
+- Added unit coverage that keeps the Codex handoff aligned with the current premium-preparation state, UI-test status, validation baseline, and safe-session instructions.
 - Added unit coverage that keeps the App Store milestone order explicit about stability before monetization and premium enforcement only after product, price, screenshots, metadata, and restore flow are confirmed.
 - Added unit coverage that keeps the recommended next build order conservative: live signals and smoke testing before StoreKit sandbox work and premium enforcement.
 - Added unit coverage that keeps the release checklist explicit about version/build, smoke tests, App Store Connect checks, archive, and TestFlight validation.
