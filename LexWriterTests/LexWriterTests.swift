@@ -823,6 +823,7 @@ struct LexWriterTests {
         #expect(milestones.contains("test the lifetime unlock product in storekit and app store connect sandbox"))
         #expect(milestones.contains("maintain `version_1_1_candidates.md` from real issues first"))
         #expect(milestones.contains("run `lexwriteruitests` if ui automation should be part of the release gate"))
+        #expect(milestones.contains("screenshot-checklist guidance to record date checked, result, device size, language"))
         #expect(milestones.contains("prepare updated app store metadata and screenshots for the paid/premium version"))
         #expect(milestones.contains("enable premium enforcement only after the product id, price, screenshots, metadata, and restore flow are confirmed"))
         #expect(milestones.contains("rechecked apple field-performance tooling"))

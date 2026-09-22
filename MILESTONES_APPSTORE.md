@@ -49,6 +49,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added unit coverage that keeps Norwegian App Store review notes explicit about premium preparation, unavailable purchases, and all documents remaining available.
 - Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
 - Added screenshot-priority guidance so normal stability or premium-preparation updates lead with Home, document editor, print/PDF preview, and Settings before any Premium preview screenshot.
+- Added screenshot-checklist guidance to record date checked, result, device size, language, and whether each screenshot matches the shipped UI.
 - Added unit coverage that keeps support responses clear about PDF saving, no full document history/cloud sync, and print/PDF troubleshooting details.
 - Added support troubleshooting wording for print/PDF issues involving long fields, free text, and signature sections.
 - Added unit coverage that keeps support premium replies explicit about all documents remaining available and future App Store Connect product setup/testing.
