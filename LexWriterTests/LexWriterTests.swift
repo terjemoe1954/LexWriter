@@ -500,6 +500,7 @@ struct LexWriterTests {
         #expect(checklist.contains("confirm privacy details still match the app"))
         #expect(checklist.contains("build the app in xcode"))
         #expect(checklist.contains("run unit tests"))
+        #expect(checklist.contains("run the launch test before archive"))
         #expect(checklist.contains("full active test plan leaves an incomplete `.xcresult`"))
         #expect(checklist.contains("run unit tests, ui tests, and launch tests as separate validation steps"))
         #expect(checklist.contains("archive the exact build intended for submission"))
