@@ -805,6 +805,8 @@ struct LexWriterTests {
         #expect(support.contains("document type"))
         #expect(support.contains("device model"))
         #expect(support.contains("ios version"))
+        #expect(support.contains("lange felt, fritekst eller signaturseksjoner"))
+        #expect(support.contains("long fields, free text, or signature sections"))
     }
 
     @Test func supportDraftsKeepPrivacyScopeLocalAndClear() async throws {

@@ -46,11 +46,11 @@ LexWriter is currently designed around filling in, previewing, printing, and sav
 
 Norwegian:
 
-Hvis utskrift eller PDF-eksport ikke fungerer som forventet, prøv å oppdatere iOS, starte appen på nytt og teste med et kortere dokument først. Hvis problemet fortsetter, noter dokumenttype, enhetsmodell, iOS-versjon og om problemet skjer ved forhåndsvisning, utskrift eller PDF-lagring.
+Hvis utskrift eller PDF-eksport ikke fungerer som forventet, prøv å oppdatere iOS, starte appen på nytt og teste med et kortere dokument først. Hvis problemet fortsetter, noter dokumenttype, enhetsmodell, iOS-versjon og om problemet skjer ved forhåndsvisning, utskrift eller PDF-lagring. Ta også med om problemet gjelder lange felt, fritekst eller signaturseksjoner.
 
 English:
 
-If printing or PDF export does not work as expected, try updating iOS, restarting the app, and testing with a shorter document first. If the issue continues, note the document type, device model, iOS version, and whether the problem happens during preview, printing, or PDF saving.
+If printing or PDF export does not work as expected, try updating iOS, restarting the app, and testing with a shorter document first. If the issue continues, note the document type, device model, iOS version, and whether the problem happens during preview, printing, or PDF saving. Also include whether the issue involves long fields, free text, or signature sections.
 
 ## App Store Review
 

@@ -49,6 +49,7 @@ Keep `LexWriter` stable, trustworthy, and legally clear after its App Store laun
 - Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
 - Added screenshot-priority guidance so normal stability or premium-preparation updates lead with Home, document editor, print/PDF preview, and Settings before any Premium preview screenshot.
 - Added unit coverage that keeps support responses clear about PDF saving, no full document history/cloud sync, and print/PDF troubleshooting details.
+- Added support troubleshooting wording for print/PDF issues involving long fields, free text, and signature sections.
 - Added unit coverage that keeps `KNOWN_LIMITATIONS.md` explicit about legal scope, storage limits, premium-preparation state, StoreKit, and the UI-test blocker.
 - Added unit coverage that keeps `PREMIUM_ACTIVATION.md` explicit about product setup, sandbox/restore testing, activation flags, and the two-release recommendation.
 - Added unit coverage that keeps `PREMIUM_ACTIVATION.md` explicit about the current free and premium-marked document split.
