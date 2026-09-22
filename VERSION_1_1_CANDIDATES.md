@@ -105,7 +105,8 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added `overflow-wrap` to printable HTML signature lines so long names, addresses, and labels wrap more safely in preview/PDF output.
 - Added `overflow-wrap` to printable HTML paper containers so long free-text fields wrap more safely in preview/PDF output.
 - Added printable HTML signature page-break protection so signature blocks are less likely to split across printed/PDF pages.
-- Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers, then reverified the separate validation gates: unit tests 83/83, build-for-testing, app build, UI tests 7/7, and launch test 1/1.
+- Reverified the separate validation gates after printable HTML signature page-break protection: unit tests 83/83, build-for-testing, app build, UI tests 7/7, and launch test 1/1.
+- Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers.
 
 ## Technical Candidates
 
