@@ -59,6 +59,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added screenshot-priority guidance so normal stability or premium-preparation updates lead with Home, document editor, print/PDF preview, and Settings before any Premium preview screenshot.
 - Added unit coverage that keeps the `LexWriterUITests` target application pointed at `LexWriter`.
 - Updated UI tests so each run resets language and appearance state, and verified `LexWriterUITests` passes with 7/7 plus the launch test passes with 1/1.
+- Stabilized the Settings app-info UI test by scrolling to the build label before asserting it.
 - Stabilized the Premium preview UI test with dedicated accessibility identifiers for the planned-premium headline, included-documents heading, and unavailable-purchases message, opened through the UI-test-only `-openPremiumPreviewUITest` launch route.
 - Added unit coverage that keeps the Premium preview UI-test launch route documented as test-only and separate from StoreKit, purchases, restore, and premium enforcement.
 - Completed a manual simulator smoke test covering Home, Settings, Premium preview, language switching, one free document, one premium-marked document, and empty Will preview validation.
@@ -109,7 +110,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added `overflow-wrap` to printable HTML paper containers so long free-text fields wrap more safely in preview/PDF output.
 - Added printable HTML signature page-break protection so signature blocks are less likely to split across printed/PDF pages.
 - Added unit coverage that keeps the completed-candidate work list free of duplicate bullets.
-- Reverified the separate validation gates after release-checklist print/PDF layout guidance: unit tests 84/84, build-for-testing, app build, UI tests 7/7, and launch test 1/1.
+- Reverified the separate validation gates after Settings build-label UI-test stabilization: unit tests 84/84, build-for-testing, app build, UI tests 7/7, and launch test 1/1.
 - Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers.
 
 ## Technical Candidates

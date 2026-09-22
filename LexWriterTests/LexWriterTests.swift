@@ -751,6 +751,7 @@ struct LexWriterTests {
         #expect(handoff.contains("app build succeeds"))
         #expect(handoff.contains("ui test target now points to `lexwriter`"))
         #expect(handoff.contains("ui tests: 7/7 passed"))
+        #expect(handoff.contains("settings app-info assertions scroll to the build label"))
         #expect(handoff.contains("support print/pdf troubleshooting"))
         #expect(handoff.contains("ui-test-only `-openpremiumpreviewuitest` launch argument"))
         #expect(handoff.contains("do not enable storekit or premium locking"))
