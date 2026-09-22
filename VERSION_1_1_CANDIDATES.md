@@ -127,11 +127,12 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Reverified UI tests after latest app build validation: UI tests 7/7.
 - Reverified launch test after latest UI-test validation: launch test 1/1.
 - Reverified local simulator smoke after latest launch-test validation: Home, badges, free/premium-marked document access, Settings access summary, Premium preview unavailable-purchases copy, and absent purchase/restore controls passed with no clear layout issues.
+- Reverified source-level print/PDF structure after local simulator smoke: printable HTML structure, paper/signature `overflow-wrap`, and signature page-break protection passed; visual exported-PDF inspection remains a manual checklist item.
 - Stabilized the Testament preview-validation UI test with dedicated accessibility identifiers.
 
 ## Technical Candidates
 
-- Automated gates are current as separate checks: unit tests, build-for-testing, app build, UI tests, and launch test all passed on 2026-09-22. The next 1.1 work should be manual App Store Connect or Xcode Organizer checks, device smoke testing, print/PDF review, and screenshot/metadata review.
+- Automated gates are current as separate checks: unit tests, build-for-testing, app build, UI tests, launch test, local simulator smoke, and source-level print/PDF structure checks all passed on 2026-09-22. The next 1.1 work should be manual App Store Connect or Xcode Organizer checks, broader device smoke testing, visual exported-PDF review, and screenshot/metadata review.
 - Take Xcode `Update to recommended settings` as a separate maintenance commit after reviewing the generated project changes.
 - Add unit tests for additional premium-marked document validation logic where the legal or UX risk is highest.
 
