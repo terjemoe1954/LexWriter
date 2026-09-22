@@ -672,6 +672,8 @@ struct LexWriterTests {
         #expect(plan.contains("device and document matrix"))
         #expect(plan.contains("small iphone, large iphone, ipad, and highest-risk template smoke testing"))
         #expect(plan.contains("print/pdf review criteria"))
+        #expect(plan.contains("`overflow-wrap` to printable html signature lines"))
+        #expect(plan.contains("long names, addresses, and labels wrap more safely"))
         #expect(plan.contains("norwegian, english, and thai character rendering"))
         #expect(plan.contains("run unit tests, ui tests, and launch tests separately"))
         #expect(plan.contains("full active test plan leaves an incomplete `.xcresult`"))
