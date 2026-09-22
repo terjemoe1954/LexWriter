@@ -510,6 +510,7 @@ struct LexWriterTests {
         #expect(checklist.contains("preview, print, and save pdf"))
         #expect(checklist.contains("check crashes, hangs, reviews, ratings, installs, and product page performance"))
         #expect(checklist.contains("confirm privacy details still match the app"))
+        #expect(checklist.contains("record date checked, result, and relevant `.xcresult`, archive, or testflight notes"))
         #expect(checklist.contains("build the app in xcode"))
         #expect(checklist.contains("run unit tests"))
         #expect(checklist.contains("run the launch test before archive"))

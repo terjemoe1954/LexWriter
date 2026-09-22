@@ -67,6 +67,7 @@ Print/PDF review:
 
 ## Final Validation
 
+- Record date checked, result, and relevant `.xcresult`, archive, or TestFlight notes for each final validation step.
 - Build the app in Xcode.
 - Build with test targets.
 - Run unit tests.

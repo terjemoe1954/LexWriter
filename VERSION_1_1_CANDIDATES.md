@@ -83,6 +83,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added release-checklist guidance to record document type, language, device, date checked, and pass/fail result for each manual print/PDF review.
 - Added release-checklist guidance to run unit tests, UI tests, and launch tests separately if the full active test plan leaves an incomplete `.xcresult`.
 - Added release-checklist guidance to run the launch test before archive.
+- Added release-checklist guidance to record date checked, result, and relevant `.xcresult`, archive, or TestFlight notes for final validation.
 - Added unit coverage that keeps the release checklist explicit about legal/trust review and higher-risk templates before release.
 - Added release-checklist guidance to record reviewer, date checked, scope, and pass/fail result for legal/trust review.
 - Added unit coverage that keeps the release checklist explicit about App Store Connect checks, screenshots, privacy details, support email, and privacy policy links.
