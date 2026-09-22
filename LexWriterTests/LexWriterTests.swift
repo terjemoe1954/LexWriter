@@ -670,6 +670,8 @@ struct LexWriterTests {
         #expect(plan.contains("small iphone, large iphone, ipad, and highest-risk template smoke testing"))
         #expect(plan.contains("print/pdf review criteria"))
         #expect(plan.contains("norwegian, english, and thai character rendering"))
+        #expect(plan.contains("run unit tests, ui tests, and launch tests separately"))
+        #expect(plan.contains("full active test plan leaves an incomplete `.xcresult`"))
         #expect(plan.contains("ui-test-only `-openpremiumpreviewuitest` launch route"))
         #expect(plan.contains("defer until premium activation"))
         #expect(plan.contains("enabling `ispremiumstoreenabled`"))
