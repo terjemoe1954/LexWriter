@@ -88,6 +88,7 @@ Current app copy should say that paid premium is planned later, not that users c
 
 ## Screenshot Checklist
 
+- Record date checked, result, device size, language, and whether each screenshot matches the shipped UI.
 - Home screen with free/premium badges visible.
 - A representative document editor.
 - Print preview with print/PDF controls.

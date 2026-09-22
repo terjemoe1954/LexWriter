@@ -647,6 +647,7 @@ struct LexWriterTests {
         let notes = try projectFileContents("APPSTORE_SUBMISSION_NOTES.md").localizedLowercase
 
         #expect(notes.contains("screenshot checklist"))
+        #expect(notes.contains("record date checked, result, device size, language, and whether each screenshot matches the shipped ui"))
         #expect(notes.contains("home screen with free/premium badges visible"))
         #expect(notes.contains("a representative document editor"))
         #expect(notes.contains("print preview with print/pdf controls"))

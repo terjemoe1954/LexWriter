@@ -59,6 +59,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added unit coverage that keeps Norwegian App Store review notes explicit about premium preparation, unavailable purchases, and all documents remaining available.
 - Added unit coverage that keeps the App Store screenshot checklist focused on the core document flow, Settings, print/PDF controls, and the Premium preview caveat.
 - Added screenshot-priority guidance so normal stability or premium-preparation updates lead with Home, document editor, print/PDF preview, and Settings before any Premium preview screenshot.
+- Added screenshot-checklist guidance to record date checked, result, device size, language, and whether each screenshot matches the shipped UI.
 - Added unit coverage that keeps the `LexWriterUITests` target application pointed at `LexWriter`.
 - Updated UI tests so each run resets language and appearance state, and verified `LexWriterUITests` passes with 7/7 plus the launch test passes with 1/1.
 - Stabilized the Settings app-info UI test by scrolling to the build label before asserting it.
