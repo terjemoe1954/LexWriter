@@ -103,6 +103,7 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 - Added HTML-preview escaping coverage for contract.
 - Added unit coverage that keeps printable HTML-preview and signature structure present across every document template.
 - Added `overflow-wrap` to printable HTML signature lines so long names, addresses, and labels wrap more safely in preview/PDF output.
+- Added `overflow-wrap` to printable HTML paper containers so long free-text fields wrap more safely in preview/PDF output.
 
 ## Technical Candidates
 
