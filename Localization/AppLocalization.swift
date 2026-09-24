@@ -100,9 +100,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.norwegian, .allDocumentsOpenNow):
             return "Alle dokumenter er åpne nå"
         case (.norwegian, .accessPlanSummary):
-            return "\(MonetizationPlan.freeDocuments.count) gratis maler og \(MonetizationPlan.premiumDocuments.count) planlagte premium-maler."
+            return "\(MonetizationPlan.freeDocuments.count) gratis maler og \(MonetizationPlan.premiumDocuments.count) premium-maler."
         case (.norwegian, .futurePricingNote):
-            return "Alle dokumenter er tilgjengelige nå. Gratis- og premium-merkene viser hvordan en senere betalt versjon kan bli organisert."
+            return "Alle dokumenter er tilgjengelige nå mens premium-kjøp testes. Premium-låsing aktiveres først etter at kjøp og gjenoppretting er bekreftet."
         case (.norwegian, .freeTier):
             return "Gratis"
         case (.norwegian, .premiumTier):
@@ -326,9 +326,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.english, .allDocumentsOpenNow):
             return "All documents open now"
         case (.english, .accessPlanSummary):
-            return "\(MonetizationPlan.freeDocuments.count) free templates and \(MonetizationPlan.premiumDocuments.count) planned premium templates."
+            return "\(MonetizationPlan.freeDocuments.count) free templates and \(MonetizationPlan.premiumDocuments.count) premium templates."
         case (.english, .futurePricingNote):
-            return "All documents are currently available. The free and premium labels show how a later paid version may be organized."
+            return "All documents are currently available while premium purchases are tested. Premium locking will be enabled only after purchase and restore are verified."
         case (.english, .freeTier):
             return "Free"
         case (.english, .premiumTier):
@@ -552,9 +552,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.thai, .allDocumentsOpenNow):
             return "เอกสารทั้งหมดเปิดใช้งานอยู่ตอนนี้"
         case (.thai, .accessPlanSummary):
-            return "มีเทมเพลตฟรี \(MonetizationPlan.freeDocuments.count) รายการ และเทมเพลตพรีเมียมที่วางแผนไว้ \(MonetizationPlan.premiumDocuments.count) รายการ"
+            return "มีเทมเพลตฟรี \(MonetizationPlan.freeDocuments.count) รายการ และเทมเพลตพรีเมียม \(MonetizationPlan.premiumDocuments.count) รายการ"
         case (.thai, .futurePricingNote):
-            return "ขณะนี้เอกสารทั้งหมดใช้งานได้ ป้ายฟรีและพรีเมียมแสดงว่าเวอร์ชันแบบชำระเงินในอนาคตอาจจัดกลุ่มอย่างไร"
+            return "ขณะนี้เอกสารทั้งหมดใช้งานได้ระหว่างทดสอบการซื้อแบบพรีเมียม การล็อกพรีเมียมจะเปิดใช้หลังจากยืนยันการซื้อและการกู้คืนแล้ว"
         case (.thai, .freeTier):
             return "ฟรี"
         case (.thai, .premiumTier):
