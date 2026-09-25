@@ -102,7 +102,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.norwegian, .accessPlanSummary):
             return "\(MonetizationPlan.freeDocuments.count) gratis maler og \(MonetizationPlan.premiumDocuments.count) premium-maler."
         case (.norwegian, .futurePricingNote):
-            return "Alle dokumenter er tilgjengelige nå mens premium-kjøp testes. Premium-låsing aktiveres først etter at kjøp og gjenoppretting er bekreftet."
+            return "Gratis maler kan brukes uten kjøp. Premium gir livstidstilgang til resten av dokumentsamlingen."
         case (.norwegian, .freeTier):
             return "Gratis"
         case (.norwegian, .premiumTier):
@@ -125,6 +125,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Lås opp livstidstilgang"
         case (.norwegian, .restorePurchases):
             return "Gjenopprett kjøp"
+        case (.norwegian, .restorePurchasesFailed):
+            return "Kunne ikke gjenopprette kjøp nå. Prøv igjen senere, eller sjekk at du er logget inn med riktig Apple-konto."
+        case (.norwegian, .purchaseCouldNotComplete):
+            return "Kjøpet kunne ikke fullføres nå. Prøv igjen senere."
         case (.norwegian, .premiumUnlocked):
             return "Premium er aktivert."
         case (.norwegian, .premiumLoadingProducts):
@@ -328,7 +332,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.english, .accessPlanSummary):
             return "\(MonetizationPlan.freeDocuments.count) free templates and \(MonetizationPlan.premiumDocuments.count) premium templates."
         case (.english, .futurePricingNote):
-            return "All documents are currently available while premium purchases are tested. Premium locking will be enabled only after purchase and restore are verified."
+            return "Free templates can be used without purchase. Premium gives lifetime access to the rest of the document library."
         case (.english, .freeTier):
             return "Free"
         case (.english, .premiumTier):
@@ -351,6 +355,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "Unlock lifetime access"
         case (.english, .restorePurchases):
             return "Restore purchases"
+        case (.english, .restorePurchasesFailed):
+            return "Could not restore purchases right now. Try again later, or check that you are signed in with the correct Apple account."
+        case (.english, .purchaseCouldNotComplete):
+            return "The purchase could not be completed right now. Try again later."
         case (.english, .premiumUnlocked):
             return "Premium is active."
         case (.english, .premiumLoadingProducts):
@@ -554,7 +562,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case (.thai, .accessPlanSummary):
             return "มีเทมเพลตฟรี \(MonetizationPlan.freeDocuments.count) รายการ และเทมเพลตพรีเมียม \(MonetizationPlan.premiumDocuments.count) รายการ"
         case (.thai, .futurePricingNote):
-            return "ขณะนี้เอกสารทั้งหมดใช้งานได้ระหว่างทดสอบการซื้อแบบพรีเมียม การล็อกพรีเมียมจะเปิดใช้หลังจากยืนยันการซื้อและการกู้คืนแล้ว"
+            return "เทมเพลตฟรีใช้งานได้โดยไม่ต้องซื้อ พรีเมียมให้สิทธิ์เข้าถึงคลังเอกสารที่เหลือตลอดชีพ"
         case (.thai, .freeTier):
             return "ฟรี"
         case (.thai, .premiumTier):
@@ -577,6 +585,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
             return "ปลดล็อกการเข้าถึงตลอดชีพ"
         case (.thai, .restorePurchases):
             return "กู้คืนการซื้อ"
+        case (.thai, .restorePurchasesFailed):
+            return "ไม่สามารถกู้คืนการซื้อได้ในตอนนี้ โปรดลองอีกครั้งภายหลัง หรือตรวจสอบว่าคุณลงชื่อเข้าใช้ด้วยบัญชี Apple ที่ถูกต้อง"
+        case (.thai, .purchaseCouldNotComplete):
+            return "ไม่สามารถดำเนินการซื้อให้เสร็จสมบูรณ์ได้ในตอนนี้ โปรดลองอีกครั้งภายหลัง"
         case (.thai, .premiumUnlocked):
             return "เปิดใช้พรีเมียมแล้ว"
         case (.thai, .premiumLoadingProducts):
@@ -759,6 +771,8 @@ enum LocalizedKey {
     case premiumPreviewIncludes
     case unlockPremiumLifetime
     case restorePurchases
+    case restorePurchasesFailed
+    case purchaseCouldNotComplete
     case premiumUnlocked
     case premiumLoadingProducts
     case premiumNotAvailableYet

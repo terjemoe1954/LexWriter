@@ -455,15 +455,19 @@ struct LexWriterTests {
     }
 
     @Test func accessPlanSummaryShowsFreeAndPremiumCounts() async throws {
-        #expect(AppLanguage.norwegian.text(.accessPlanSummary) == "3 gratis maler og 9 planlagte premium-maler.")
-        #expect(AppLanguage.english.text(.accessPlanSummary) == "3 free templates and 9 planned premium templates.")
-        #expect(AppLanguage.thai.text(.accessPlanSummary) == "มีเทมเพลตฟรี 3 รายการ และเทมเพลตพรีเมียมที่วางแผนไว้ 9 รายการ")
+        #expect(AppLanguage.norwegian.text(.accessPlanSummary) == "3 gratis maler og 9 premium-maler.")
+        #expect(AppLanguage.english.text(.accessPlanSummary) == "3 free templates and 9 premium templates.")
+        #expect(AppLanguage.thai.text(.accessPlanSummary) == "มีเทมเพลตฟรี 3 รายการ และเทมเพลตพรีเมียม 9 รายการ")
     }
 
-    @Test func premiumPreviewFooterExplainsAllDocumentsAreAvailableNow() async throws {
-        #expect(AppLanguage.norwegian.text(.futurePricingNote).contains("Alle dokumenter er tilgjengelige nå"))
-        #expect(AppLanguage.english.text(.futurePricingNote).contains("All documents are currently available"))
-        #expect(AppLanguage.thai.text(.futurePricingNote).contains("ขณะนี้เอกสารทั้งหมดใช้งานได้"))
+    @Test func premiumFooterExplainsFreeTemplatesAndLifetimeAccess() async throws {
+        #expect(AppLanguage.norwegian.text(.futurePricingNote).contains("Gratis maler kan brukes uten kjøp"))
+        #expect(AppLanguage.english.text(.futurePricingNote).contains("Free templates can be used without purchase"))
+        #expect(AppLanguage.thai.text(.futurePricingNote).contains("เทมเพลตฟรีใช้งานได้โดยไม่ต้องซื้อ"))
+    }
+
+    @Test func monetizationPlanEnforcesPremiumAccess() async throws {
+        #expect(MonetizationPlan.isPremiumEnforced)
     }
 
     @Test func releaseAndSupportDraftsKeepPremiumPreparationMessaging() async throws {
@@ -977,6 +981,8 @@ struct LexWriterTests {
             .premiumTitle,
             .unlockPremiumLifetime,
             .restorePurchases,
+            .restorePurchasesFailed,
+            .purchaseCouldNotComplete,
             .premiumUnlocked,
             .premiumLoadingProducts,
             .premiumNotAvailableYet,

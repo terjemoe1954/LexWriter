@@ -22,6 +22,7 @@ final class PurchaseManager {
     private(set) var isLoadingProducts = false
     private(set) var isProcessingPurchase = false
     private(set) var statusMessage: String?
+    private(set) var statusMessageKey: LocalizedKey?
 
     private var updatesTask: Task<Void, Never>?
 
@@ -58,7 +59,7 @@ final class PurchaseManager {
         guard premiumProduct == nil, !isLoadingProducts else { return }
 
         isLoadingProducts = true
-        statusMessage = nil
+        clearStatusMessage()
         defer { isLoadingProducts = false }
 
         do {
@@ -71,20 +72,20 @@ final class PurchaseManager {
 
     func restorePurchases() async {
         isProcessingPurchase = true
-        statusMessage = nil
+        clearStatusMessage()
         defer { isProcessingPurchase = false }
 
         do {
             try await AppStore.sync()
             await refreshEntitlements()
         } catch {
-            statusMessage = error.localizedDescription
+            statusMessageKey = .restorePurchasesFailed
         }
     }
 
     func beginPurchase() {
         isProcessingPurchase = true
-        statusMessage = nil
+        clearStatusMessage()
     }
 
     func finishPurchase() {
@@ -93,7 +94,7 @@ final class PurchaseManager {
 
     func handlePurchaseError(_ error: Error) {
         isProcessingPurchase = false
-        statusMessage = error.localizedDescription
+        statusMessageKey = .purchaseCouldNotComplete
     }
 
     func completePurchase(_ purchaseResult: Product.PurchaseResult) async {
@@ -119,11 +120,11 @@ final class PurchaseManager {
         case .success(let verification):
             await handle(transactionResult: verification)
         case .pending:
-            statusMessage = nil
+            clearStatusMessage()
         case .userCancelled:
-            statusMessage = nil
+            clearStatusMessage()
         @unknown default:
-            statusMessage = nil
+            clearStatusMessage()
         }
     }
 
@@ -133,8 +134,8 @@ final class PurchaseManager {
         switch transactionResult {
         case .verified(let verifiedTransaction):
             transaction = verifiedTransaction
-        case .unverified(_, let error):
-            statusMessage = error.localizedDescription
+        case .unverified:
+            statusMessageKey = .purchaseCouldNotComplete
             return
         }
 
@@ -148,6 +149,11 @@ final class PurchaseManager {
             let isActive = transaction.revocationDate == nil
             setPremiumAccess(isActive)
         }
+    }
+
+    private func clearStatusMessage() {
+        statusMessage = nil
+        statusMessageKey = nil
     }
 
     private func setPremiumAccess(_ value: Bool) {
