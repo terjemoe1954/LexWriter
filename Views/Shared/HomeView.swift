@@ -1,8 +1,8 @@
 //
-//  HomeView.swift
-//  LexWriter
+//   HomeView.swift
+//   LexWriter
 //
-//  Created by Terje Moe on 28/08/2026.
+//   Created by Terje Moe on 28/08/2026.
 //
 
 import SwiftUI
