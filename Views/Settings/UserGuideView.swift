@@ -84,7 +84,7 @@ extension AppLanguage {
         case (.norwegian, .printingTitle):
             return "Forhåndsvisning og utskrift"
         case (.norwegian, .printingBody):
-            return "Når alle nødvendige felt er fylt inn, kan du åpne forhåndsvisning. Derfra kan dokumentet skrives ut eller lagres som PDF. Utskriftsvisningen bruker et formelt oppsett som egner seg for signering på papir."
+            return "Når alle nødvendige felt er fylt inn, kan du åpne forhåndsvisning. Med språkknappen kan du velge norsk, engelsk, thai eller en tospråklig utgave før dokumentet skrives ut eller lagres som PDF. Faste overskrifter og standardtekster bytter språk, mens navn og tekst du selv har skrevet beholdes uendret. Kontroller derfor hele dokumentet før signering."
         case (.norwegian, .privacyTitle):
             return "Personvern"
         case (.norwegian, .privacyBody):
@@ -108,7 +108,7 @@ extension AppLanguage {
         case (.english, .printingTitle):
             return "Preview and Printing"
         case (.english, .printingBody):
-            return "When all required fields are completed, you can open the preview. From there, the document can be printed or saved as a PDF. The print layout is formal and intended for paper signing."
+            return "When all required fields are completed, you can open the preview. Use the language button to select Norwegian, English, Thai, or a bilingual edition before printing or saving a PDF. Standard headings and template text change language, while names and text you entered remain unchanged. Review the complete document before signing."
         case (.english, .privacyTitle):
             return "Privacy"
         case (.english, .privacyBody):
@@ -132,7 +132,7 @@ extension AppLanguage {
         case (.thai, .printingTitle):
             return "ตัวอย่างและการพิมพ์"
         case (.thai, .printingBody):
-            return "เมื่อกรอกข้อมูลที่จำเป็นครบแล้ว คุณสามารถเปิดตัวอย่างก่อนพิมพ์ได้ จากหน้านั้นสามารถสั่งพิมพ์เอกสารหรือบันทึกเป็น PDF ได้ รูปแบบการพิมพ์ถูกออกแบบให้เป็นทางการและเหมาะสำหรับลงนามบนกระดาษ"
+            return "เมื่อกรอกข้อมูลที่จำเป็นครบแล้ว คุณสามารถเปิดตัวอย่างได้ ใช้ปุ่มภาษาเพื่อเลือกภาษานอร์เวย์ อังกฤษ ไทย หรือฉบับสองภาษา ก่อนพิมพ์หรือบันทึกเป็น PDF หัวข้อและข้อความมาตรฐานจะเปลี่ยนภาษา แต่ชื่อและข้อความที่คุณกรอกเองจะคงเดิม ดังนั้นควรตรวจสอบเอกสารทั้งหมดก่อนลงนาม"
         case (.thai, .privacyTitle):
             return "ความเป็นส่วนตัว"
         case (.thai, .privacyBody):

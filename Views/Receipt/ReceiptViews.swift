@@ -93,15 +93,21 @@ struct ReceiptEditorView: View {
         }
     }
 
-    private func printDocument() {
+    private func printDocument(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "Receipt")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.present(markupText: markup, jobName: "Receipt")
         #endif
     }
 
-    private func saveDocumentAsPDF() {
+    private func saveDocumentAsPDF(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "Receipt")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.exportPDF(markupText: markup, jobName: "Receipt")
         #endif
     }
 }
@@ -109,15 +115,15 @@ struct ReceiptEditorView: View {
 private struct ReceiptPreviewView: View {
     let language: AppLanguage
     let document: ReceiptDocument
-    let printAction: () -> Void
-    let savePDFAction: () -> Void
+    let printAction: (DocumentOutputOption) -> Void
+    let savePDFAction: (DocumentOutputOption) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         LegalPaperView(
-            title: language.receiptText(.title),
-            bodyText: document.bodyText(in: language),
+            title: { outputLanguage in outputLanguage.receiptText(.title) },
+            bodyText: { outputLanguage in document.bodyText(in: outputLanguage) },
             signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate)",
             firstSignature: document.issuer.name,
             secondSignature: document.payer.name,

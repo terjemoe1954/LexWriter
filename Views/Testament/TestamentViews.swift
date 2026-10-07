@@ -153,15 +153,21 @@ struct TestamentEditorView: View {
         }
     }
 
-    private func printDocument() {
+    private func printDocument(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.present(markupText: formData.generatedDocument.htmlDocument, jobName: "Testament")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.generatedDocument.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.present(markupText: markup, jobName: "Testament")
         #endif
     }
 
-    private func saveDocumentAsPDF() {
+    private func saveDocumentAsPDF(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.exportPDF(markupText: formData.generatedDocument.htmlDocument, jobName: "Testament")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.generatedDocument.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.exportPDF(markupText: markup, jobName: "Testament")
         #endif
     }
 }
@@ -169,42 +175,68 @@ struct TestamentEditorView: View {
 struct TestamentPreviewView: View {
     let language: AppLanguage
     let document: TestamentDocument
-    let printAction: () -> Void
-    let savePDFAction: () -> Void
+    let printAction: (DocumentOutputOption) -> Void
+    let savePDFAction: (DocumentOutputOption) -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @State private var outputOption: DocumentOutputOption
 
     private let paperColor = Color(red: 0.96, green: 0.92, blue: 0.84)
     private let paperBorderColor = Color(red: 0.55, green: 0.43, blue: 0.28)
     private let inkColor = Color(red: 0.16, green: 0.13, blue: 0.10)
     private let deskColor = Color(red: 0.82, green: 0.76, blue: 0.68)
 
+    init(
+        language: AppLanguage,
+        document: TestamentDocument,
+        printAction: @escaping (DocumentOutputOption) -> Void,
+        savePDFAction: @escaping (DocumentOutputOption) -> Void
+    ) {
+        self.language = language
+        self.document = document
+        self.printAction = printAction
+        self.savePDFAction = savePDFAction
+        _outputOption = State(initialValue: .defaultOption(for: language))
+    }
+
+    private var previewLanguage: AppLanguage {
+        outputOption.previewLanguage
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                Text("TESTAMENT")
+                Text(previewLanguage.text(.testamentTitle).uppercased())
                     .font(.system(size: 30, weight: .bold, design: .serif))
                     .tracking(3)
 
-                Text(document.formattedBody)
+                Text(document.formattedBody(in: previewLanguage))
                     .font(.system(size: 18, design: .serif))
                     .lineSpacing(8)
 
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(language.text(.signatureAndDate))
+                    Text(previewLanguage.text(.signatureAndDate))
                         .font(.headline)
-                    SignatureLine(label: "\(document.testamentPlace), \(document.formattedDate)")
-                    SignatureLine(label: language.text(.testatorSignature))
+                    SignatureLine(label: "\(document.testamentPlace), \(document.formattedDate(in: previewLanguage))")
+                    SignatureLine(label: previewLanguage.text(.testatorSignature))
                 }
 
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(language.text(.witnessStatementTitle))
+                    Text(previewLanguage.text(.witnessStatementTitle))
                         .font(.headline)
-                    Text(document.witnessStatement)
+                    Text(document.witnessStatement(in: previewLanguage))
                         .font(.system(size: 16, design: .serif))
                         .lineSpacing(6)
-                    WitnessSignatureBlock(title: language.text(.witnessOne), witness: document.witnessOne)
-                    WitnessSignatureBlock(title: language.text(.witnessTwo), witness: document.witnessTwo)
+                    WitnessSignatureBlock(
+                        title: previewLanguage.text(.witnessOne),
+                        language: previewLanguage,
+                        witness: document.witnessOne
+                    )
+                    WitnessSignatureBlock(
+                        title: previewLanguage.text(.witnessTwo),
+                        language: previewLanguage,
+                        witness: document.witnessTwo
+                    )
                 }
             }
             .foregroundStyle(inkColor)
@@ -231,15 +263,28 @@ struct TestamentPreviewView: View {
             }
 
             ToolbarItem(placement: .automatic) {
+                Menu {
+                    Picker(language.documentLanguageLabel, selection: $outputOption) {
+                        ForEach(DocumentOutputOption.allCases) { option in
+                            Text(option.displayName).tag(option)
+                        }
+                    }
+                } label: {
+                    Label(outputOption.displayName, systemImage: "globe")
+                }
+                .accessibilityIdentifier("documentLanguageMenu")
+            }
+
+            ToolbarItem(placement: .automatic) {
                 Button(language.text(.savePDFButton)) {
-                    savePDFAction()
+                    savePDFAction(outputOption)
                 }
                 .accessibilityIdentifier("savePDFButton")
             }
 
             ToolbarItem(placement: .primaryAction) {
                 Button(language.text(.printButton)) {
-                    printAction()
+                    printAction(outputOption)
                 }
                 .accessibilityIdentifier("printButton")
             }
@@ -348,15 +393,16 @@ private struct SignatureLine: View {
 
 private struct WitnessSignatureBlock: View {
     let title: String
+    let language: AppLanguage
     let witness: WitnessInfo
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.subheadline.weight(.semibold))
-            SignatureLine(label: witness.name.trimmed.isEmpty ? "Navn" : witness.name)
-            SignatureLine(label: witness.address.trimmed.isEmpty ? "Adresse" : witness.address)
-            SignatureLine(label: "Underskrift")
+            SignatureLine(label: witness.name.trimmed.isEmpty ? language.text(.name) : witness.name)
+            SignatureLine(label: witness.address.trimmed.isEmpty ? language.text(.address) : witness.address)
+            SignatureLine(label: TestamentWording(language: language).signature)
         }
     }
 }

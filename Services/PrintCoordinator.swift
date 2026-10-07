@@ -9,6 +9,43 @@
 import UIKit
 
 enum PrintCoordinator {
+    static func markup(
+        for option: DocumentOutputOption,
+        makeDocument: (AppLanguage) -> String
+    ) -> String {
+        let documents = option.languages.map(makeDocument)
+        guard let firstDocument = documents.first else {
+            return ""
+        }
+
+        return documents.dropFirst().reduce(firstDocument) { combinedDocument, document in
+            appendAsNewPage(document, to: combinedDocument)
+        }
+    }
+
+    private static func appendAsNewPage(_ document: String, to existingDocument: String) -> String {
+        guard
+            let closingBodyRange = existingDocument.range(of: "</body>", options: .caseInsensitive),
+            let openingBodyRange = document.range(of: "<body>", options: .caseInsensitive),
+            let documentClosingBodyRange = document.range(
+                of: "</body>",
+                options: [.caseInsensitive, .backwards]
+            )
+        else {
+            return existingDocument + document
+        }
+
+        let bodyContent = document[openingBodyRange.upperBound..<documentClosingBodyRange.lowerBound]
+        let newPage = """
+        <div style="break-before: page; page-break-before: always;"></div>
+        \(bodyContent)
+        """
+
+        var result = existingDocument
+        result.insert(contentsOf: newPage, at: closingBodyRange.lowerBound)
+        return result
+    }
+
     @MainActor
     static func present(markupText: String, jobName: String) {
         let controller = UIPrintInteractionController.shared

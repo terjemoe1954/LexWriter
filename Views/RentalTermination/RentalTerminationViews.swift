@@ -96,15 +96,21 @@ struct RentalTerminationEditorView: View {
         }
     }
 
-    private func printDocument() {
+    private func printDocument(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "RentalTermination")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.present(markupText: markup, jobName: "RentalTermination")
         #endif
     }
 
-    private func saveDocumentAsPDF() {
+    private func saveDocumentAsPDF(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "RentalTermination")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.exportPDF(markupText: markup, jobName: "RentalTermination")
         #endif
     }
 }
@@ -112,15 +118,15 @@ struct RentalTerminationEditorView: View {
 private struct RentalTerminationPreviewView: View {
     let language: AppLanguage
     let document: RentalTerminationDocument
-    let printAction: () -> Void
-    let savePDFAction: () -> Void
+    let printAction: (DocumentOutputOption) -> Void
+    let savePDFAction: (DocumentOutputOption) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         LegalPaperView(
-            title: language.rentalTerminationText(.title),
-            bodyText: document.bodyText(in: language),
+            title: { outputLanguage in outputLanguage.rentalTerminationText(.title) },
+            bodyText: { outputLanguage in document.bodyText(in: outputLanguage) },
             signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate)",
             firstSignature: document.landlord.name,
             secondSignature: document.tenant.name,

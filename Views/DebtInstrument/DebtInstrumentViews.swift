@@ -97,15 +97,21 @@ struct DebtInstrumentEditorView: View {
         }
     }
 
-    private func printDocument() {
+    private func printDocument(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "DebtInstrument")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.present(markupText: markup, jobName: "DebtInstrument")
         #endif
     }
 
-    private func saveDocumentAsPDF() {
+    private func saveDocumentAsPDF(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "DebtInstrument")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.exportPDF(markupText: markup, jobName: "DebtInstrument")
         #endif
     }
 }
@@ -113,15 +119,15 @@ struct DebtInstrumentEditorView: View {
 private struct DebtInstrumentPreviewView: View {
     let language: AppLanguage
     let document: DebtInstrumentDocument
-    let printAction: () -> Void
-    let savePDFAction: () -> Void
+    let printAction: (DocumentOutputOption) -> Void
+    let savePDFAction: (DocumentOutputOption) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         LegalPaperView(
-            title: language.debtText(.title),
-            bodyText: document.bodyText(in: language),
+            title: { outputLanguage in outputLanguage.debtText(.title) },
+            bodyText: { outputLanguage in document.bodyText(in: outputLanguage) },
             signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate)",
             firstSignature: document.creditor.name,
             secondSignature: document.debtor.name,

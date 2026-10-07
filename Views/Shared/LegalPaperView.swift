@@ -7,16 +7,73 @@
 
 import SwiftUI
 
+enum DocumentOutputOption: String, CaseIterable, Identifiable {
+    case norwegian
+    case english
+    case thai
+    case norwegianAndEnglish
+    case norwegianAndThai
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .norwegian:
+            return "Norsk"
+        case .english:
+            return "English"
+        case .thai:
+            return "ไทย"
+        case .norwegianAndEnglish:
+            return "Norsk + English"
+        case .norwegianAndThai:
+            return "Norsk + ไทย"
+        }
+    }
+
+    var languages: [AppLanguage] {
+        switch self {
+        case .norwegian:
+            return [.norwegian]
+        case .english:
+            return [.english]
+        case .thai:
+            return [.thai]
+        case .norwegianAndEnglish:
+            return [.norwegian, .english]
+        case .norwegianAndThai:
+            return [.norwegian, .thai]
+        }
+    }
+
+    var previewLanguage: AppLanguage {
+        languages.first ?? .norwegian
+    }
+
+    static func defaultOption(for language: AppLanguage) -> DocumentOutputOption {
+        switch language {
+        case .norwegian:
+            return .norwegian
+        case .english:
+            return .english
+        case .thai:
+            return .thai
+        }
+    }
+}
+
 struct LegalPaperView: View {
-    let title: String
-    let bodyText: String
+    let title: (AppLanguage) -> String
+    let bodyText: (AppLanguage) -> String
     let signingPlaceAndDate: String
     let firstSignature: String
     let secondSignature: String
     let language: AppLanguage
-    let printAction: () -> Void
-    let savePDFAction: () -> Void
+    let printAction: (DocumentOutputOption) -> Void
+    let savePDFAction: (DocumentOutputOption) -> Void
     let dismissAction: () -> Void
+
+    @State private var outputOption: DocumentOutputOption
 
     private let paperColor = Color(red: 0.96, green: 0.92, blue: 0.84)
     private let paperBorderColor = Color(red: 0.55, green: 0.43, blue: 0.28)
@@ -24,19 +81,46 @@ struct LegalPaperView: View {
     private let secondaryInkColor = Color(red: 0.38, green: 0.31, blue: 0.24)
     private let deskColor = Color(red: 0.82, green: 0.76, blue: 0.68)
 
+    init(
+        title: @escaping (AppLanguage) -> String,
+        bodyText: @escaping (AppLanguage) -> String,
+        signingPlaceAndDate: String,
+        firstSignature: String,
+        secondSignature: String,
+        language: AppLanguage,
+        printAction: @escaping (DocumentOutputOption) -> Void,
+        savePDFAction: @escaping (DocumentOutputOption) -> Void,
+        dismissAction: @escaping () -> Void
+    ) {
+        self.title = title
+        self.bodyText = bodyText
+        self.signingPlaceAndDate = signingPlaceAndDate
+        self.firstSignature = firstSignature
+        self.secondSignature = secondSignature
+        self.language = language
+        self.printAction = printAction
+        self.savePDFAction = savePDFAction
+        self.dismissAction = dismissAction
+        _outputOption = State(initialValue: .defaultOption(for: language))
+    }
+
+    private var previewLanguage: AppLanguage {
+        outputOption.previewLanguage
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                Text(title.uppercased())
+                Text(title(previewLanguage).uppercased())
                     .font(.system(size: 30, weight: .bold, design: .serif))
                     .tracking(3)
 
-                Text(bodyText)
+                Text(bodyText(previewLanguage))
                     .font(.system(size: 18, design: .serif))
                     .lineSpacing(8)
 
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(language.text(.signatureAndDate))
+                    Text(previewLanguage.text(.signatureAndDate))
                         .font(.headline)
                     LegalSignatureLine(label: signingPlaceAndDate)
                     LegalSignatureLine(label: firstSignature)
@@ -57,7 +141,7 @@ struct LegalPaperView: View {
             .padding()
         }
         .background(deskColor.ignoresSafeArea())
-        .navigationTitle(language.text(.previewTitle))
+        .navigationTitle(previewLanguage.text(.previewTitle))
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button(language.text(.close)) {
@@ -67,18 +151,44 @@ struct LegalPaperView: View {
             }
 
             ToolbarItem(placement: .automatic) {
+                Menu {
+                    Picker(language.documentLanguageLabel, selection: $outputOption) {
+                        ForEach(DocumentOutputOption.allCases) { option in
+                            Text(option.displayName).tag(option)
+                        }
+                    }
+                } label: {
+                    Label(outputOption.displayName, systemImage: "globe")
+                }
+                .accessibilityIdentifier("documentLanguageMenu")
+            }
+
+            ToolbarItem(placement: .automatic) {
                 Button(language.text(.savePDFButton)) {
-                    savePDFAction()
+                    savePDFAction(outputOption)
                 }
                 .accessibilityIdentifier("savePDFButton")
             }
 
             ToolbarItem(placement: .primaryAction) {
                 Button(language.text(.printButton)) {
-                    printAction()
+                    printAction(outputOption)
                 }
                 .accessibilityIdentifier("printButton")
             }
+        }
+    }
+}
+
+extension AppLanguage {
+    var documentLanguageLabel: String {
+        switch self {
+        case .norwegian:
+            return "Dokumentspråk"
+        case .english:
+            return "Document language"
+        case .thai:
+            return "ภาษาของเอกสาร"
         }
     }
 }

@@ -231,42 +231,63 @@ struct TestamentDocument {
     let witnessOne: WitnessInfo
     let witnessTwo: WitnessInfo
 
-    var formattedDate: String {
-        testamentDate.formatted(date: .long, time: .omitted)
+    func formattedDate(in language: AppLanguage) -> String {
+        let locale: Locale = switch language {
+        case .norwegian:
+            Locale(identifier: "nb_NO")
+        case .english:
+            Locale(identifier: "en_GB")
+        case .thai:
+            Locale(identifier: "th_TH")
+        }
+
+        return testamentDate.formatted(
+            Date.FormatStyle(date: .long, time: .omitted).locale(locale)
+        )
     }
 
-    var formattedBody: String {
+    var formattedDate: String {
+        formattedDate(in: .norwegian)
+    }
+
+    func formattedBody(in language: AppLanguage) -> String {
+        let wording = TestamentWording(language: language)
         var paragraphs: [String] = []
 
-        paragraphs.append("Jeg, \(testatorName), bosatt i \(testatorAddress), oppretter med dette som mitt testament og tilbakekaller tidligere testamenter og testamentariske disposisjoner i den utstrekning de strider mot dette dokumentet.")
+        paragraphs.append(wording.introduction(name: testatorName, address: testatorAddress))
 
         for beneficiary in beneficiaries {
-            paragraphs.append("Jeg bestemmer at \(beneficiary.name.trimmed) skal arve \(beneficiary.disposition.trimmed).")
+            paragraphs.append(
+                wording.beneficiary(
+                    name: beneficiary.name.trimmed,
+                    disposition: beneficiary.disposition.trimmed
+                )
+            )
         }
 
         if residueClause.isEmpty {
-            paragraphs.append("Arv som ikke er særskilt regulert i dette testamentet, skal fordeles etter arvelovens regler.")
+            paragraphs.append(wording.defaultResidue)
         } else {
-            paragraphs.append("Resten av min formue skal tilfalle \(residueClause).")
+            paragraphs.append(wording.residue(residueClause))
         }
 
         if specialProvisions.isEmpty == false {
-            paragraphs.append("Særbestemmelser: \(specialProvisions)")
+            paragraphs.append("\(wording.specialProvisions): \(specialProvisions)")
         }
 
         if familyNotice.isEmpty == false {
-            paragraphs.append(familyNotice)
+            paragraphs.append(wording.familyNotice(from: familyNotice))
         }
 
         if testatorPhone.isEmpty == false || testatorEmail.isEmpty == false {
-            var contactLines = ["Kontaktopplysninger til testator:"]
+            var contactLines = ["\(wording.contactInformation):"]
 
             if testatorPhone.isEmpty == false {
-                contactLines.append("Telefon: \(testatorPhone)")
+                contactLines.append("\(wording.phone): \(testatorPhone)")
             }
 
             if testatorEmail.isEmpty == false {
-                contactLines.append("E-post: \(testatorEmail)")
+                contactLines.append("\(wording.email): \(testatorEmail)")
             }
 
             paragraphs.append(contactLines.joined(separator: "\n"))
@@ -275,25 +296,23 @@ struct TestamentDocument {
         return paragraphs.joined(separator: "\n\n")
     }
 
-    var witnessStatement: String {
-        "Vi bekrefter at testator i vårt samtidige nærvær underskrev eller vedkjente seg dette dokumentet som sitt testament. Vi er kjent med at dokumentet er et testament, og vi signerer som vitner mens testator er til stede."
+    var formattedBody: String {
+        formattedBody(in: .norwegian)
     }
 
-    var htmlDocument: String {
-        let beneficiaryItems = beneficiaries.map {
-            "<li><strong>\($0.name.htmlEscaped)</strong> skal arve \($0.disposition.htmlEscaped).</li>"
-        }.joined()
+    func witnessStatement(in language: AppLanguage) -> String {
+        TestamentWording(language: language).witnessStatement
+    }
 
-        let residueHTML: String
-        if residueClause.isEmpty {
-            residueHTML = "<p>Arv som ikke er særskilt regulert i dette testamentet, skal fordeles etter arvelovens regler.</p>"
-        } else {
-            residueHTML = "<p>Resten av min formue skal tilfalle \(residueClause.htmlEscaped).</p>"
-        }
+    var witnessStatement: String {
+        witnessStatement(in: .norwegian)
+    }
 
-        let specialHTML = specialProvisions.isEmpty ? "" : "<p><strong>Særbestemmelser:</strong> \(specialProvisions.htmlEscaped)</p>"
-        let familyHTML = familyNotice.isEmpty ? "" : "<p>\(familyNotice.htmlEscaped)</p>"
-        let contactHTML = formattedContactHTML
+    func htmlDocument(in language: AppLanguage) -> String {
+        let wording = TestamentWording(language: language)
+        let bodyHTML = formattedBody(in: language)
+            .htmlEscaped
+            .replacingOccurrences(of: "\n", with: "<br><br>")
 
         return """
         <html>
@@ -333,27 +352,21 @@ struct TestamentDocument {
         </head>
         <body>
             <div class="paper">
-                <h1>TESTAMENT</h1>
-                <p>Jeg, <strong>\(testatorName.htmlEscaped)</strong>, bosatt i \(testatorAddress.htmlEscaped), oppretter med dette som mitt testament.</p>
-                <p>Tidligere testamenter og testamentariske disposisjoner tilbakekalles i den utstrekning de strider mot dette dokumentet.</p>
-                <ol>\(beneficiaryItems)</ol>
-                \(residueHTML)
-                \(specialHTML)
-                \(familyHTML)
-                \(contactHTML)
+                <h1>\(language.text(.testamentTitle).htmlEscaped)</h1>
+                <p>\(bodyHTML)</p>
                 <div class="signature">
-                    <p>Opprettet i \(testamentPlace.htmlEscaped), \(formattedDate.htmlEscaped).</p>
-                    <div class="line">Testators underskrift</div>
+                    <p>\(wording.createdIn) \(testamentPlace.htmlEscaped), \(formattedDate(in: language).htmlEscaped).</p>
+                    <div class="line">\(language.text(.testatorSignature).htmlEscaped)</div>
                 </div>
                 <div class="signature">
-                    <p><strong>Vitnepåtegning</strong></p>
-                    <p>\(witnessStatement.htmlEscaped)</p>
-                    <div class="line">Vitne 1: \(witnessOne.name.htmlEscaped)</div>
-                    <div class="line">Adresse: \(witnessOne.address.htmlEscaped)</div>
-                    <div class="line">Underskrift</div>
-                    <div class="line">Vitne 2: \(witnessTwo.name.htmlEscaped)</div>
-                    <div class="line">Adresse: \(witnessTwo.address.htmlEscaped)</div>
-                    <div class="line">Underskrift</div>
+                    <p><strong>\(language.text(.witnessStatementTitle).htmlEscaped)</strong></p>
+                    <p>\(witnessStatement(in: language).htmlEscaped)</p>
+                    <div class="line">\(language.text(.witnessOne).htmlEscaped): \(witnessOne.name.htmlEscaped)</div>
+                    <div class="line">\(language.text(.address).htmlEscaped): \(witnessOne.address.htmlEscaped)</div>
+                    <div class="line">\(wording.signature)</div>
+                    <div class="line">\(language.text(.witnessTwo).htmlEscaped): \(witnessTwo.name.htmlEscaped)</div>
+                    <div class="line">\(language.text(.address).htmlEscaped): \(witnessTwo.address.htmlEscaped)</div>
+                    <div class="line">\(wording.signature)</div>
                 </div>
             </div>
         </body>
@@ -361,23 +374,147 @@ struct TestamentDocument {
         """
     }
 
-    private var formattedContactHTML: String {
-        var lines: [String] = []
+    var htmlDocument: String {
+        htmlDocument(in: .norwegian)
+    }
 
-        if testatorPhone.isEmpty == false {
-            lines.append("Telefon: \(testatorPhone.htmlEscaped)")
+}
+
+struct TestamentWording {
+    let language: AppLanguage
+
+    func introduction(name: String, address: String) -> String {
+        switch language {
+        case .norwegian:
+            return "Jeg, \(name), bosatt i \(address), oppretter med dette som mitt testament og tilbakekaller tidligere testamenter og testamentariske disposisjoner i den utstrekning de strider mot dette dokumentet."
+        case .english:
+            return "I, \(name), residing at \(address), hereby make this document my will and revoke earlier wills and testamentary dispositions to the extent that they conflict with this document."
+        case .thai:
+            return "ข้าพเจ้า \(name) มีที่อยู่ที่ \(address) จัดทำเอกสารฉบับนี้เป็นพินัยกรรม และเพิกถอนพินัยกรรมหรือข้อกำหนดเกี่ยวกับมรดกฉบับก่อนเท่าที่ขัดกับเอกสารฉบับนี้"
+        }
+    }
+
+    func beneficiary(name: String, disposition: String) -> String {
+        switch language {
+        case .norwegian:
+            return "Jeg bestemmer at \(name) skal arve \(disposition)."
+        case .english:
+            return "I direct that \(name) shall inherit \(disposition)."
+        case .thai:
+            return "ข้าพเจ้ากำหนดให้ \(name) ได้รับมรดก \(disposition)"
+        }
+    }
+
+    var defaultResidue: String {
+        switch language {
+        case .norwegian:
+            return "Arv som ikke er særskilt regulert i dette testamentet, skal fordeles etter arvelovens regler."
+        case .english:
+            return "Any estate not specifically disposed of by this will shall be distributed under the Norwegian Inheritance Act."
+        case .thai:
+            return "ทรัพย์มรดกที่พินัยกรรมนี้ไม่ได้กำหนดไว้โดยเฉพาะให้แบ่งตามกฎหมายมรดกของนอร์เวย์"
+        }
+    }
+
+    func residue(_ value: String) -> String {
+        switch language {
+        case .norwegian:
+            return "Resten av min formue skal tilfalle \(value)."
+        case .english:
+            return "The remainder of my estate shall pass to \(value)."
+        case .thai:
+            return "ทรัพย์มรดกส่วนที่เหลือของข้าพเจ้าให้ตกแก่ \(value)"
+        }
+    }
+
+    var specialProvisions: String {
+        switch language {
+        case .norwegian: "Særbestemmelser"
+        case .english: "Special provisions"
+        case .thai: "ข้อกำหนดพิเศษ"
+        }
+    }
+
+    var contactInformation: String {
+        switch language {
+        case .norwegian: "Kontaktopplysninger til testator"
+        case .english: "Testator contact information"
+        case .thai: "ข้อมูลติดต่อของผู้ทำพินัยกรรม"
+        }
+    }
+
+    var phone: String {
+        switch language {
+        case .norwegian: "Telefon"
+        case .english: "Phone"
+        case .thai: "โทรศัพท์"
+        }
+    }
+
+    var email: String {
+        switch language {
+        case .norwegian: "E-post"
+        case .english: "Email"
+        case .thai: "อีเมล"
+        }
+    }
+
+    var createdIn: String {
+        switch language {
+        case .norwegian: "Opprettet i"
+        case .english: "Made in"
+        case .thai: "จัดทำ ณ"
+        }
+    }
+
+    var signature: String {
+        switch language {
+        case .norwegian: "Underskrift"
+        case .english: "Signature"
+        case .thai: "ลายมือชื่อ"
+        }
+    }
+
+    var witnessStatement: String {
+        switch language {
+        case .norwegian:
+            return "Vi bekrefter at testator i vårt samtidige nærvær underskrev eller vedkjente seg dette dokumentet som sitt testament. Vi er kjent med at dokumentet er et testament, og vi signerer som vitner mens testator er til stede."
+        case .english:
+            return "We confirm that the testator signed or acknowledged this document as their will in our simultaneous presence. We know that the document is a will and sign as witnesses while the testator is present."
+        case .thai:
+            return "เราขอยืนยันว่าผู้ทำพินัยกรรมได้ลงนามหรือรับรองเอกสารฉบับนี้ว่าเป็นพินัยกรรมต่อหน้าเราทั้งสองพร้อมกัน เราทราบว่าเอกสารนี้เป็นพินัยกรรมและลงนามเป็นพยานในขณะที่ผู้ทำพินัยกรรมอยู่ด้วย"
+        }
+    }
+
+    func familyNotice(from norwegianNotice: String) -> String {
+        guard language != .norwegian else {
+            return norwegianNotice
         }
 
-        if testatorEmail.isEmpty == false {
-            lines.append("E-post: \(testatorEmail.htmlEscaped)")
-        }
+        let notices = [
+            (
+                "Testamentet skal forstås og gjennomføres innenfor reglene om pliktdelsarv til livsarvinger.",
+                language == .english
+                    ? "This will shall be interpreted and implemented subject to the mandatory inheritance rights of lineal descendants."
+                    : "พินัยกรรมนี้ให้ตีความและดำเนินการภายใต้สิทธิรับมรดกภาคบังคับของผู้สืบสันดาน"
+            ),
+            (
+                "Ektefelles eller registrert partners rettigheter etter arveloven skal respekteres.",
+                language == .english
+                    ? "The rights of a spouse or registered partner under the Norwegian Inheritance Act shall be respected."
+                    : "ต้องเคารพสิทธิของคู่สมรสหรือคู่จดทะเบียนตามกฎหมายมรดกของนอร์เวย์"
+            ),
+            (
+                "Samboers lovbestemte rettigheter skal respekteres der slike rettigheter foreligger.",
+                language == .english
+                    ? "A cohabitant's statutory rights shall be respected where such rights apply."
+                    : "ต้องเคารพสิทธิตามกฎหมายของคู่ชีวิตในกรณีที่มีสิทธิดังกล่าว"
+            )
+        ]
 
-        guard lines.isEmpty == false else {
-            return ""
+        return notices.reduce(norwegianNotice) { result, notice in
+            result.replacingOccurrences(of: notice.0, with: notice.1)
         }
-
-        let body = lines.joined(separator: "<br>")
-        return "<p><strong>Kontaktopplysninger til testator:</strong><br>\(body)</p>"
     }
 }
 

@@ -1699,6 +1699,55 @@ struct LexWriterTests {
         return party
     }
 
+    @Test func documentOutputOptionsMapToExpectedLanguages() async throws {
+        #expect(DocumentOutputOption.norwegian.languages == [.norwegian])
+        #expect(DocumentOutputOption.english.languages == [.english])
+        #expect(DocumentOutputOption.thai.languages == [.thai])
+        #expect(DocumentOutputOption.norwegianAndEnglish.languages == [.norwegian, .english])
+        #expect(DocumentOutputOption.norwegianAndThai.languages == [.norwegian, .thai])
+    }
+
+    @Test func documentLanguageControlIsLocalized() async throws {
+        #expect(AppLanguage.norwegian.documentLanguageLabel == "Dokumentspråk")
+        #expect(AppLanguage.english.documentLanguageLabel == "Document language")
+        #expect(AppLanguage.thai.documentLanguageLabel == "ภาษาของเอกสาร")
+    }
+
+    @Test func userGuideExplainsDocumentLanguageBehavior() async throws {
+        #expect(AppLanguage.norwegian.guideText(.printingBody).contains("tospråklig"))
+        #expect(AppLanguage.norwegian.guideText(.printingBody).contains("beholdes uendret"))
+        #expect(AppLanguage.english.guideText(.printingBody).contains("bilingual"))
+        #expect(AppLanguage.english.guideText(.printingBody).contains("remain unchanged"))
+        #expect(AppLanguage.thai.guideText(.printingBody).contains("ฉบับสองภาษา"))
+        #expect(AppLanguage.thai.guideText(.printingBody).contains("คงเดิม"))
+    }
+
+    @Test func bilingualPrintMarkupPlacesSecondLanguageOnANewPage() async throws {
+        let markup = PrintCoordinator.markup(for: .norwegianAndEnglish) { language in
+            "<html><body><p>\(language.rawValue)</p></body></html>"
+        }
+
+        #expect(markup.contains("<p>norwegian</p>"))
+        #expect(markup.contains("<p>english</p>"))
+        #expect(markup.contains("page-break-before: always"))
+        #expect(markup.components(separatedBy: "<html>").count == 2)
+    }
+
+    @Test func testamentGeneratesLocalizedLegalText() async throws {
+        var formData = TestamentFormData()
+        formData.testatorName = "Ola Nordmann"
+        formData.testatorAddress = "Testveien 1"
+        formData.beneficiaries = [BeneficiaryEntry(name: "Kari Nordmann", disposition: "hele boet")]
+
+        let document = formData.generatedDocument
+
+        #expect(document.formattedBody(in: .norwegian).contains("Jeg, Ola Nordmann"))
+        #expect(document.formattedBody(in: .english).contains("I, Ola Nordmann"))
+        #expect(document.formattedBody(in: .thai).contains("ข้าพเจ้า Ola Nordmann"))
+        #expect(document.htmlDocument(in: .english).contains("Witness attestation"))
+        #expect(document.htmlDocument(in: .thai).contains("คำรับรองของพยาน"))
+    }
+
     private func projectFileContents(_ relativePath: String) throws -> String {
         let testFileURL = URL(fileURLWithPath: #filePath)
         let projectURL = testFileURL.deletingLastPathComponent().deletingLastPathComponent()

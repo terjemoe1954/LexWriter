@@ -99,15 +99,21 @@ struct NDAEditorView: View {
         }
     }
 
-    private func printDocument() {
+    private func printDocument(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "NDA")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.present(markupText: markup, jobName: "NDA")
         #endif
     }
 
-    private func saveDocumentAsPDF() {
+    private func saveDocumentAsPDF(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "NDA")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.exportPDF(markupText: markup, jobName: "NDA")
         #endif
     }
 }
@@ -115,15 +121,15 @@ struct NDAEditorView: View {
 private struct NDAPreviewView: View {
     let language: AppLanguage
     let document: NDADocument
-    let printAction: () -> Void
-    let savePDFAction: () -> Void
+    let printAction: (DocumentOutputOption) -> Void
+    let savePDFAction: (DocumentOutputOption) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         LegalPaperView(
-            title: language.ndaText(.title),
-            bodyText: document.bodyText(in: language),
+            title: { outputLanguage in outputLanguage.ndaText(.title) },
+            bodyText: { outputLanguage in document.bodyText(in: outputLanguage) },
             signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate)",
             firstSignature: document.disclosingParty.name,
             secondSignature: document.receivingParty.name,

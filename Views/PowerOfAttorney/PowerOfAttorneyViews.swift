@@ -103,15 +103,21 @@ struct PowerOfAttorneyEditorView: View {
         }
     }
 
-    private func printDocument() {
+    private func printDocument(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.present(markupText: formData.document.htmlDocument(in: language), jobName: "PowerOfAttorney")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.present(markupText: markup, jobName: "PowerOfAttorney")
         #endif
     }
 
-    private func saveDocumentAsPDF() {
+    private func saveDocumentAsPDF(option: DocumentOutputOption) {
         #if canImport(UIKit)
-        PrintCoordinator.exportPDF(markupText: formData.document.htmlDocument(in: language), jobName: "PowerOfAttorney")
+        let markup = PrintCoordinator.markup(for: option) { outputLanguage in
+            formData.document.htmlDocument(in: outputLanguage)
+        }
+        PrintCoordinator.exportPDF(markupText: markup, jobName: "PowerOfAttorney")
         #endif
     }
 }
@@ -119,15 +125,15 @@ struct PowerOfAttorneyEditorView: View {
 private struct PowerOfAttorneyPreviewView: View {
     let language: AppLanguage
     let document: PowerOfAttorneyDocument
-    let printAction: () -> Void
-    let savePDFAction: () -> Void
+    let printAction: (DocumentOutputOption) -> Void
+    let savePDFAction: (DocumentOutputOption) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         LegalPaperView(
-            title: language.text(.powerOfAttorneyTitle),
-            bodyText: document.bodyText(in: language),
+            title: { outputLanguage in outputLanguage.text(.powerOfAttorneyTitle) },
+            bodyText: { outputLanguage in document.bodyText(in: outputLanguage) },
             signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate)",
             firstSignature: document.principalName,
             secondSignature: document.agentName,
