@@ -28,6 +28,13 @@ Version 1.1 should be a trust, polish, and premium-preparation release. It shoul
 
 ## Completed Candidate Work
 
+- Improved Receipt as the pilot with persistent labels, examples, scope guidance, localized validation, local draft restoration/deletion, clearer PDF errors and localized filenames.
+- Added Dynamic Type text styles, adaptive field-label layout, VoiceOver field hints, and keyboard focus movement from Notes to Place in Receipt.
+- Completed Receipt testing with three first-time testers; the reported Tab-navigation issue was fixed and manually confirmed.
+- Verified the current local baseline on 2026-10-15: 94/94 unit tests, 7/7 ordinary UI tests, 1/1 separate launch test, and a successful app build.
+- Added a safe older-installation test confirming that absence of a Receipt draft does not modify existing settings or premium status.
+- Prepared Norwegian App Store copy and TestFlight instructions without uploading or publishing them.
+
 - Updated the App Store milestones so premium badges are treated as visible-and-unlocked state, not future work.
 - Added unit coverage for Home screen localization across every supported app language.
 - Added unit coverage for home-screen legal-scope copy across Norwegian, English, and Thai.

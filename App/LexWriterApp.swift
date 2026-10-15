@@ -15,6 +15,7 @@ struct LexWriterApp: App {
         if ProcessInfo.processInfo.arguments.contains("-resetUITestState") {
             UserDefaults.standard.removeObject(forKey: "selectedLanguage")
             UserDefaults.standard.removeObject(forKey: "preferredAppearance")
+            UserDefaults.standard.removeObject(forKey: ReceiptDraftStore.storageKey)
         }
     }
 

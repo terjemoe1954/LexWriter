@@ -58,13 +58,18 @@ enum PrintCoordinator {
     }
 
     @MainActor
-    static func exportPDF(markupText: String, jobName: String) {
-        let fileURL = makeTemporaryPDF(markupText: markupText, jobName: jobName)
+    @discardableResult
+    static func exportPDF(markupText: String, jobName: String) -> Bool {
+        guard let fileURL = try? makeTemporaryPDF(markupText: markupText, jobName: jobName) else {
+            return false
+        }
+        guard let presenter = topViewController() else { return false }
         let controller = UIDocumentPickerViewController(forExporting: [fileURL], asCopy: true)
-        topViewController()?.present(controller, animated: true)
+        presenter.present(controller, animated: true)
+        return true
     }
 
-    private static func makeTemporaryPDF(markupText: String, jobName: String) -> URL {
+    private static func makeTemporaryPDF(markupText: String, jobName: String) throws -> URL {
         let renderer = UIPrintPageRenderer()
         renderer.addPrintFormatter(UIMarkupTextPrintFormatter(markupText: markupText), startingAtPageAt: 0)
 
@@ -84,11 +89,11 @@ enum PrintCoordinator {
         let fileURL = FileManager.default.temporaryDirectory
             .appendingPathComponent(sanitizedFileName(for: jobName))
             .appendingPathExtension("pdf")
-        try? data.write(to: fileURL, options: .atomic)
+        try data.write(to: fileURL, options: .atomic)
         return fileURL
     }
 
-    private static func sanitizedFileName(for jobName: String) -> String {
+    static func sanitizedFileName(for jobName: String) -> String {
         let invalidCharacters = CharacterSet.alphanumerics.inverted
         let components = jobName.components(separatedBy: invalidCharacters).filter { $0.isEmpty == false }
         return components.isEmpty ? "Document" : components.joined(separator: "-")

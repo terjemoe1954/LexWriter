@@ -112,11 +112,12 @@ struct LegalPaperView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 Text(title(previewLanguage).uppercased())
-                    .font(.system(size: 30, weight: .bold, design: .serif))
+                    .font(.system(.largeTitle, design: .serif, weight: .bold))
                     .tracking(3)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text(bodyText(previewLanguage))
-                    .font(.system(size: 18, design: .serif))
+                    .font(.system(.body, design: .serif))
                     .lineSpacing(8)
 
                 VStack(alignment: .leading, spacing: 14) {

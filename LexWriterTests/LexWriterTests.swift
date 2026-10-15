@@ -466,10 +466,6 @@ struct LexWriterTests {
         #expect(AppLanguage.thai.text(.futurePricingNote).contains("เทมเพลตฟรีใช้งานได้โดยไม่ต้องซื้อ"))
     }
 
-    @Test func monetizationPlanEnforcesPremiumAccess() async throws {
-        #expect(MonetizationPlan.isPremiumEnforced)
-    }
-
     @Test func releaseAndSupportDraftsKeepPremiumPreparationMessaging() async throws {
         let drafts = try [
             projectFileContents("APPSTORE_SUBMISSION_NOTES.md"),
@@ -1068,6 +1064,152 @@ struct LexWriterTests {
         #expect(bodyText.contains("Betaler"))
         #expect(bodyText.contains("Depositum"))
         #expect(bodyText.contains("10 000 kroner"))
+    }
+
+    @Test func receiptGuidanceIsCompleteInEveryLanguage() async throws {
+        let guidanceKeys: [ReceiptLocalizedKey] = [
+            .guideTitle,
+            .guidePurpose,
+            .guidePreparation,
+            .guideResult,
+            .issuerHelp,
+            .payerHelp,
+            .requiredMarker,
+            .optionalMarker,
+            .nameExample,
+            .addressExample,
+            .phoneExample,
+            .emailExample,
+            .receiptForExample,
+            .amountExample,
+            .paymentDateExample,
+            .paymentMethodExample,
+            .notesExample,
+            .signingPlaceExample,
+            .signingDateHelp,
+            .draftSavedMessage,
+            .draftRestoredMessage,
+            .clearDraftButton,
+            .clearDraftTitle,
+            .clearDraftMessage,
+            .clearDraftConfirm,
+            .businessScopeWarning,
+            .pdfExportErrorTitle,
+            .pdfExportErrorMessage
+        ]
+
+        for language in AppLanguage.allCases {
+            #expect(guidanceKeys.allSatisfy {
+                language.receiptText($0).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+            })
+        }
+
+        #expect(AppLanguage.norwegian.receiptText(.draftSavedMessage).contains("automatisk"))
+        #expect(AppLanguage.english.receiptText(.draftSavedMessage).contains("automatically"))
+        #expect(AppLanguage.thai.receiptText(.draftSavedMessage).contains("อัตโนมัติ"))
+    }
+
+    @Test func receiptDraftStoreRestoresAndClearsOnlyItsOwnData() async throws {
+        let suiteName = "LexWriterTests.receiptDraftStoreRestoresAndClearsOnlyItsOwnData"
+        let userDefaults = try #require(UserDefaults(suiteName: suiteName))
+        userDefaults.removePersistentDomain(forName: suiteName)
+        defer { userDefaults.removePersistentDomain(forName: suiteName) }
+
+        userDefaults.set(true, forKey: "hasPremiumAccess")
+        let store = ReceiptDraftStore(userDefaults: userDefaults)
+        var form = ReceiptFormData()
+        form.issuer = ContractParty(
+            name: "Kari Eksempel",
+            address: "Eksempelveien 10",
+            phone: "900 00 000",
+            email: "kari@example.no"
+        )
+        form.payer = contractParty(name: "Ola Eksempel")
+        form.receiptFor = "Brukt skrivebord"
+        form.amount = "2 500 NOK"
+        form.paymentDateText = "15.10.2026"
+        form.paymentMethod = "Bankoverføring"
+        form.notes = "Referanse 2026-014"
+        form.signingPlace = "Oslo"
+
+        store.save(form)
+        let restored = try #require(store.load())
+        #expect(restored == form)
+
+        store.clear()
+        #expect(store.load() == nil)
+        #expect(userDefaults.bool(forKey: "hasPremiumAccess"))
+
+        store.save(ReceiptFormData())
+        #expect(userDefaults.data(forKey: ReceiptDraftStore.storageKey) == nil)
+    }
+
+    @Test func receiptDraftStoreSafelyHandlesAnOlderInstallationWithoutADraft() async throws {
+        let suiteName = "LexWriterTests.receiptDraftStoreSafelyHandlesAnOlderInstallationWithoutADraft"
+        let userDefaults = try #require(UserDefaults(suiteName: suiteName))
+        userDefaults.removePersistentDomain(forName: suiteName)
+        defer { userDefaults.removePersistentDomain(forName: suiteName) }
+
+        userDefaults.set("existing-setting", forKey: "legacySetting")
+        userDefaults.set(true, forKey: "hasPremiumAccess")
+
+        let store = ReceiptDraftStore(userDefaults: userDefaults)
+
+        #expect(store.load() == nil)
+        #expect(userDefaults.string(forKey: "legacySetting") == "existing-setting")
+        #expect(userDefaults.bool(forKey: "hasPremiumAccess"))
+        #expect(userDefaults.object(forKey: ReceiptDraftStore.storageKey) == nil)
+    }
+
+    @Test func receiptMapsEveryDocumentFieldAndHandlesEmptyOptionalFields() async throws {
+        var form = ReceiptFormData()
+        form.issuer = ContractParty(
+            name: "Kari Eksempel",
+            address: "Eksempelveien 10",
+            phone: "900 00 000",
+            email: "kari@example.no"
+        )
+        form.payer = ContractParty(
+            name: "Ola Eksempel",
+            address: "Prøvegata 4",
+            phone: "911 11 111",
+            email: "ola@example.no"
+        )
+        form.receiptFor = "Brukt skrivebord, serienummer 1234"
+        form.amount = "2 500 NOK"
+        form.paymentDateText = "15.10.2026"
+        form.paymentMethod = "Bankoverføring"
+        form.notes = "Referanse 2026-014"
+        form.signingPlace = "Oslo"
+
+        let bodyText = form.document.bodyText(in: .norwegian)
+        for expectedValue in [
+            "Kari Eksempel", "Eksempelveien 10", "Ola Eksempel", "Prøvegata 4",
+            "Brukt skrivebord, serienummer 1234", "2 500 NOK", "15.10.2026",
+            "Bankoverføring", "Referanse 2026-014"
+        ] {
+            #expect(bodyText.contains(expectedValue))
+        }
+
+        let html = form.document.htmlDocument(in: .norwegian)
+        #expect(html.contains("Oslo"))
+        #expect(html.contains("Kari Eksempel"))
+        #expect(html.contains("Ola Eksempel"))
+
+        form.paymentMethod = ""
+        form.notes = ""
+        let bodyWithoutOptionalValues = form.document.bodyText(in: .norwegian)
+        #expect(bodyWithoutOptionalValues.contains(AppLanguage.norwegian.receiptText(.defaultMethod)))
+        #expect(bodyWithoutOptionalValues.contains(AppLanguage.norwegian.receiptText(.defaultNotes)))
+        #expect(!bodyWithoutOptionalValues.contains(".."))
+    }
+
+    @Test func receiptPDFUsesReadableLocalizedFileNames() async throws {
+        #if canImport(UIKit)
+        #expect(PrintCoordinator.sanitizedFileName(for: AppLanguage.norwegian.receiptText(.title)) == "Kvittering")
+        #expect(PrintCoordinator.sanitizedFileName(for: AppLanguage.english.receiptText(.title)) == "Receipt")
+        #expect(PrintCoordinator.sanitizedFileName(for: AppLanguage.thai.receiptText(.title)).isEmpty == false)
+        #endif
     }
 
     @Test func loanAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {

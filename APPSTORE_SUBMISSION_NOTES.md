@@ -6,6 +6,9 @@ Use this as a working draft for the next App Store submission.
 
 ### Norwegian
 
+- Kvittering har fått tydeligere feltetiketter, eksempler og forklaringer på norsk, engelsk og thai.
+- Kvitteringsutkast lagres lokalt og kan gjenopprettes når du fortsetter senere.
+- Forbedret tastaturnavigasjon flytter fokus videre fra Merknader til Sted.
 - Tydeligere merking av gratis og kommende premium-dokumenter.
 - Hjemskjermen viser planlagte premium-maler tydeligere mens kjøp er deaktivert.
 - Ny tilgangs-, premiumplan- og personverninformasjon i Innstillinger.
@@ -17,6 +20,9 @@ Use this as a working draft for the next App Store submission.
 
 ### English
 
+- Receipt now has clearer field labels, examples, and guidance in Norwegian, English, and Thai.
+- Receipt drafts are saved locally and can be restored when you continue later.
+- Improved keyboard navigation moves focus from Notes to Place.
 - Clearer labels for free and future premium documents.
 - The home screen now labels planned premium templates more clearly while purchases are disabled.
 - Added access, premium-plan, and privacy information in Settings.

@@ -14,6 +14,7 @@ For recurring user-facing replies, use `SUPPORT_RESPONSES.md`.
 ## Data and Storage
 
 - The app is designed around local entry, preview, printing, and PDF saving.
+- Receipt now keeps one local draft on the device and can restore or delete it. Other templates do not have equivalent draft persistence.
 - The app does not currently provide a full document library, cloud sync, account system, or cross-device save flow.
 - Users are responsible for storing printed or exported documents safely.
 
@@ -31,13 +32,18 @@ For recurring user-facing replies, use `SUPPORT_RESPONSES.md`.
 
 - Apple field-performance datasets were rechecked on 2026-09-22 for live versions `1.0.1` and `1.0`; launches, hangs, and disk writes returned no available versions, so crash/review status should still be checked manually in Xcode Organizer or App Store Connect.
 - Unit tests currently cover the premium-preview state, premium safety flags/defaults, release/support/checklist premium-preparation wording, release checklist submission validation, release checklist product smoke-test scope, release checklist device/document matrix, release checklist print/PDF review criteria, release checklist separate unit/UI/launch validation guidance, release checklist legal/trust review, release checklist App Store Connect checks, App Store release-notes premium-preparation scope, App Store metadata draft legal/print scope, App Store keyword scope, App Store review/screenshot scope including Norwegian review-note premium-preparation wording, App Store screenshot checklist scope, UI test target application, support saving/print scope, support print/PDF troubleshooting details, support legal-advice scope, support privacy/local-processing scope, known-limitations release risks, premium activation preconditions and document split, version 1.1 premium deferral, handoff safe-session instructions, App Store milestone premium-readiness order and next build order, full PremiumView localization, supported languages and stable language identifiers, stable appearance identifiers, Home and Settings localization, stable document order/identifiers, distinct document titles/subtitles, document card titles/subtitles/icons, document checklist titles/items, document preview button labels, print-preview controls, validation and requirement messages, access-tier/monetization-plan consistency, printable HTML-preview/signature structure, printable HTML signature-line and paper-container `overflow-wrap` protection, printable HTML signature page-break protection, home-screen legal-scope copy, Settings privacy copy, User Guide localization, and User Guide access/privacy/legal-scope copy.
-- UI test target application now points to `LexWriter`; UI tests pass with 7/7 and the launch test passes with 1/1 after resetting language and appearance state on launch.
+- UI test target application now points to `LexWriter`; UI tests pass with 7/7 and the launch test passes with 1/1. The current local automated baseline also includes 94/94 unit tests on 2026-10-15.
+- The Receipt pilot has been completed by three first-time testers. One Tab-navigation issue was found, fixed, and manually confirmed on the iPhone 17 Pro simulator.
+- Version 1.1 (build 6) has been built, installed, and launched on the owner's physical iPhone 15 Pro after removing an older TestFlight installation.
+- The iOS App Archive for version 1.1 (build 6) passed all validation checks and was uploaded to App Store Connect; it has not been distributed to testers or published.
+- Source checks and tests cover Receipt field mapping and printable structure, but a full visual comparison of preview versus exported PDF across small iPhone, large iPhone, and iPad remains manual.
+- Physical AirPrint, maximum Dynamic Type, actual VoiceOver reading order, and upgrade from an installed older build with copied data remain unverified.
 - Some test runs may need to be repeated manually if Xcode reports tests as discovered but not run, or if the full active test plan leaves an incomplete `.xcresult`; in that case, run unit tests, UI tests, and launch tests as separate validation steps.
 - Before enabling premium enforcement, purchase, restore, pending purchase, cancelled purchase, and unavailable-product states must be tested.
 
 ## Future Candidates
 
-- Local document save/history.
+- Local draft/history support for templates other than Receipt.
 - More export options.
 - More robust legal review for high-risk templates.
 - App Store metadata and screenshots tailored to the premium model.
