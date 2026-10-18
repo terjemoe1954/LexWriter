@@ -1212,6 +1212,28 @@ struct LexWriterTests {
         #endif
     }
 
+    @Test func receiptSigningDateUsesTheSelectedAppLanguage() async throws {
+        #expect(AppLanguage.norwegian.locale.identifier == "nb_NO")
+        #expect(AppLanguage.english.locale.identifier == "en_GB")
+        #expect(AppLanguage.thai.locale.identifier == "th_TH")
+
+        var components = DateComponents()
+        components.calendar = Calendar(identifier: .gregorian)
+        components.timeZone = TimeZone(secondsFromGMT: 0)
+        components.year = 2026
+        components.month = 10
+        components.day = 18
+        let signingDate = try #require(components.date)
+
+        var form = ReceiptFormData()
+        form.signingDate = signingDate
+
+        #expect(form.document.formattedDate(in: .norwegian).contains("oktober"))
+        #expect(form.document.formattedDate(in: .english).contains("October"))
+        #expect(form.document.formattedDate(in: .thai).contains("ตุลาคม"))
+        #expect(form.document.htmlDocument(in: .norwegian).contains("18. oktober 2026"))
+    }
+
     @Test func loanAgreementValidatesRequiredFieldsAndAdvisoryWarnings() async throws {
         #expect(LoanAgreementFormData().blockingIssues(in: .norwegian).count == 6)
         #expect(LoanAgreementFormData().warnings(in: .norwegian).count == 4)

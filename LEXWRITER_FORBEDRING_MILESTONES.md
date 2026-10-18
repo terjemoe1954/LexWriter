@@ -216,7 +216,7 @@ Ferdig når: Forbedringene virker i støttede miljøer og ikke har ødelagt eksi
 
 Gjennomfør etter at pilotflyten er forbedret og verifisert. Les den faktiske nåværende App Store-presentasjonen fra eierens materiale eller en bekreftet oppføring. Ikke gjett app-ID, dokumentutvalg, priser eller resultater.
 
-Pilotstatus 15. oktober 2026: Norsk metadatautkast og skjermbildemanus er laget i `LEXWRITER_APPSTORE_NO.md` med kontrollerte feltgrenser fra Apple. PDF/utskrift og gjenopprettet kladd er uttrykkelig holdt ute av bildeløftet til manuell verifikasjon er fullført. Faktisk offentlig App Store-oppføring og aktive support-/personvernlenker er ikke tilgjengelige i prosjektet og må kontrolleres av eieren før publisering.
+Pilotstatus 18. oktober 2026: Norsk metadatautkast og skjermbildemanus er revidert i `LEXWRITER_APPSTORE_NO.md` etter bestått intern TestFlight-test av versjon 1.1 (6). Undertittel, promotional text og søkeord er kontrollert mot Apples gjeldende feltgrenser; søkeordene bruker 99 av 100 bytes uten å gjenta appnavnet eller undertittelen. Skjermbildemanuset bruker verifiserte appflyter, men påstår ikke at fysisk AirPrint er testet. Faktisk offentlig App Store-oppføring og aktive support-/personvernlenker må fortsatt kontrolleres av eieren før publisering.
 
 - [ ] Beskriv målgruppen og hovednytten i én setning, basert på dokumentene som faktisk fungerer godt.
 - [ ] Velg to–tre sterke brukssituasjoner fremfor å fremheve et stort antall maler.
@@ -266,9 +266,9 @@ Ferdig når: Pilotflyten kan fullføres uten hjelp av minst tre av de frivillige
 
 ## M10 – klargjør oppdatering og følg med på resultatet
 
-Pilotstatus 15. oktober 2026: Build, 94 av 94 enhetstester, 7 av 7 ordinære UI-tester og separat oppstartstest består. En ny oppgraderingskontroll bekrefter at en eldre installasjon uten Kvittering-kladd beholder eksisterende innstillinger og premiumstatus. Tab-rettingen er manuelt bekreftet. Utgivelsesnotater og et TestFlight-testopplegg er oppdatert. Et iOS App Archive for versjon 1.1, build 6 er opprettet, har bestått alle valideringskontroller og er lastet opp til App Store Connect. Bygget er ikke distribuert til testere eller publisert. Reell oppgradering med kopi av data fra en eldre build, fysisk AirPrint, største Dynamic Type/VoiceOver og full visuell PDF-matrise gjenstår før milepælen er komplett.
+Pilotstatus 18. oktober 2026: Build 6 ble testet internt via TestFlight. Under gjennomgang av en eksportert norsk PDF ble en blandet engelsk signeringsdato oppdaget. Dette er rettet og kontrollert i build 7 med målrettet språkstest, vellykket build og ny norsk PDF. Build 7 er arkivert, validert uten feil og lastet opp til App Store Connect. Build 6 skal ikke brukes til App Review. Appen er ikke publisert. Reell oppgradering med kopi av data fra en eldre build, fysisk AirPrint, største Dynamic Type/VoiceOver og full visuell PDF-matrise gjenstår før milepælen er komplett.
 
-Versjon 1.1, build 6 er bekreftet av eier. Build mot valgt fysisk iPhone 15 Pro med iOS 27.0.1 består. Etter at en tidligere TestFlight-versjon ble avinstallert, ble appen installert og startet på den fysiske iPhonen. Arkivet er validert uten feil og lastet opp til App Store Connect; det er ikke distribuert til testere eller publisert.
+Versjon 1.1, build 7 er gjeldende kandidat. Den nødvendige datolokaliseringsrettelsen er manuelt bekreftet i eksportert PDF. Arkivet er validert uten feil og lastet opp til App Store Connect; det er ikke publisert.
 
 - [ ] Kjør relevante tester for validering, felt-til-mal-kobling, betingede avsnitt, utkast og eksport. Skriv målrettede regresjonstester for feil som rettes.
 - [ ] Gjør visuell PDF-kontroll og manuell test av hele pilotflyten i aktuell build.

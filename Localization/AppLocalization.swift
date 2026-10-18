@@ -14,6 +14,17 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    var locale: Locale {
+        switch self {
+        case .norwegian:
+            Locale(identifier: "nb_NO")
+        case .english:
+            Locale(identifier: "en_GB")
+        case .thai:
+            Locale(identifier: "th_TH")
+        }
+    }
+
     var displayName: String {
         switch self {
         case .norwegian:

@@ -1,6 +1,6 @@
 # LexWriter – funn fra M0 og M1
 
-Sist oppdatert: 15. oktober 2026
+Sist oppdatert: 18. oktober 2026
 
 ## Prioritert funnliste
 
@@ -16,6 +16,8 @@ Sist oppdatert: 15. oktober 2026
 | LW-008 | Dokumentversjon og jurisdiksjon | Ferdige dokumenter lagres ikke i appen, og modellene har ingen malversjon. Språkvalg styrer dokumenttekst, mens flere maler bruker norsk rett i standardtekst. | Det finnes ingen intern historikk som fryser tidligere malinnhold; språk kan forveksles med lovvalg. | P2 | Dokumenter jurisdiksjon og malversjon før maltekst endres. Ikke påstå at grensesnittspråk endrer lovvalg. | Bekreftet i kode, åpen | Ingen SwiftData/Core Data/CloudKit/dokumentlager eller malversjonsfelt funnet. |
 | LW-009 | PDF-eksport | PDF ble skrevet til midlertidig mappe med `try?`, slik at skrivefeil kunne bli ignorert. | Eksport kunne mislykkes uten tydelig feilmelding. | P2 | Returner eksportresultat og vis forståelig feil i piloten. | Rettet for Kvittering; øvrige dokumenter åpne | Koordinatoren returnerer nå feilstatus; Kvittering viser lokalisert feil. Feiltilstanden er ikke fremprovosert manuelt. |
 | LW-010 | Kvittering / juridisk omfang | Malen mangler flere opplysninger som kreves når en bokføringspliktig virksomhet bruker et dokument som salgsdokumentasjon, blant annet dokumentnummer, organisasjonsnummer og eventuell MVA-spesifikasjon. | En bruker kan feilaktig bruke den enkle betalingsbekreftelsen som næringsbilag. | P1 | Avgrens malen tydelig mot bokførings-/MVA-pliktig salgsdokumentasjon. Ikke bygg bedriftskvittering uten egen kravgjennomgang. | Avgrensning rettet; funksjonsgap åpent | Omfangsadvarsel lagt til på norsk, engelsk og thai. Primærkilder kontrollert 15.10.2026. |
+| LW-011 | Kvittering / forhåndsvisning og PDF | Norsk Kvittering viste signeringsdatoen som «18 October 2026» fordi datoformatet fulgte enhetens region i stedet for valgt dokumentspråk. | Dokumentet blandet norsk og engelsk og var uegnet som endelig App Store-eksempel. | P1 | Formater signeringsdato eksplisitt med norsk, engelsk eller thai locale basert på valgt språk. | Rettet | Regresjonstest består for «oktober», «October» og «ตุลาคม». Full Xcode-build består. Eier eksporterte deretter ny norsk PDF som korrekt viser «Oslo, 18. oktober 2026». |
+| LW-012 | Kvittering / datovelger | Norsk skjema viste den valgte signeringsdatoen som «18 Oct 2026» fordi systemets DatePicker ikke fikk appens valgte locale. | Norsk grensesnitt blandet norsk og engelsk, og skjermbildet kunne ikke brukes i App Store. | P1 | Gi DatePicker eksplisitt locale fra valgt appspråk. | Rettet | Build for testing og språkregresjon består. Eier bekreftet manuelt at build 8 viser «18. okt. 2026» i skjemaet og «18. oktober 2026» i PDF-en. |
 
 ## M0 – faktisk funksjonsoversikt
 

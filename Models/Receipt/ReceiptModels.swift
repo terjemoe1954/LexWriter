@@ -150,8 +150,14 @@ struct ReceiptDocument {
     let signingPlace: String
     let signingDate: Date
 
+    func formattedDate(in language: AppLanguage) -> String {
+        return signingDate.formatted(
+            Date.FormatStyle(date: .long, time: .omitted).locale(language.locale)
+        )
+    }
+
     var formattedDate: String {
-        signingDate.formatted(date: .long, time: .omitted)
+        formattedDate(in: .norwegian)
     }
 
     func bodyText(in language: AppLanguage) -> String {
@@ -185,7 +191,7 @@ struct ReceiptDocument {
         <h1>\(language.receiptText(.title).htmlEscaped)</h1>
         <p>\(bodyText(in: language).htmlEscaped.replacingOccurrences(of: "\n", with: "<br><br>"))</p>
         <div class="signature">
-        <p>\(signingPlace.htmlEscaped), \(formattedDate.htmlEscaped)</p>
+        <p>\(signingPlace.htmlEscaped), \(formattedDate(in: language).htmlEscaped)</p>
         <div class="line">\(issuer.name.htmlEscaped)</div>
         <div class="line">\(payer.name.htmlEscaped)</div>
         </div>

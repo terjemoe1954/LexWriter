@@ -125,6 +125,7 @@ struct ReceiptEditorView: View {
                 )
                 VStack(alignment: .leading, spacing: 6) {
                     DatePicker(language.text(.date), selection: $formData.signingDate, displayedComponents: .date)
+                        .environment(\.locale, language.locale)
                     Text(language.receiptText(.signingDateHelp))
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -228,7 +229,7 @@ private struct ReceiptPreviewView: View {
         LegalPaperView(
             title: { outputLanguage in outputLanguage.receiptText(.title) },
             bodyText: { outputLanguage in document.bodyText(in: outputLanguage) },
-            signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate)",
+            signingPlaceAndDate: "\(document.signingPlace), \(document.formattedDate(in: language))",
             firstSignature: document.issuer.name,
             secondSignature: document.payer.name,
             language: language,

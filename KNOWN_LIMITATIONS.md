@@ -35,7 +35,9 @@ For recurring user-facing replies, use `SUPPORT_RESPONSES.md`.
 - UI test target application now points to `LexWriter`; UI tests pass with 7/7 and the launch test passes with 1/1. The current local automated baseline also includes 94/94 unit tests on 2026-10-15.
 - The Receipt pilot has been completed by three first-time testers. One Tab-navigation issue was found, fixed, and manually confirmed on the iPhone 17 Pro simulator.
 - Version 1.1 (build 6) has been built, installed, and launched on the owner's physical iPhone 15 Pro after removing an older TestFlight installation.
-- The iOS App Archive for version 1.1 (build 6) passed all validation checks and was uploaded to App Store Connect; it has not been distributed to testers or published.
+- Version 1.1 build 6 was tested internally, but must not be submitted for review because its Norwegian Receipt PDF could show an English signing month. The fix is included in build 7.
+- The iOS App Archive for version 1.1 (build 7) passed validation and was uploaded to App Store Connect; it has not been published.
+- Build 7 must not be submitted for review because the Norwegian Receipt editor could still display its DatePicker value with an English abbreviated month. The locale fix is included in build 8 and has been manually verified on the owner's iPhone.
 - Source checks and tests cover Receipt field mapping and printable structure, but a full visual comparison of preview versus exported PDF across small iPhone, large iPhone, and iPad remains manual.
 - Physical AirPrint, maximum Dynamic Type, actual VoiceOver reading order, and upgrade from an installed older build with copied data remain unverified.
 - Some test runs may need to be repeated manually if Xcode reports tests as discovered but not run, or if the full active test plan leaves an incomplete `.xcresult`; in that case, run unit tests, UI tests, and launch tests as separate validation steps.
